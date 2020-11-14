@@ -1,16 +1,9 @@
 # Sources START
 
-set(FILES_SOURCE)
-set(FILES_HEADERS)
-
 list(APPEND FILES_HEADERS)
 
 list(APPEND FILES_SOURCE
-    main.c
-    )
-
-set(all_code_files
-    ${FILES_SOURCE}
+    ${CMAKE_CURRENT_LIST_DIR}/main.c
     )
 
 # Sources END
