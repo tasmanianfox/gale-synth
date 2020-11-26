@@ -34,6 +34,7 @@ set(FILES_SOURCE)
 list(APPEND FILES_SOURCE
     # src/synth/ui/window_main/menu.c
     src/synth/app/app.cpp
+    src/synth/ui/window_main/menu.cpp
     src/synth/ui/window_main/window_main.cpp
     )
 
