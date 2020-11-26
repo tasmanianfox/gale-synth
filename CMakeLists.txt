@@ -8,32 +8,33 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY .build)
+set(CMAKE_BUILD_FILES_DIRECTORY .build)
+set(CMAKE_BUILD_DIRECTORY .build)
 
 # Use the package PkgConfig to detect GTK+ headers/library files
 FIND_PACKAGE(PkgConfig REQUIRED)
-PKG_CHECK_MODULES(GTK3 REQUIRED gtk+-3.0)
+pkg_check_modules(GTKMM gtkmm-3.0 REQUIRED)
 
 # Setup CMake to use GTK+, tell the compiler where to look for headers
 # and to the linker where to look for libraries
-INCLUDE_DIRECTORIES(src ${GTK3_INCLUDE_DIRS})
-LINK_DIRECTORIES(${GTK3_LIBRARY_DIRS})
 
-# Add other flags to the compiler
-ADD_DEFINITIONS(${GTK3_CFLAGS_OTHER})
+INCLUDE_DIRECTORIES(src ${GTKMM_INCLUDE_DIRS})
+LINK_DIRECTORIES(${GTKMM_LIBRARY_DIRS})
 
 # Sources START
 
 set(FILES_SOURCE)
-set(FILES_HEADERS)
+# set(FILES_HEADERS)
 
-list(APPEND FILES_HEADERS
-    src/synth/ui/window_main/menu.h
-    src/synth/ui/window_main/window_main.h
-    )
+# list(APPEND FILES_HEADERS
+#     # src/synth/ui/window_main/menu.h
+#     src/synth/ui/window_main/window_main.hpp
+#     )
 
 list(APPEND FILES_SOURCE
-    src/synth/ui/window_main/menu.c
-    src/synth/ui/window_main/window_main.c
+    # src/synth/ui/window_main/menu.c
+    src/synth/app/app.cpp
+    src/synth/ui/window_main/window_main.cpp
     )
 
 
@@ -59,4 +60,4 @@ set(all_code_files
     )
 
 add_executable(${APP_NAME} ${all_code_files})
-target_link_libraries(${APP_NAME} ${GTK3_LIBRARIES})
+target_link_libraries(${APP_NAME} ${GTKMM_LIBRARIES})

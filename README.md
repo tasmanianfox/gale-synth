@@ -5,6 +5,14 @@ A syntheizer plugin.
 __Under development__
 
 
+## Development environment
+
+### Native app ()
+
+```bash
+cmake . -Dtype=native
+```
+
 ## Roadmap
 
 Just some ideas:
