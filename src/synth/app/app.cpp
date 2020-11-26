@@ -1,14 +1,23 @@
 #include "app.hpp"
 
-#include <iostream>
+const char APP_ID[] = "com.github.tasmanianfox.gale";
+const char APP_NAME[] = "Gale";
 
-App::App(int argc, char *argv[])
+App::App(int argc, char *argv[]) : Gtk::Application(APP_ID)
 {
-    this->gtkApplication = Gtk::Application::create(argc, argv, "com.github.tasmanianfox.gale");
+    Glib::set_application_name(APP_NAME);
 }
 
-int App::run()
+Glib::RefPtr<App> App::create(int argc, char *argv[])
 {
-    this->mainWindow = new WindowMain();
-    return this->gtkApplication->run(*this->mainWindow);
+  return Glib::RefPtr<App>(new App(argc, argv));
+}
+
+void App::on_startup()
+{
+  Gtk::Application::on_startup();
+
+  this->mainWindow = new WindowMain();
+  add_window(*this->mainWindow);
+  this->mainWindow->show_all();
 }

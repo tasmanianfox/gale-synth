@@ -5,16 +5,17 @@
 
 #include "synth/ui/window_main/window_main.hpp"
 
-class App
+class App : public Gtk::Application
 {
 public:
-    App(int argc, char *argv[]);
+    static Glib::RefPtr<App> create(int argc, char *argv[]);
 
-    int run();
 private:
     WindowMain* mainWindow;
 
-    Glib::RefPtr<Gtk::Application> gtkApplication;
+    App(int argc, char *argv[]);
+    
+    void on_startup() override;    
 };
 
 #endif

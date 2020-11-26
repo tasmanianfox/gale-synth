@@ -2,6 +2,6 @@
 
 int main(int argc, char *argv[])
 {
-  App app(argc, argv);
-  return app.run();
+  Glib::RefPtr<App> app = App::create(argc, argv);
+  return app->run();
 }
