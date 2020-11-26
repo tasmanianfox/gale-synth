@@ -4,3 +4,7 @@ cmake_install.cmake
 Makefile
 
 /.build
+
+/.vscode
+/.project
+/.idea
