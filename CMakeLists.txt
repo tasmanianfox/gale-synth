@@ -7,9 +7,9 @@ project(${APP_NAME} VERSION 0.1.0)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY .build)
-set(CMAKE_BUILD_FILES_DIRECTORY .build)
-set(CMAKE_BUILD_DIRECTORY .build)
+# set(CMAKE_RUNTIME_OUTPUT_DIRECTORY .build)
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/.build)
+set(LIBRARY_OUTPUT_PATH    ${CMAKE_BINARY_DIR}/.build)
 
 # Use the package PkgConfig to detect GTK+ headers/library files
 FIND_PACKAGE(PkgConfig REQUIRED)
@@ -24,22 +24,18 @@ LINK_DIRECTORIES(${GTKMM_LIBRARY_DIRS})
 # Sources START
 
 set(FILES_SOURCE)
-# set(FILES_HEADERS)
-
-# list(APPEND FILES_HEADERS
-#     # src/synth/ui/window_main/menu.h
-#     src/synth/ui/window_main/window_main.hpp
-#     )
 
 list(APPEND FILES_SOURCE
-    # src/synth/ui/window_main/menu.c
     src/synth/app/app.cpp
     src/synth/ui/window_main/menu.cpp
     src/synth/ui/window_main/window_main.cpp
     )
-
-
 # Sources END
+
+# exe = executable file, lib = shared library
+set(target_type "exe")
+
+# Target-specific parameters START
 
 option(type "(native|lv2|vst). WARNING: only native is implemented." native)
 
@@ -53,12 +49,20 @@ if(type STREQUAL "vst")
 endif()
 
 if(type STREQUAL "lv2")
-    message( FATAL_ERROR "LV2 build is not implemented." )
+    include("src/ports/lv2/CMakeLists.txt")
 endif()
+
+# Target-specific parameters END
 
 set(all_code_files
     ${FILES_SOURCE}
     )
 
-add_executable(${APP_NAME} ${all_code_files})
+if (target_type STREQUAL "exe")
+    add_executable(${APP_NAME} ${all_code_files})
+endif()
+if (target_type STREQUAL "lib")
+    add_library(${APP_NAME} SHARED ${all_code_files})
+endif()
+
 target_link_libraries(${APP_NAME} ${GTKMM_LIBRARIES})

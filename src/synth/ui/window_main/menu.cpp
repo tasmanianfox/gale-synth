@@ -6,8 +6,8 @@ static Glib::ustring ui_info =
     "    <menu action='FileMenu'>"
     "      <menuitem action='FileNew'/>"
     "      <menuitem action='FileSave'/>"
-    "      <menuitem action='FileOpen' />"
-    "      <menuitem action='FileQuit' sensitive='0'/>"
+    "      <menuitem action='FileOpen'/>"
+    "      <menuitem action='FileQuit'/>"
     "    </menu>"
     "  </menubar>"
     "</ui>";

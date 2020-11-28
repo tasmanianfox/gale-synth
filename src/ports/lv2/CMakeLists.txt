@@ -8,4 +8,5 @@ list(APPEND FILES_SOURCE
 
 # Sources END
 
-set(target_type "exe")
+
+set(target_type "lib")
