@@ -1,3 +1,5 @@
+pkg_check_modules(LV2 lv2 REQUIRED)
+
 # Sources START
 
 list(APPEND FILES_HEADERS)
