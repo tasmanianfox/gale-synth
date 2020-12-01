@@ -5,15 +5,19 @@
 
 #include <gtkmm.h>
 
+#include "synth/project/project.hpp"
+
 class WindowMain : public Gtk::Window
 {
 
 public:
-  WindowMain();
+  WindowMain(Project* project);
   virtual ~WindowMain();
 
 private:
-  Gtk::VBox m_Box;
+  Gtk::VBox m_Box; // menu
+
+  Project* project;
 
   void initMenu();
   void on_menu_file_quit();

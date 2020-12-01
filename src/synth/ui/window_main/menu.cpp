@@ -9,13 +9,13 @@ static Glib::ustring ui_info =
     "      <menuitem action='FileOpen'/>"
     "      <menuitem action='FileQuit'/>"
     "    </menu>"
+    "    <menu action='AddMenu'>"
+    "    </menu>"
     "  </menubar>"
     "</ui>";
 
 void WindowMain::initMenu()
 {
-	this->add(m_Box);
-
     auto m_refActionGroup = Gtk::ActionGroup::create();
     m_refActionGroup->add(Gtk::Action::create("FileMenu", "File"));
     m_refActionGroup->add(Gtk::Action::create("FileNew", Gtk::Stock::NEW));
@@ -23,6 +23,7 @@ void WindowMain::initMenu()
     m_refActionGroup->add(Gtk::Action::create("FileOpen", Gtk::Stock::OPEN));
     m_refActionGroup->add(Gtk::Action::create("FileQuit", Gtk::Stock::QUIT),
                         sigc::mem_fun(*this, &WindowMain::on_menu_file_quit));
+    m_refActionGroup->add(Gtk::Action::create("AddMenu", "Add"));
 
     auto m_refUIManager = Gtk::UIManager::create();
     m_refUIManager->insert_action_group(m_refActionGroup);

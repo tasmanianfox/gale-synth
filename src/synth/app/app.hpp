@@ -4,6 +4,7 @@
 #include <gtkmm.h>
 
 #include "synth/ui/window_main/window_main.hpp"
+#include "synth/project/project.hpp"
 
 class App : public Gtk::Application
 {
@@ -12,6 +13,7 @@ public:
 
 private:
     WindowMain* mainWindow;
+    Project project;
 
     App(int argc, char *argv[]);
     

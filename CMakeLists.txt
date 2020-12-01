@@ -27,6 +27,10 @@ set(FILES_SOURCE)
 
 list(APPEND FILES_SOURCE
     src/synth/app/app.cpp
+    src/synth/project/node.cpp
+    src/synth/project/node/output/stream_output.cpp
+    src/synth/project/port.cpp
+    src/synth/project/project.cpp
     src/synth/ui/window_main/menu.cpp
     src/synth/ui/window_main/window_main.cpp
     )
