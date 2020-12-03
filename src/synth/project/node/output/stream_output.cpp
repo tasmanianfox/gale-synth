@@ -4,6 +4,6 @@ StreamOutput::StreamOutput() :
     Glib::ObjectBase("output_stream_output_widget"),
     Node::Node()
 {
-    this->ports.push_back(Port(PortType::INPUT));
-    this->ports.push_back(Port(PortType::INPUT));
+    addPort(Port(PortType::INPUT, "IN_L"));
+    addPort(Port(PortType::INPUT, "IN_R"));
 }

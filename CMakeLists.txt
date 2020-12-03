@@ -7,6 +7,7 @@ project(${APP_NAME} VERSION 0.1.0)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
+
 # set(CMAKE_RUNTIME_OUTPUT_DIRECTORY .build)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/.build)
 set(LIBRARY_OUTPUT_PATH    ${CMAKE_BINARY_DIR}/.build)
@@ -27,9 +28,10 @@ set(FILES_SOURCE)
 
 list(APPEND FILES_SOURCE
     src/synth/app/app.cpp
-    src/synth/project/node.cpp
+    src/synth/project/node/node.cpp
+    src/synth/project/node/node_ondraw.cpp
     src/synth/project/node/output/stream_output.cpp
-    src/synth/project/port.cpp
+    src/synth/project/node/port.cpp
     src/synth/project/project.cpp
     src/synth/ui/window_main/menu.cpp
     src/synth/ui/window_main/window_main.cpp

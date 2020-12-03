@@ -3,9 +3,7 @@
 
 #include <vector>
 
-#include "synth/project/node/output/stream_output.hpp"
-
-#include "node.hpp"
+#include "synth/project/node/node.hpp"
 
 using namespace std;
 
