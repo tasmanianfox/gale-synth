@@ -1,9 +1,9 @@
 #include "node.hpp"
 
-const float PAD_VERTICAL = 25.;
-const float PAD_PORTS = 10.;
-const float PORT_WIDTH = 10.;
-const float PORT_HEIGHT = 10.;
+const int PAD_VERTICAL = 25;
+const int PAD_PORTS = 10;
+const int PORT_WIDTH = 10;
+const int PORT_HEIGHT = 10;
 
 void Node::draw_outer_box(node_draw_context* context)
 {
@@ -16,27 +16,38 @@ void Node::draw_outer_box(node_draw_context* context)
 }
 
 void Node::draw_ports(node_draw_context* context)
-{;
+{   
+    Pango::FontDescription font;
+    font.set_family("Monospace");
+    font.set_weight(Pango::WEIGHT_BOLD);
+    font.set_size(8*PANGO_SCALE);
+
     for(int i = 0; i < this->inputPorts.size(); i++)
     {
-        context->cr->rectangle(.0, i*(PORT_WIDTH+PAD_PORTS) + PAD_VERTICAL, PORT_WIDTH, PORT_HEIGHT);
+        int y = i*(PORT_WIDTH+PAD_PORTS) + PAD_VERTICAL;
+        context->cr->rectangle(.0, y, PORT_WIDTH, PORT_HEIGHT);
         context->cr->fill();
         context->cr->stroke();
+
+        context->cr->move_to(PORT_WIDTH+3, y);
+        Port* port = this->inputPorts.at(i);
+        Glib::RefPtr<Pango::Layout> layout = create_pango_layout(port->getName().c_str());
+        layout->set_font_description(font);
+        layout->show_in_cairo_context(context->cr);
     }
 }
 
 void Node::draw_name(node_draw_context* context)
 {
-  Pango::FontDescription font;
-  font.set_family("Monospace");
-  font.set_weight(Pango::WEIGHT_BOLD);
-  font.set_size(8*PANGO_SCALE);
-  Glib::RefPtr<Pango::Layout> layout = create_pango_layout(this->name.c_str());
-  layout->set_font_description(font);
+    context->cr->move_to(context->scale_x*0.1, 5);
 
-  context->cr->move_to(context->scale_x*0.15, 5);
-
-  layout->show_in_cairo_context(context->cr);
+    Pango::FontDescription font;
+    font.set_family("Monospace");
+    font.set_weight(Pango::WEIGHT_BOLD);
+    font.set_size(8*PANGO_SCALE);
+    Glib::RefPtr<Pango::Layout> layout = create_pango_layout(this->name.c_str());
+    layout->set_font_description(font);
+    layout->show_in_cairo_context(context->cr);
 }
 
 bool Node::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
@@ -64,12 +75,12 @@ bool Node::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 
 void Node::get_preferred_width_vfunc(int& minimum_width, int& natural_width) const
 {
-  minimum_width = 140;
-  natural_width = 140;
+    minimum_width = 140;
+    natural_width = 140;
 }
 
 void Node::get_preferred_height_vfunc(int& minimum_height, int& natural_height) const
 {
-  minimum_height = 50;
-  natural_height = 50;
+    int maxPorts = max(this->inputPorts.size(), this->outputPorts.size());
+    minimum_height = natural_height = 2 * PAD_VERTICAL + maxPorts * PORT_HEIGHT + (maxPorts-1) * PAD_PORTS;
 }

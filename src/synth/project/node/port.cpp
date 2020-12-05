@@ -15,3 +15,8 @@ bool Port::isInput()
 {
     return PortType::INPUT == this->type;
 }
+
+string Port::getName()
+{
+    return this->name;
+}

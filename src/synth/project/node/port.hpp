@@ -18,6 +18,7 @@ public:
     PortType getType();
 
     bool isInput();
+    string getName();
 protected:
     PortType type;
     string name;

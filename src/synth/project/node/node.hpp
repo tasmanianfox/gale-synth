@@ -1,6 +1,7 @@
 #ifndef _GALE_SYNTH_PROJECT_NODE_NODE_H_
 #define _GALE_SYNTH_PROJECT_NODE_NODE_H_
 
+#include <algorithm>
 #include <string>
 #include <vector>
 
