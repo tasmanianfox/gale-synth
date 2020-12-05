@@ -8,8 +8,14 @@ Node::Node(const char* name) : Gtk::Widget()
     this->name = string(name);
     this->x = this->y = 0;
 
-    this->set_events(Gdk::BUTTON_PRESS_MASK | Gdk::BUTTON_RELEASE_MASK);
+    Pango::FontDescription font;
+    font.set_family("Monospace");
+    font.set_weight(Pango::WEIGHT_BOLD);
+    font.set_size(8*PANGO_SCALE);
+    this->labelName = create_pango_layout(this->name.c_str());
+    this->labelName->set_font_description(font);
 
+    this->set_events(Gdk::BUTTON_PRESS_MASK | Gdk::BUTTON_RELEASE_MASK);
     this->signal_button_press_event().connect(sigc::mem_fun(this, &Node::on_button_pressed));
     this->signal_button_release_event().connect(sigc::mem_fun(this, &Node::on_button_released));
 }

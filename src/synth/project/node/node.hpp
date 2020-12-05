@@ -15,8 +15,8 @@ using namespace std;
 struct node_draw_context
 {
     const Cairo::RefPtr<Cairo::Context>& cr;
-    const double scale_x;
-    const double scale_y;
+    const int width;
+    const int height;
 };
 
 
@@ -51,6 +51,8 @@ protected:
 
     void addPort(Port* p);
 private:
+    Glib::RefPtr<Pango::Layout> labelName;
+
     void draw_name(node_draw_context* context);
     void draw_ports(node_draw_context* context);
     void draw_outer_box(node_draw_context* context);

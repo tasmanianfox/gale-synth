@@ -4,6 +4,7 @@ const int PAD_VERTICAL = 25;
 const int PAD_PORTS = 10;
 const int PORT_WIDTH = 10;
 const int PORT_HEIGHT = 10;
+const int NAME_MARGIN_HORIZONTAL = 10;
 
 #include <iostream>
 
@@ -11,9 +12,9 @@ void Node::draw_outer_box(node_draw_context* context)
 {
     context->cr->set_source_rgb(1.0, 0.0, 0.0);
     context->cr->move_to(0, 0);
-    context->cr->line_to(context->scale_x, 0);
-    context->cr->line_to(context->scale_x, context->scale_y);
-    context->cr->line_to(0, context->scale_y);
+    context->cr->line_to(context->width, 0);
+    context->cr->line_to(context->width, context->height);
+    context->cr->line_to(0, context->height);
     context->cr->line_to(0, 0);
     context->cr->stroke();
 }
@@ -42,7 +43,7 @@ void Node::draw_ports(node_draw_context* context)
     for(int i = 0; i < this->outputPorts.size(); i++)
     {
         int y = i*(PORT_WIDTH+PAD_PORTS) + PAD_VERTICAL;
-        context->cr->rectangle(context->scale_x - PORT_WIDTH, y, PORT_WIDTH, PORT_HEIGHT);
+        context->cr->rectangle(context->width - PORT_WIDTH, y, PORT_WIDTH, PORT_HEIGHT);
         context->cr->fill();
 
         
@@ -53,7 +54,7 @@ void Node::draw_ports(node_draw_context* context)
         int text_width;
         int text_height;
         layout->get_pixel_size(text_width, text_height);
-        context->cr->move_to(context->scale_x - PORT_WIDTH - 3 - text_width, y);
+        context->cr->move_to(context->width - PORT_WIDTH - 3 - text_width, y);
         layout->show_in_cairo_context(context->cr);
     }
 }
@@ -61,28 +62,17 @@ void Node::draw_ports(node_draw_context* context)
 void Node::draw_name(node_draw_context* context)
 {
     context->cr->set_source_rgb(0.0, 0.0, 0.0);
-    context->cr->move_to(context->scale_x*0.1, 5);
-
-    Pango::FontDescription font;
-    font.set_family("Monospace");
-    font.set_weight(Pango::WEIGHT_BOLD);
-    font.set_size(8*PANGO_SCALE);
-    Glib::RefPtr<Pango::Layout> layout = create_pango_layout(this->name.c_str());
-    layout->set_font_description(font);
-    layout->show_in_cairo_context(context->cr);
-    context->cr->stroke();
+    context->cr->move_to(NAME_MARGIN_HORIZONTAL, 5);
+    this->labelName->show_in_cairo_context(context->cr);
 }
 
 bool Node::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 {
     const Gtk::Allocation allocation = get_allocation();
-    const double scale_x = (double)allocation.get_width();
-    const double scale_y = (double)allocation.get_height();
-
     node_draw_context context = {
         .cr = cr,
-        .scale_x = scale_x,
-        .scale_y = scale_y
+        .width = allocation.get_width(),
+        .height = allocation.get_height()
     };
 
     Glib::RefPtr<Gtk::StyleContext> refStyleContext = get_style_context();
@@ -98,8 +88,11 @@ bool Node::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 
 void Node::get_preferred_width_vfunc(int& minimum_width, int& natural_width) const
 {
-    minimum_width = 140;
-    natural_width = 140;
+    int text_width;
+    int text_height;
+    this->labelName->get_pixel_size(text_width, text_height);
+
+    minimum_width = natural_width = text_width + NAME_MARGIN_HORIZONTAL*2;
 }
 
 void Node::get_preferred_height_vfunc(int& minimum_height, int& natural_height) const
