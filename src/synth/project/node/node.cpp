@@ -6,6 +6,7 @@ Node::Node(const char* name) : Gtk::Widget()
     this->inputPorts = vector<Port*>();
     this->outputPorts = vector<Port*>();
     this->name = string(name);
+    this->x = this->y = 0;
 }
 
 Node::~Node()
@@ -67,4 +68,10 @@ void Node::addPort(Port* p)
   {
     this->outputPorts.push_back(p);
   }
+}
+
+void Node::setPosition(int x, int y)
+{
+  this->x = x;
+  this->y = y;
 }

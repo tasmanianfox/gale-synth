@@ -28,6 +28,11 @@ class Node : public Gtk::Widget
 public:
     Node(const char* name);
     ~Node();
+
+    void setPosition(int x, int y);
+
+    int x;
+    int y;
 protected:
     vector<Port*> ports;
     vector<Port*> inputPorts;

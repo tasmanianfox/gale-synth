@@ -16,11 +16,12 @@ WindowMain::WindowMain(Project* project)
 
     for (int i = 0; i < this->project->nodes.size(); i++)
     {
-        Node* node = this->project->nodes[i];
-        projectArea->add(*node);
+        Node* node = this->project->nodes.at(i);
 
-        projectArea->child_property_x(*node).set_value(10);
-        projectArea->child_property_y(*node).set_value(50);
+        projectArea->put(*node, node->x, node->y);
+
+        // projectArea->child_property_x(*node).set_value(10);
+        // projectArea->child_property_y(*node).set_value(50);
 
         node->show();
     }    

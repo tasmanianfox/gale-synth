@@ -5,6 +5,8 @@ const int PAD_PORTS = 10;
 const int PORT_WIDTH = 10;
 const int PORT_HEIGHT = 10;
 
+#include <iostream>
+
 void Node::draw_outer_box(node_draw_context* context)
 {
     context->cr->move_to(0, 0);
@@ -27,12 +29,29 @@ void Node::draw_ports(node_draw_context* context)
         int y = i*(PORT_WIDTH+PAD_PORTS) + PAD_VERTICAL;
         context->cr->rectangle(.0, y, PORT_WIDTH, PORT_HEIGHT);
         context->cr->fill();
-        context->cr->stroke();
 
-        context->cr->move_to(PORT_WIDTH+3, y);
         Port* port = this->inputPorts.at(i);
         Glib::RefPtr<Pango::Layout> layout = create_pango_layout(port->getName().c_str());
         layout->set_font_description(font);
+        context->cr->move_to(PORT_WIDTH+3, y);
+        layout->show_in_cairo_context(context->cr);
+    }
+
+    for(int i = 0; i < this->outputPorts.size(); i++)
+    {
+        int y = i*(PORT_WIDTH+PAD_PORTS) + PAD_VERTICAL;
+        context->cr->rectangle(context->scale_x - PORT_WIDTH, y, PORT_WIDTH, PORT_HEIGHT);
+        context->cr->fill();
+
+        
+        Port* port = this->outputPorts.at(i);
+        Glib::RefPtr<Pango::Layout> layout = create_pango_layout(port->getName().c_str());
+        layout->set_font_description(font);
+
+        int text_width;
+        int text_height;
+        layout->get_pixel_size(text_width, text_height);
+        context->cr->move_to(context->scale_x - PORT_WIDTH - 3 - text_width, y);
         layout->show_in_cairo_context(context->cr);
     }
 }
@@ -48,6 +67,7 @@ void Node::draw_name(node_draw_context* context)
     Glib::RefPtr<Pango::Layout> layout = create_pango_layout(this->name.c_str());
     layout->set_font_description(font);
     layout->show_in_cairo_context(context->cr);
+    context->cr->stroke();
 }
 
 bool Node::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
