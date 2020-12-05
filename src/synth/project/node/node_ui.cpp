@@ -9,6 +9,7 @@ const int PORT_HEIGHT = 10;
 
 void Node::draw_outer_box(node_draw_context* context)
 {
+    context->cr->set_source_rgb(1.0, 0.0, 0.0);
     context->cr->move_to(0, 0);
     context->cr->line_to(context->scale_x, 0);
     context->cr->line_to(context->scale_x, context->scale_y);
@@ -19,6 +20,7 @@ void Node::draw_outer_box(node_draw_context* context)
 
 void Node::draw_ports(node_draw_context* context)
 {   
+    context->cr->set_source_rgb(0.0, 0.5, 0.0);
     Pango::FontDescription font;
     font.set_family("Monospace");
     font.set_weight(Pango::WEIGHT_BOLD);
@@ -58,6 +60,7 @@ void Node::draw_ports(node_draw_context* context)
 
 void Node::draw_name(node_draw_context* context)
 {
+    context->cr->set_source_rgb(0.0, 0.0, 0.0);
     context->cr->move_to(context->scale_x*0.1, 5);
 
     Pango::FontDescription font;

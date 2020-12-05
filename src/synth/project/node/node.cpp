@@ -7,6 +7,11 @@ Node::Node(const char* name) : Gtk::Widget()
     this->outputPorts = vector<Port*>();
     this->name = string(name);
     this->x = this->y = 0;
+
+    this->set_events(Gdk::BUTTON_PRESS_MASK | Gdk::BUTTON_RELEASE_MASK);
+
+    this->signal_button_press_event().connect(sigc::mem_fun(this, &Node::on_button_pressed));
+    this->signal_button_release_event().connect(sigc::mem_fun(this, &Node::on_button_released));
 }
 
 Node::~Node()
@@ -43,9 +48,6 @@ void Node::on_realize()
           GDK_WA_X | GDK_WA_Y);
   set_window(m_refGdkWindow);
 
-  //set colors
-  this->override_color(Gdk::RGBA("blue"));
-
   //make the widget receive expose events
   m_refGdkWindow->set_user_data(gobj());
 }
@@ -74,4 +76,19 @@ void Node::setPosition(int x, int y)
 {
   this->x = x;
   this->y = y;
+}
+
+#include <iostream>
+using namespace std;
+
+bool Node::on_button_pressed(GdkEventButton* button_event)
+{
+  cout << "Clicked!" << endl;
+  return true;
+}
+
+bool Node::on_button_released(GdkEventButton* release_event)
+{
+  cout << "Released!" << endl;
+  return true;
 }

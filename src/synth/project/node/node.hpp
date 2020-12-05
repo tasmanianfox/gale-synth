@@ -39,6 +39,9 @@ protected:
     vector<Port*> outputPorts;
     string name;
     
+    bool on_button_pressed(GdkEventButton* button_event);
+    bool on_button_released(GdkEventButton* release_event);
+
     void get_preferred_width_vfunc(int& minimum_width, int& natural_width) const override;
     void get_preferred_height_vfunc(int& minimum_height, int& natural_height) const override;
     void on_realize();
