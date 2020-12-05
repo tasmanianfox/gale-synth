@@ -1,6 +1,7 @@
 #ifndef _GALE_SYNTH_PROJECT_NODE_NODE_H_
 #define _GALE_SYNTH_PROJECT_NODE_NODE_H_
 
+#include <string>
 #include <vector>
 
 #include <gdkmm/general.h> 
@@ -10,6 +11,13 @@
 
 using namespace std;
 
+struct node_draw_context
+{
+    const Cairo::RefPtr<Cairo::Context>& cr;
+    const double scale_x;
+    const double scale_y;
+};
+
 
 /**
  * Nodes: wave generators, processors, mixers, effects, etc
@@ -17,10 +25,10 @@ using namespace std;
 class Node : public Gtk::Widget
 {
 public:
-    Node();
-    vector<Port>* getPorts();
+    Node(const char* name);
 protected:
     vector<Port> ports;
+    string name;
     
     void get_preferred_width_vfunc(int& minimum_width, int& natural_width) const override;
     void get_preferred_height_vfunc(int& minimum_height, int& natural_height) const override;
@@ -30,6 +38,10 @@ protected:
     Glib::RefPtr<Gdk::Window> m_refGdkWindow;
 
     void addPort(Port p);
+private:
+    void draw_name(node_draw_context* context);
+    void draw_ports(node_draw_context* context);
+    void draw_outer_box(node_draw_context* context);
 };
 
 #endif

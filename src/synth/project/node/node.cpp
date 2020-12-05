@@ -1,8 +1,9 @@
 #include "node.hpp"
 
-Node::Node() : Gtk::Widget()
+Node::Node(const char* name) : Gtk::Widget()
 {
     this->ports = vector<Port>();
+    this->name = string(name);
 }
 
 void Node::on_realize()
@@ -45,25 +46,7 @@ void Node::on_unrealize()
 }
 
 
-
-void Node::get_preferred_width_vfunc(int& minimum_width, int& natural_width) const
-{
-  minimum_width = 60;
-  natural_width = 100;
-}
-
-void Node::get_preferred_height_vfunc(int& minimum_height, int& natural_height) const
-{
-  minimum_height = 50;
-  natural_height = 70;
-}
-
 void Node::addPort(Port p)
 {
   this->ports.push_back(p);
-}
-
-vector<Port>* Node::getPorts()
-{
-    return &this->ports;
 }
