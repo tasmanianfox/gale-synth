@@ -16,6 +16,8 @@ class Port
 public:
     Port(PortType type, const char* name);
     PortType getType();
+
+    bool isInput();
 protected:
     PortType type;
     string name;

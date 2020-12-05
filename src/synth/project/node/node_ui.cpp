@@ -17,31 +17,11 @@ void Node::draw_outer_box(node_draw_context* context)
 
 void Node::draw_ports(node_draw_context* context)
 {;
-    vector<Port> inputs;
-    vector<Port> outputs;
-    for(int i = 0; i < this->ports.size(); i++)
+    for(int i = 0; i < this->inputPorts.size(); i++)
     {
-        Port port = this->ports.at(i);
-        if (port.getType() == PortType::INPUT)
-        {
-            inputs.push_back(port);
-        }
-        else
-        {
-            outputs.push_back(port);
-        }
-        
-    }
-
-    if (inputs.size())
-    {
-        for(int i = 0; i < inputs.size(); i++)
-        {
-            context->cr->rectangle(.0, i*(PORT_WIDTH+PAD_PORTS) + PAD_VERTICAL, PORT_WIDTH, PORT_HEIGHT);
-            context->cr->fill();
-            context->cr->stroke();
-        }
-        
+        context->cr->rectangle(.0, i*(PORT_WIDTH+PAD_PORTS) + PAD_VERTICAL, PORT_WIDTH, PORT_HEIGHT);
+        context->cr->fill();
+        context->cr->stroke();
     }
 }
 

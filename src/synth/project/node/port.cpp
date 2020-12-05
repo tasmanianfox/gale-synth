@@ -10,3 +10,8 @@ PortType Port::getType()
 {
     return this->type;
 }
+
+bool Port::isInput()
+{
+    return PortType::INPUT == this->type;
+}

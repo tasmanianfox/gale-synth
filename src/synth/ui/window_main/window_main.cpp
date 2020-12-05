@@ -1,9 +1,5 @@
 #include "window_main.hpp"
 
-#include <iostream>
-using namespace std;
-
-
 WindowMain::WindowMain(Project* project)
 {
     this->project = project;
@@ -15,13 +11,11 @@ WindowMain::WindowMain(Project* project)
     this->add(this->m_Box);
     this->initMenu();
 
-    Gtk::Fixed* projectArea = new Gtk::Fixed();
+    this->projectArea = new Gtk::Fixed();
     this->m_Box.pack_start(*projectArea);
 
-    cout << "Constructor called!" << endl;
     for (int i = 0; i < this->project->nodes.size(); i++)
     {
-        cout << "Drawing widget!" << endl;
         Node* node = this->project->nodes[i];
         projectArea->add(*node);
 
@@ -34,5 +28,5 @@ WindowMain::WindowMain(Project* project)
 
 WindowMain::~WindowMain()
 {
-
+    delete this->projectArea;
 }

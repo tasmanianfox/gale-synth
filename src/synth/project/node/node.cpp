@@ -2,8 +2,18 @@
 
 Node::Node(const char* name) : Gtk::Widget()
 {
-    this->ports = vector<Port>();
+    this->ports = vector<Port*>();
+    this->inputPorts = vector<Port*>();
+    this->outputPorts = vector<Port*>();
     this->name = string(name);
+}
+
+Node::~Node()
+{
+  for (int i = 0; i < this->ports.size(); i++)
+  {
+    delete this->ports.at(i);
+  }
 }
 
 void Node::on_realize()
@@ -46,7 +56,15 @@ void Node::on_unrealize()
 }
 
 
-void Node::addPort(Port p)
+void Node::addPort(Port* p)
 {
   this->ports.push_back(p);
+  if (p->isInput())
+  {
+    this->inputPorts.push_back(p);
+  } 
+  else 
+  {
+    this->outputPorts.push_back(p);
+  }
 }

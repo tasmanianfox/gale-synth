@@ -9,6 +9,11 @@ App::App(int argc, char *argv[]) : Gtk::Application(APP_ID)
     this->project = Project();
 }
 
+App::~App()
+{
+  delete this->mainWindow;
+}
+
 Glib::RefPtr<App> App::create(int argc, char *argv[])
 {
   return Glib::RefPtr<App>(new App(argc, argv));

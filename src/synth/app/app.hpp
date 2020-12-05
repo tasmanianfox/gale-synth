@@ -16,6 +16,7 @@ private:
     Project project;
 
     App(int argc, char *argv[]);
+    ~App();
     
     void on_startup() override;    
 };

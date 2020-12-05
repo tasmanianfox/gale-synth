@@ -16,6 +16,7 @@ public:
 
 private:
   Gtk::VBox m_Box; // menu
+  Gtk::Fixed* projectArea;
 
   Project* project;
 

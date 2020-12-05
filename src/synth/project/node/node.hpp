@@ -26,8 +26,11 @@ class Node : public Gtk::Widget
 {
 public:
     Node(const char* name);
+    ~Node();
 protected:
-    vector<Port> ports;
+    vector<Port*> ports;
+    vector<Port*> inputPorts;
+    vector<Port*> outputPorts;
     string name;
     
     void get_preferred_width_vfunc(int& minimum_width, int& natural_width) const override;
@@ -37,7 +40,7 @@ protected:
     bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
     Glib::RefPtr<Gdk::Window> m_refGdkWindow;
 
-    void addPort(Port p);
+    void addPort(Port* p);
 private:
     void draw_name(node_draw_context* context);
     void draw_ports(node_draw_context* context);
