@@ -33,6 +33,12 @@ public:
     Port* getPort(const char* name);
     vector<Port*> getOutputPorts();
 
+    int getInputPortMiddleX(int index);
+    int getInputPortMiddleY(int index);
+    int getInputPortIndex(Port* port);
+    int getOutputPortMiddleX(int index);
+    int getOutputPortMiddleY(int index);
+
     int x;
     int y;
 protected:
@@ -58,6 +64,11 @@ private:
     void draw_name(node_draw_context* context);
     void draw_ports(node_draw_context* context);
     void draw_outer_box(node_draw_context* context);
+
+    int getInputPortX(int index);
+    int getInputPortY(int index);
+    int getOutputPortX(int index);
+    int getOutputPortY(int index);
 };
 
 #endif

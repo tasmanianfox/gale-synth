@@ -29,8 +29,8 @@ void Node::draw_ports(node_draw_context* context)
 
     for(int i = 0; i < this->inputPorts.size(); i++)
     {
-        int y = i*(PORT_WIDTH+PAD_PORTS) + PAD_VERTICAL;
-        context->cr->rectangle(.0, y, PORT_WIDTH, PORT_HEIGHT);
+        int y = this->getInputPortY(i);
+        context->cr->rectangle(this->getInputPortX(i), this->getInputPortY(i), PORT_WIDTH, PORT_HEIGHT);
         context->cr->fill();
 
         Port* port = this->inputPorts.at(i);
@@ -42,8 +42,8 @@ void Node::draw_ports(node_draw_context* context)
 
     for(int i = 0; i < this->outputPorts.size(); i++)
     {
-        int y = i*(PORT_WIDTH+PAD_PORTS) + PAD_VERTICAL;
-        context->cr->rectangle(context->width - PORT_WIDTH, y, PORT_WIDTH, PORT_HEIGHT);
+        int y = this->getOutputPortY(i);
+        context->cr->rectangle(this->getOutputPortX(i), this->getOutputPortY(i), PORT_WIDTH, PORT_HEIGHT);
         context->cr->fill();
 
         
@@ -99,4 +99,58 @@ void Node::get_preferred_height_vfunc(int& minimum_height, int& natural_height) 
 {
     int maxPorts = max(this->inputPorts.size(), this->outputPorts.size());
     minimum_height = natural_height = 2 * PAD_VERTICAL + maxPorts * PORT_HEIGHT + (maxPorts-1) * PAD_PORTS;
+}
+
+int Node::getInputPortX(int index)
+{
+    return 0;
+}
+
+int Node::getInputPortY(int index)
+{
+    return index*(PORT_WIDTH+PAD_PORTS) + PAD_VERTICAL;
+}
+
+int Node::getOutputPortX(int index)
+{
+    return this->get_allocation().get_width() - PORT_WIDTH;
+}
+
+int Node::getOutputPortY(int index)
+{
+    return index*(PORT_WIDTH+PAD_PORTS) + PAD_VERTICAL;
+}
+
+int Node::getInputPortMiddleX(int index)
+{
+    return this->getInputPortX(index) + PORT_WIDTH / 2;
+}
+
+int Node::getInputPortMiddleY(int index)
+{
+    return this->getInputPortY(index) + PORT_HEIGHT / 2;
+}
+
+int Node::getOutputPortMiddleX(int index)
+{
+    return this->getOutputPortX(index) + PORT_WIDTH / 2;
+}
+
+int Node::getOutputPortMiddleY(int index)
+{
+    return this->getOutputPortY(index) + PORT_HEIGHT / 2;
+}
+
+int Node::getInputPortIndex(Port* port)
+{
+    for(int i = 0; i < this->inputPorts.size(); i++)
+    {
+        Port *p = this->inputPorts.at(i);
+        if (p->getName() == port->getName())
+        {
+            return i;
+        }
+    }
+
+    return -1;
 }
