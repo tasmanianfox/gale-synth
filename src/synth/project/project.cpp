@@ -10,13 +10,19 @@ void Project::reset()
     }
 
     // temporary. Just for demo
-    Node* node = new SimpleOscillator();
-    node->setPosition(50, 300);
-    this->nodes.push_back(node);
+    Node* node1 = new SimpleOscillator();
+    node1->setPosition(50, 300);
+    this->nodes.push_back(node1);
 
-    node = new StreamOutput();
-    node->setPosition(300, 300);
-    this->nodes.push_back(node);
+    Node* node2 = new StreamOutput();
+    node2->setPosition(300, 300);
+    this->nodes.push_back(node2);
 
+    Port* oscOut = node1->getPort("OUT");
+    Port* in1 = node2->getPort("IN_L");
+    Port* in2 = node2->getPort("IN_R");
+
+    oscOut->connect(in1);
+    oscOut->connect(in2);
 
 }

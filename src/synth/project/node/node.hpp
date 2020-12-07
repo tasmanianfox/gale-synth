@@ -30,6 +30,7 @@ public:
     ~Node();
 
     void setPosition(int x, int y);
+    Port* getPort(const char* name);
 
     int x;
     int y;

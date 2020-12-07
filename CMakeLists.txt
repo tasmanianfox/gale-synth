@@ -28,6 +28,7 @@ set(FILES_SOURCE)
 
 list(APPEND FILES_SOURCE
     src/synth/app/app.cpp
+    src/synth/project/node/connection.cpp
     src/synth/project/node/node.cpp
     src/synth/project/node/node_ui.cpp
     src/synth/project/node/oscillator/simple_oscillator.cpp

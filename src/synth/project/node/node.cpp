@@ -98,3 +98,14 @@ bool Node::on_button_released(GdkEventButton* release_event)
   cout << "Released!" << endl;
   return true;
 }
+
+Port* Node::getPort(const char* name)
+{
+  for(Port* port: this->ports) {
+      if (port->getName().compare(name) == 0)
+      {
+        return port;
+      }
+  }
+  return nullptr;
+}

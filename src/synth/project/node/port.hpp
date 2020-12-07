@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+#include "connection.hpp"
+
 using namespace std;
 
 enum PortType { INPUT, OUTPUT };
@@ -15,13 +17,20 @@ class Port
 {
 public:
     Port(PortType type, const char* name);
+    
     PortType getType();
+    string getName();
 
     bool isInput();
-    string getName();
+
+    void _addConnection(Connection* connection);
+    Connection* connect(Port* otherPort);
+    unsigned short int getConnectionsCount();
 protected:
     PortType type;
     string name;
+
+    vector<Connection*> connections;
 };
 
 #endif

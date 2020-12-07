@@ -8,9 +8,11 @@ class Port;
  */
 class Connection
 {
+public:
+    Connection(Port* output, Port* input); // plugins are connected from OUTPUT to INPUT
 private:
-    Port* firstPort;
-    Port* secondPort;
+    Port* input;
+    Port* output;
 };
 
 #endif
