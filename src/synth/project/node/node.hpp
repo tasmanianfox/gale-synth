@@ -31,6 +31,7 @@ public:
 
     void setPosition(int x, int y);
     Port* getPort(const char* name);
+    vector<Port*> getOutputPorts();
 
     int x;
     int y;

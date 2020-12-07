@@ -8,6 +8,8 @@
 
 using namespace std;
 
+class Node;
+
 enum PortType { INPUT, OUTPUT };
 
 /**
@@ -16,7 +18,7 @@ enum PortType { INPUT, OUTPUT };
 class Port
 {
 public:
-    Port(PortType type, const char* name);
+    Port(Node* node, PortType type, const char* name);
     
     PortType getType();
     string getName();
@@ -25,8 +27,11 @@ public:
 
     void _addConnection(Connection* connection);
     Connection* connect(Port* otherPort);
+    vector<Connection*> getConnections();
     unsigned short int getConnectionsCount();
+    Node* getNode();
 protected:
+    Node* node;
     PortType type;
     string name;
 

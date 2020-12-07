@@ -6,17 +6,17 @@
 #include <gtkmm.h>
 
 #include "synth/project/project.hpp"
+#include "synth/ui/window_main/project_area.hpp"
 
 class WindowMain : public Gtk::Window
 {
-
 public:
   WindowMain(Project* project);
   virtual ~WindowMain();
 
 private:
   Gtk::VBox m_Box; // menu
-  Gtk::Fixed* projectArea;
+  ProjectArea projectArea;
 
   Project* project;
 

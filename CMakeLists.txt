@@ -36,6 +36,7 @@ list(APPEND FILES_SOURCE
     src/synth/project/node/port.cpp
     src/synth/project/project.cpp
     src/synth/ui/window_main/menu.cpp
+    src/synth/ui/window_main/project_area.cpp
     src/synth/ui/window_main/window_main.cpp
     )
 # Sources END

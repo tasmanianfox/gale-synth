@@ -11,13 +11,13 @@ WindowMain::WindowMain(Project* project)
     this->add(this->m_Box);
     this->initMenu();
 
-    this->projectArea = new Gtk::Fixed();
-    this->m_Box.pack_start(*projectArea);
+    this->projectArea = ProjectArea(project);
+    this->m_Box.pack_start(projectArea);
 
     for (int i = 0; i < this->project->nodes.size(); i++)
     {
         Node* node = this->project->nodes.at(i);
-        projectArea->put(*node, node->x, node->y);
+        projectArea.put(*node, node->x, node->y);
 
         node->show();
     }    
@@ -25,5 +25,5 @@ WindowMain::WindowMain(Project* project)
 
 WindowMain::~WindowMain()
 {
-    delete this->projectArea;
+    
 }

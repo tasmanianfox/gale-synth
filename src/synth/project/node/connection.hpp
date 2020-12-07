@@ -10,6 +10,8 @@ class Connection
 {
 public:
     Connection(Port* output, Port* input); // plugins are connected from OUTPUT to INPUT
+
+    Port* getInput();
 private:
     Port* input;
     Port* output;
