@@ -14,8 +14,7 @@ bool ProjectArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 {
     cr->set_line_width(10.0);
     cr->set_source_rgba(0.0, 0.0, 1.0, 0.5);
-
-    for (Node* outputNode: this->project->nodes)
+    for (ProjectNode* outputNode: this->project->nodes)
     {
         vector<Port*> outputPorts = outputNode->getOutputPorts();
         for (int outputPortIndex = 0; outputPortIndex < outputPorts.size(); outputPortIndex++)

@@ -28,16 +28,18 @@ set(FILES_SOURCE)
 
 list(APPEND FILES_SOURCE
     src/synth/app/app.cpp
-    src/synth/project/node/connection.cpp
-    src/synth/project/node/node.cpp
-    src/synth/project/node/node_ui.cpp
-    src/synth/project/node/oscillator/simple_oscillator.cpp
-    src/synth/project/node/output/stream_output.cpp
-    src/synth/project/node/port.cpp
-    src/synth/project/project.cpp
+    src/synth/core/node/connection.cpp
+    src/synth/core/node/node.cpp
+    src/synth/core/project.cpp
+    src/synth/core/node/oscillator/simple_oscillator.cpp
+    src/synth/core/node/output/stream_output.cpp
+    src/synth/core/node/port.cpp
+    src/synth/app/project/project.cpp
+    src/synth/app/project/project_node.cpp
     src/synth/ui/window_main/menu.cpp
     src/synth/ui/window_main/project_area.cpp
     src/synth/ui/window_main/window_main.cpp
+    src/synth/ui/window_main/node_widget.cpp
     )
 # Sources END
 

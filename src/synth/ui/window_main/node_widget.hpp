@@ -1,14 +1,9 @@
-#ifndef _GALE_SYNTH_PROJECT_NODE_NODE_H_
-#define _GALE_SYNTH_PROJECT_NODE_NODE_H_
+#ifndef _GALE_SYNTH_UI_WINDOW_MAIN_NODE_WIDGET_H_
+#define _GALE_SYNTH_UI_WINDOW_MAIN_NODE_WIDGET_H_
 
-#include <algorithm>
 #include <string>
-#include <vector>
 
-#include <gdkmm/general.h> 
 #include <gtkmm/widget.h>
-
-#include "port.hpp"
 
 using namespace std;
 
@@ -19,34 +14,23 @@ struct node_draw_context
     const int height;
 };
 
-
-/**
- * Nodes: wave generators, processors, mixers, effects, etc
- */
-class Node : public Gtk::Widget
+class NodeWidget : public Gtk::Widget
 {
 public:
-    Node(const char* name);
-    ~Node();
-
-    void setPosition(int x, int y);
-    Port* getPort(const char* name);
-    vector<Port*> getOutputPorts();
+    NodeWidget(Node* node);
+    ~NodeWidget();
 
     int getInputPortMiddleX(int index);
     int getInputPortMiddleY(int index);
     int getInputPortIndex(Port* port);
     int getOutputPortMiddleX(int index);
     int getOutputPortMiddleY(int index);
-
-    int x;
-    int y;
-protected:
-    vector<Port*> ports;
-    vector<Port*> inputPorts;
-    vector<Port*> outputPorts;
+private:
+    Node* node;
     string name;
-    
+
+    Glib::RefPtr<Pango::Layout> labelName;
+
     bool on_button_pressed(GdkEventButton* button_event);
     bool on_button_released(GdkEventButton* release_event);
 
@@ -56,10 +40,6 @@ protected:
     void on_unrealize();
     bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
     Glib::RefPtr<Gdk::Window> m_refGdkWindow;
-
-    void addPort(Port* p);
-private:
-    Glib::RefPtr<Pango::Layout> labelName;
 
     void draw_name(node_draw_context* context);
     void draw_ports(node_draw_context* context);

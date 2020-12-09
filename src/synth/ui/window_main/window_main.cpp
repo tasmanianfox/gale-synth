@@ -12,18 +12,24 @@ WindowMain::WindowMain(Project* project)
     this->initMenu();
 
     this->projectArea = ProjectArea(project);
-    this->m_Box.pack_start(projectArea);
-
-    for (int i = 0; i < this->project->nodes.size(); i++)
-    {
-        Node* node = this->project->nodes.at(i);
-        projectArea.put(*node, node->x, node->y);
-
-        node->show();
-    }    
+    this->m_Box.pack_start(this->projectArea); 
 }
 
 WindowMain::~WindowMain()
 {
     
+}
+
+void WindowMain::load()
+{
+    this->project = project;
+
+    for (int i = 0; i < this->project->nodes.size(); i++)
+    {
+        Node* node = this->project->nodes.at(i);
+        NodeWidget widget(node);
+        projectArea.put(widget, node->x, node->y);
+
+        node->show();
+    }   
 }

@@ -3,7 +3,7 @@
 
 #include <gtkmm.h>
 
-#include "synth/project/project.hpp"
+#include "synth/app/project/project.hpp"
 
 class ProjectArea : public Gtk::Fixed
 {

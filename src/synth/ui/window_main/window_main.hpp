@@ -5,7 +5,8 @@
 
 #include <gtkmm.h>
 
-#include "synth/project/project.hpp"
+#include "synth/app/project/project.hpp"
+#include "synth/ui/window_main/node_widget.hpp"
 #include "synth/ui/window_main/project_area.hpp"
 
 class WindowMain : public Gtk::Window
@@ -13,6 +14,8 @@ class WindowMain : public Gtk::Window
 public:
   WindowMain(Project* project);
   virtual ~WindowMain();
+
+  void loadProject(Project* project);
 
 private:
   Gtk::VBox m_Box; // menu

@@ -1,5 +1,5 @@
-#ifndef _GALE_SYNTH_PROJECT_NODE_PORT_H_
-#define _GALE_SYNTH_PROJECT_NODE_PORT_H_
+#ifndef _GALE_SYNTH_CORE_NODE_PORT_H_
+#define _GALE_SYNTH_CORE_NODE_PORT_H_
 
 #include <string>
 #include <vector>
