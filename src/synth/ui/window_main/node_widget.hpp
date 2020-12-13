@@ -27,6 +27,7 @@ public:
     int getInputPortMiddleX(int index);
     int getInputPortMiddleY(int index);
     int getInputPortIndex(Gale::Port* port);
+    ProjectNode* getNode();
     int getOutputPortMiddleX(int index);
     int getOutputPortMiddleY(int index);
 private:

@@ -173,6 +173,11 @@ void NodeWidget::get_preferred_height_vfunc(int& minimum_height, int& natural_he
     minimum_height = natural_height = 2 * PAD_VERTICAL + maxPorts * PORT_HEIGHT + (maxPorts-1) * PAD_PORTS;
 }
 
+ProjectNode* NodeWidget::getNode()
+{
+    return this->node;
+}
+
 int NodeWidget::getInputPortX(int index)
 {
     return 0;

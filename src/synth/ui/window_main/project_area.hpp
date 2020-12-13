@@ -23,6 +23,8 @@ public:
 private:
     Project *project;
     vector<NodeWidget*> nodes;
+
+    NodeWidget* getNodeWidget(Gale::Node* node);
 };
 
 #endif
