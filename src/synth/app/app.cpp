@@ -3,15 +3,19 @@
 const char APP_ID[] = "com.github.tasmanianfox.gale";
 const char APP_NAME[] = "Gale";
 
-App::App(int argc, char *argv[]) : Gtk::Application(APP_ID)
+App::App(int argc, char *argv[]) :
+  Gtk::Application(APP_ID),
+  mainWindow(nullptr)
 {
     Glib::set_application_name(APP_NAME);
-    this->project = Project();
 }
 
 App::~App()
 {
-  delete this->mainWindow;
+  if (this->mainWindow != nullptr)
+  {
+    delete this->mainWindow;
+  } 
 }
 
 Glib::RefPtr<App> App::create(int argc, char *argv[])

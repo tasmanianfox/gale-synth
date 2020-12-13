@@ -18,7 +18,27 @@ void ProjectNode::setPosition(int x, int y)
   this->y = y;
 }
 
+vector<Port*> ProjectNode::getInputPorts()
+{
+  return this->node->getInputPorts();
+}
+
 vector<Port*> ProjectNode::getOutputPorts()
 {
   return this->node->getOutputPorts();
+}
+
+int ProjectNode::getX()
+{
+  return this->x;
+}
+
+int ProjectNode::getY()
+{
+  return this->y;
+}
+
+Node* ProjectNode::getNode()
+{
+  return this->node;
 }

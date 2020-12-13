@@ -15,7 +15,11 @@ public:
     ~ProjectNode();
 
     void setPosition(int x, int y);
+    int getX();
+    int getY();
+    vector<Port*> getInputPorts();
     vector<Port*> getOutputPorts();
+    Node* getNode();
 private:
     Node* node;
 

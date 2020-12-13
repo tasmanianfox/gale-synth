@@ -1,8 +1,16 @@
 #include "node_widget.hpp"
 
+#include <iostream> // TODO: REMOVEME
 using namespace std;
 
-NodeWidget::NodeWidget(Node* node) : x = 0, y = o
+const int PAD_VERTICAL = 25;
+const int PAD_PORTS = 10;
+const int PORT_WIDTH = 10;
+const int PORT_HEIGHT = 10;
+const int NAME_MARGIN_HORIZONTAL = 10;
+
+
+NodeWidget::NodeWidget(ProjectNode* node) : node(node)
 {
     Pango::FontDescription font;
     font.set_family("Monospace");
@@ -12,8 +20,8 @@ NodeWidget::NodeWidget(Node* node) : x = 0, y = o
     this->labelName->set_font_description(font);
 
     this->set_events(Gdk::BUTTON_PRESS_MASK | Gdk::BUTTON_RELEASE_MASK);
-    this->signal_button_press_event().connect(sigc::mem_fun(this, &Node::on_button_pressed));
-    this->signal_button_release_event().connect(sigc::mem_fun(this, &Node::on_button_released));
+    this->signal_button_press_event().connect(sigc::mem_fun(this, &NodeWidget::on_button_pressed));
+    this->signal_button_release_event().connect(sigc::mem_fun(this, &NodeWidget::on_button_released));
 }
 
 NodeWidget::~NodeWidget()
@@ -40,36 +48,36 @@ void NodeWidget::draw_ports(node_draw_context* context)
     font.set_weight(Pango::WEIGHT_BOLD);
     font.set_size(8*PANGO_SCALE);
 
-    for(int i = 0; i < this->inputPorts.size(); i++)
-    {
-        int y = this->getInputPortY(i);
-        context->cr->rectangle(this->getInputPortX(i), this->getInputPortY(i), PORT_WIDTH, PORT_HEIGHT);
-        context->cr->fill();
+    // for(int i = 0; i < this->inputPorts.size(); i++)
+    // {
+    //     int y = this->getInputPortY(i);
+    //     context->cr->rectangle(this->getInputPortX(i), this->getInputPortY(i), PORT_WIDTH, PORT_HEIGHT);
+    //     context->cr->fill();
 
-        Port* port = this->inputPorts.at(i);
-        Glib::RefPtr<Pango::Layout> layout = create_pango_layout(port->getName().c_str());
-        layout->set_font_description(font);
-        context->cr->move_to(PORT_WIDTH+3, y);
-        layout->show_in_cairo_context(context->cr);
-    }
+    //     Port* port = this->inputPorts.at(i);
+    //     Glib::RefPtr<Pango::Layout> layout = create_pango_layout(port->getName().c_str());
+    //     layout->set_font_description(font);
+    //     context->cr->move_to(PORT_WIDTH+3, y);
+    //     layout->show_in_cairo_context(context->cr);
+    // }
 
-    for(int i = 0; i < this->outputPorts.size(); i++)
-    {
-        int y = this->getOutputPortY(i);
-        context->cr->rectangle(this->getOutputPortX(i), this->getOutputPortY(i), PORT_WIDTH, PORT_HEIGHT);
-        context->cr->fill();
+    // for(int i = 0; i < this->outputPorts.size(); i++)
+    // {
+    //     int y = this->getOutputPortY(i);
+    //     context->cr->rectangle(this->getOutputPortX(i), this->getOutputPortY(i), PORT_WIDTH, PORT_HEIGHT);
+    //     context->cr->fill();
 
         
-        Port* port = this->outputPorts.at(i);
-        Glib::RefPtr<Pango::Layout> layout = create_pango_layout(port->getName().c_str());
-        layout->set_font_description(font);
+    //     Port* port = this->outputPorts.at(i);
+    //     Glib::RefPtr<Pango::Layout> layout = create_pango_layout(port->getName().c_str());
+    //     layout->set_font_description(font);
 
-        int text_width;
-        int text_height;
-        layout->get_pixel_size(text_width, text_height);
-        context->cr->move_to(context->width - PORT_WIDTH - 3 - text_width, y);
-        layout->show_in_cairo_context(context->cr);
-    }
+    //     int text_width;
+    //     int text_height;
+    //     layout->get_pixel_size(text_width, text_height);
+    //     context->cr->move_to(context->width - PORT_WIDTH - 3 - text_width, y);
+    //     layout->show_in_cairo_context(context->cr);
+    // }
 }
 
 void NodeWidget::draw_name(node_draw_context* context)
@@ -135,13 +143,13 @@ void NodeWidget::on_unrealize()
   Gtk::Widget::on_unrealize();
 }
 
-bool Node::on_button_pressed(GdkEventButton* button_event)
+bool NodeWidget::on_button_pressed(GdkEventButton* button_event)
 {
   cout << "Clicked!" << endl;
   return true;
 }
 
-bool Node::on_button_released(GdkEventButton* release_event)
+bool NodeWidget::on_button_released(GdkEventButton* release_event)
 {
   cout << "Released!" << endl;
   return true;
@@ -158,7 +166,7 @@ void NodeWidget::get_preferred_width_vfunc(int& minimum_width, int& natural_widt
 
 void NodeWidget::get_preferred_height_vfunc(int& minimum_height, int& natural_height) const
 {
-    int maxPorts = max(this->inputPorts.size(), this->outputPorts.size());
+    int maxPorts = max(this->node->getInputPorts().size(), this->node->getOutputPorts().size());
     minimum_height = natural_height = 2 * PAD_VERTICAL + maxPorts * PORT_HEIGHT + (maxPorts-1) * PAD_PORTS;
 }
 

@@ -22,7 +22,9 @@ public:
     ~Node();
 
     Port* getPort(const char* name);
+    vector<Port*> getInputPorts();
     vector<Port*> getOutputPorts();
+    int getInputPortIndex(Port* port);
 protected:
     vector<Port*> ports;
     vector<Port*> inputPorts;

@@ -15,7 +15,7 @@ public:
   WindowMain(Project* project);
   virtual ~WindowMain();
 
-  void loadProject(Project* project);
+  void loadProject();
 
 private:
   Gtk::VBox m_Box; // menu

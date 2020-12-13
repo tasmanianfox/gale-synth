@@ -5,6 +5,8 @@
 
 #include <gtkmm/widget.h>
 
+#include "synth/app/project/project_node.hpp"
+
 using namespace std;
 
 struct node_draw_context
@@ -17,7 +19,7 @@ struct node_draw_context
 class NodeWidget : public Gtk::Widget
 {
 public:
-    NodeWidget(Node* node);
+    NodeWidget(ProjectNode* node);
     ~NodeWidget();
 
     int getInputPortMiddleX(int index);
@@ -26,7 +28,7 @@ public:
     int getOutputPortMiddleX(int index);
     int getOutputPortMiddleY(int index);
 private:
-    Node* node;
+    ProjectNode* node;
     string name;
 
     Glib::RefPtr<Pango::Layout> labelName;

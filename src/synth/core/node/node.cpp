@@ -2,9 +2,6 @@
 
 Node::Node(const char* name) : Gtk::Widget()
 {
-    // this->ports = vector<Port*>();
-    // this->inputPorts = vector<Port*>();
-    // this->outputPorts = vector<Port*>();
     this->name = string(name);
 }
 
@@ -40,7 +37,26 @@ Port* Node::getPort(const char* name)
   return nullptr;
 }
 
+vector<Port*> Node::getInputPorts()
+{
+  return this->inputPorts;
+}
+
 vector<Port*> Node::getOutputPorts()
 {
   return this->outputPorts;
+}
+
+int Node::getInputPortIndex(Port* port)
+{
+    for(int i = 0; i < this->inputPorts.size(); i++)
+    {
+        Port *p = this->inputPorts.at(i);
+        if (p->getName() == port->getName())
+        {
+            return i;
+        }
+    }
+
+    return -1;
 }

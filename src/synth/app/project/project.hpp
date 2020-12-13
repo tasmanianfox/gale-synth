@@ -19,7 +19,11 @@ public:
     Project();
     ~Project();
     void reset();
+public:
+    void addNode(ProjectNode* node);
+    vector<ProjectNode*> getNodes();
 
+protected:
     vector<ProjectNode*> nodes;
 private:
     Gale::Project* project;

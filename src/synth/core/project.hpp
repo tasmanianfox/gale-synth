@@ -15,6 +15,8 @@ namespace Gale
  */
 class Project
 {
+public:
+    void addNode(Node* node);
 private:
     vector<Node*> nodes;
 };

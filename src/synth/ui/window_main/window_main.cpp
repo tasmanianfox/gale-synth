@@ -12,7 +12,9 @@ WindowMain::WindowMain(Project* project)
     this->initMenu();
 
     this->projectArea = ProjectArea(project);
-    this->m_Box.pack_start(this->projectArea); 
+    this->m_Box.pack_start(this->projectArea);
+
+    this->loadProject();
 }
 
 WindowMain::~WindowMain()
@@ -20,16 +22,12 @@ WindowMain::~WindowMain()
     
 }
 
-void WindowMain::load()
+void WindowMain::loadProject()
 {
-    this->project = project;
-
-    for (int i = 0; i < this->project->nodes.size(); i++)
+    vector<ProjectNode*> nodes = this->project->getNodes();
+    for (int i = 0; i < nodes.size(); i++)
     {
-        Node* node = this->project->nodes.at(i);
-        NodeWidget widget(node);
-        projectArea.put(widget, node->x, node->y);
-
-        node->show();
+        ProjectNode* node = nodes.at(i);
+        this->projectArea.addNode(node);
     }   
 }
