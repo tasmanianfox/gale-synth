@@ -8,6 +8,9 @@
 
 using namespace std;
 
+namespace Gale
+{
+
 class Node;
 
 enum PortType { INPUT, OUTPUT };
@@ -37,5 +40,7 @@ protected:
 
     vector<Connection*> connections;
 };
+
+}
 
 #endif

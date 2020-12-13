@@ -10,13 +10,16 @@ const int PORT_HEIGHT = 10;
 const int NAME_MARGIN_HORIZONTAL = 10;
 
 
-NodeWidget::NodeWidget(ProjectNode* node) : node(node)
+NodeWidget::NodeWidget(ProjectNode* node) :
+    Gtk::Widget(),
+    Glib::ObjectBase("gale_node"),
+    node(node)
 {
     Pango::FontDescription font;
     font.set_family("Monospace");
     font.set_weight(Pango::WEIGHT_BOLD);
     font.set_size(8*PANGO_SCALE);
-    this->labelName = create_pango_layout(this->name.c_str());
+    this->labelName = create_pango_layout(this->node->getNode()->getName().c_str());
     this->labelName->set_font_description(font);
 
     this->set_events(Gdk::BUTTON_PRESS_MASK | Gdk::BUTTON_RELEASE_MASK);
@@ -48,36 +51,36 @@ void NodeWidget::draw_ports(node_draw_context* context)
     font.set_weight(Pango::WEIGHT_BOLD);
     font.set_size(8*PANGO_SCALE);
 
-    // for(int i = 0; i < this->inputPorts.size(); i++)
-    // {
-    //     int y = this->getInputPortY(i);
-    //     context->cr->rectangle(this->getInputPortX(i), this->getInputPortY(i), PORT_WIDTH, PORT_HEIGHT);
-    //     context->cr->fill();
+    vector<Gale::Port*> ports = this->node->getNode()->getInputPorts();
+    for(int i = 0; i < ports.size(); i++)
+    {
+        int y = this->getInputPortY(i);
+        context->cr->rectangle(this->getInputPortX(i), this->getInputPortY(i), PORT_WIDTH, PORT_HEIGHT);
+        context->cr->fill();
 
-    //     Port* port = this->inputPorts.at(i);
-    //     Glib::RefPtr<Pango::Layout> layout = create_pango_layout(port->getName().c_str());
-    //     layout->set_font_description(font);
-    //     context->cr->move_to(PORT_WIDTH+3, y);
-    //     layout->show_in_cairo_context(context->cr);
-    // }
+        Gale::Port* port = ports.at(i);
+        Glib::RefPtr<Pango::Layout> layout = create_pango_layout(port->getName().c_str());
+        layout->set_font_description(font);
+        context->cr->move_to(PORT_WIDTH+3, y);
+        layout->show_in_cairo_context(context->cr);
+    }
 
-    // for(int i = 0; i < this->outputPorts.size(); i++)
-    // {
-    //     int y = this->getOutputPortY(i);
-    //     context->cr->rectangle(this->getOutputPortX(i), this->getOutputPortY(i), PORT_WIDTH, PORT_HEIGHT);
-    //     context->cr->fill();
+    ports = this->node->getNode()->getOutputPorts();
+    for(int i = 0; i < ports.size(); i++)
+    {
+        int y = this->getOutputPortY(i);
+        context->cr->rectangle(this->getOutputPortX(i), this->getOutputPortY(i), PORT_WIDTH, PORT_HEIGHT);
+        context->cr->fill();
 
-        
-    //     Port* port = this->outputPorts.at(i);
-    //     Glib::RefPtr<Pango::Layout> layout = create_pango_layout(port->getName().c_str());
-    //     layout->set_font_description(font);
-
-    //     int text_width;
-    //     int text_height;
-    //     layout->get_pixel_size(text_width, text_height);
-    //     context->cr->move_to(context->width - PORT_WIDTH - 3 - text_width, y);
-    //     layout->show_in_cairo_context(context->cr);
-    // }
+        Gale::Port* port = ports.at(i);
+        Glib::RefPtr<Pango::Layout> layout = create_pango_layout(port->getName().c_str());
+        layout->set_font_description(font);
+        int text_width;
+        int text_height;
+        layout->get_pixel_size(text_width, text_height);
+        context->cr->move_to(context->width - PORT_WIDTH - 3 - text_width, y);
+        layout->show_in_cairo_context(context->cr);
+    }
 }
 
 void NodeWidget::draw_name(node_draw_context* context)

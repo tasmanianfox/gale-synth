@@ -5,17 +5,17 @@
 #include <string>
 #include <vector>
 
-#include <gdkmm/general.h> 
-#include <gtkmm/widget.h>
-
 #include "port.hpp"
 
 using namespace std;
 
+namespace Gale
+{
+
 /**
  * Nodes: wave generators, processors, mixers, effects, etc
  */
-class Node : public Gtk::Widget
+class Node
 {
 public:
     Node(const char* name);
@@ -25,6 +25,7 @@ public:
     vector<Port*> getInputPorts();
     vector<Port*> getOutputPorts();
     int getInputPortIndex(Port* port);
+    string getName();
 protected:
     vector<Port*> ports;
     vector<Port*> inputPorts;
@@ -33,5 +34,7 @@ protected:
 
     void addPort(Port* p);
 };
+
+}
 
 #endif

@@ -1,5 +1,7 @@
 #include "connection.hpp"
 
+using namespace Gale;
+
 Connection::Connection(Port* output, Port* input)
 {
     this->output = output;

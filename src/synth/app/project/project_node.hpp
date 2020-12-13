@@ -11,17 +11,17 @@ using namespace std;
 class ProjectNode
 {
 public:
-    ProjectNode(Node* node);
+    ProjectNode(Gale::Node* node);
     ~ProjectNode();
 
     void setPosition(int x, int y);
     int getX();
     int getY();
-    vector<Port*> getInputPorts();
-    vector<Port*> getOutputPorts();
-    Node* getNode();
+    vector<Gale::Port*> getInputPorts();
+    vector<Gale::Port*> getOutputPorts();
+    Gale::Node* getNode();
 private:
-    Node* node;
+    Gale::Node* node;
 
     int x;
     int y;

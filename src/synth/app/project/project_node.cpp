@@ -1,10 +1,11 @@
 #include "project_node.hpp"
 
-ProjectNode::ProjectNode(Node* node) :
+ProjectNode::ProjectNode(Gale::Node* node) :
   x(0),
-  y(0)
+  y(0),
+  node(node)
 {
-    this->node = node;
+
 }
 
 ProjectNode::~ProjectNode()
@@ -18,12 +19,12 @@ void ProjectNode::setPosition(int x, int y)
   this->y = y;
 }
 
-vector<Port*> ProjectNode::getInputPorts()
+vector<Gale::Port*> ProjectNode::getInputPorts()
 {
   return this->node->getInputPorts();
 }
 
-vector<Port*> ProjectNode::getOutputPorts()
+vector<Gale::Port*> ProjectNode::getOutputPorts()
 {
   return this->node->getOutputPorts();
 }
@@ -38,7 +39,7 @@ int ProjectNode::getY()
   return this->y;
 }
 
-Node* ProjectNode::getNode()
+Gale::Node* ProjectNode::getNode()
 {
   return this->node;
 }

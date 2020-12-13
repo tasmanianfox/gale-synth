@@ -1,6 +1,8 @@
 #include "node.hpp"
 
-Node::Node(const char* name) : Gtk::Widget()
+using namespace Gale;
+
+Node::Node(const char* name)
 {
     this->name = string(name);
 }
@@ -59,4 +61,9 @@ int Node::getInputPortIndex(Port* port)
     }
 
     return -1;
+}
+
+string Node::getName()
+{
+  return this->name;
 }

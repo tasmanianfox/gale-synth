@@ -1,6 +1,9 @@
 #ifndef _GALE_SYNTH_CORE_NODE_CONNECTION_H_
 #define _GALE_SYNTH_CORE_NODE_CONNECTION_H_
 
+namespace Gale
+{
+
 class Port;
 
 /**
@@ -16,5 +19,7 @@ private:
     Port* input;
     Port* output;
 };
+
+}
 
 #endif

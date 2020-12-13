@@ -5,6 +5,9 @@
 
 #include "synth/core/node/node.hpp"
 
+namespace Gale
+{
+
 /**
  * Outputs the sound to external device (DAW, audio editor, system sound, etc)
  */
@@ -14,5 +17,6 @@ public:
     StreamOutput();
 };
 
+}
 
 #endif

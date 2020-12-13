@@ -3,9 +3,11 @@
 
 #include <string>
 
+#include <gdkmm/general.h>
 #include <gtkmm/widget.h>
 
 #include "synth/app/project/project_node.hpp"
+#include "synth/core/node/port.hpp"
 
 using namespace std;
 
@@ -24,12 +26,12 @@ public:
 
     int getInputPortMiddleX(int index);
     int getInputPortMiddleY(int index);
-    int getInputPortIndex(Port* port);
+    int getInputPortIndex(Gale::Port* port);
     int getOutputPortMiddleX(int index);
     int getOutputPortMiddleY(int index);
 private:
     ProjectNode* node;
-    string name;
+    // string name;
 
     Glib::RefPtr<Pango::Layout> labelName;
 
