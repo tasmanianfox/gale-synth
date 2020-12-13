@@ -217,3 +217,8 @@ int NodeWidget::getOutputPortMiddleY(int index)
 {
     return this->getOutputPortY(index) + PORT_HEIGHT / 2;
 }
+
+Gale::Connection* NodeWidget::connect(const char* myPortName, NodeWidget* otherNode, const char* otherPortName)
+{
+    return this->getNode()->connect(myPortName, otherNode->getNode(), otherPortName);
+}

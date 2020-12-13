@@ -30,9 +30,10 @@ public:
     ProjectNode* getNode();
     int getOutputPortMiddleX(int index);
     int getOutputPortMiddleY(int index);
+
+    Gale::Connection* connect(const char* myPortName, NodeWidget* otherNode, const char* otherPortName);
 private:
     ProjectNode* node;
-    // string name;
 
     Glib::RefPtr<Pango::Layout> labelName;
 

@@ -32,23 +32,15 @@ void Project::reset() // Temporary. Should be a clean project
     }
 
     // temporary. Just for demo
-    Gale::Node* n1 = new Gale::SimpleOscillator();
-    ProjectNode* node1 = new ProjectNode(n1);
+    ProjectNode* node1 = new ProjectNode(new Gale::SimpleOscillator());
     node1->setPosition(50, 300);
     this->addNode(node1);
-
-    Gale::Node *n2 = new Gale::StreamOutput();
-    ProjectNode* node2 = new ProjectNode(n2);
+    ProjectNode* node2 = new ProjectNode(new Gale::StreamOutput());
     node2->setPosition(300, 300);
     this->addNode(node2);
 
-    Gale::Port* oscOut = n1->getPort("OUT");
-    Gale::Port* in1 = n2->getPort("IN_L");
-    Gale::Port* in2 = n2->getPort("IN_R");
-
-    oscOut->connect(in1);
-    oscOut->connect(in2);
-
+    node1->connect("OUT", node2, "IN_L");
+    node1->connect("OUT", node2, "IN_R");
 }
 
 void Project::addNode(ProjectNode* node)

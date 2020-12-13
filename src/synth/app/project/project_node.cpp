@@ -43,3 +43,11 @@ Gale::Node* ProjectNode::getNode()
 {
   return this->node;
 }
+
+Gale::Connection* ProjectNode::connect(const char* myPortName, ProjectNode* otherNode, const char* otherPortName)
+{
+    Gale::Port* myPort = this->getNode()->getPort(myPortName);
+    Gale::Port* otherPort = otherNode->getNode()->getPort(otherPortName);
+
+    return myPort->connect(otherPort);
+}

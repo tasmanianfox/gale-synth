@@ -14,6 +14,8 @@ public:
     ProjectNode(Gale::Node* node);
     ~ProjectNode();
 
+    Gale::Connection* connect(const char* myPortName, ProjectNode* otherNode, const char* otherPortName);
+
     void setPosition(int x, int y);
     int getX();
     int getY();
