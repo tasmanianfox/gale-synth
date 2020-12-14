@@ -11,6 +11,8 @@
 
 using namespace std;
 
+class ProjectArea;
+
 struct node_draw_context
 {
     const Cairo::RefPtr<Cairo::Context>& cr;
@@ -21,7 +23,7 @@ struct node_draw_context
 class NodeWidget : public Gtk::Widget
 {
 public:
-    NodeWidget(ProjectNode* node);
+    NodeWidget(ProjectArea *projectArea, ProjectNode* node);
     ~NodeWidget();
 
     int getInputPortMiddleX(int index);
@@ -33,12 +35,17 @@ public:
 
     Gale::Connection* connect(const char* myPortName, NodeWidget* otherNode, const char* otherPortName);
 private:
+    ProjectArea *projectArea;
     ProjectNode* node;
+
+    gdouble drag_start_x;
+    gdouble drag_start_y;
 
     Glib::RefPtr<Pango::Layout> labelName;
 
     bool on_button_pressed(GdkEventButton* button_event);
     bool on_button_released(GdkEventButton* release_event);
+    bool on_mouse_motion(GdkEventMotion* motion_event);
 
     void get_preferred_width_vfunc(int& minimum_width, int& natural_width) const override;
     void get_preferred_height_vfunc(int& minimum_height, int& natural_height) const override;

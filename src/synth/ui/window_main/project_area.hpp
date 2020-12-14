@@ -14,7 +14,6 @@ using namespace std;
 class ProjectArea : public Gtk::Fixed
 {
 public:
-    ProjectArea();
     ProjectArea(Project *project);
 
     void addNode(ProjectNode* node);

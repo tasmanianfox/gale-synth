@@ -1,4 +1,5 @@
 #include "node_widget.hpp"
+#include "project_area.hpp"
 
 #include <iostream> // TODO: REMOVEME
 using namespace std;
@@ -9,10 +10,10 @@ const int PORT_WIDTH = 10;
 const int PORT_HEIGHT = 10;
 const int NAME_MARGIN_HORIZONTAL = 10;
 
-
-NodeWidget::NodeWidget(ProjectNode* node) :
+NodeWidget::NodeWidget(ProjectArea *projectArea, ProjectNode* node) :
     Gtk::Widget(),
     Glib::ObjectBase("gale_node"),
+    projectArea(projectArea),
     node(node)
 {
     Pango::FontDescription font;
@@ -22,9 +23,10 @@ NodeWidget::NodeWidget(ProjectNode* node) :
     this->labelName = create_pango_layout(this->node->getNode()->getName().c_str());
     this->labelName->set_font_description(font);
 
-    this->set_events(Gdk::BUTTON_PRESS_MASK | Gdk::BUTTON_RELEASE_MASK);
+    this->set_events(Gdk::BUTTON_PRESS_MASK | Gdk::BUTTON_RELEASE_MASK | Gdk::BUTTON1_MOTION_MASK);
     this->signal_button_press_event().connect(sigc::mem_fun(this, &NodeWidget::on_button_pressed));
     this->signal_button_release_event().connect(sigc::mem_fun(this, &NodeWidget::on_button_released));
+    this->signal_motion_notify_event().connect(sigc::mem_fun(*this, &NodeWidget::on_mouse_motion));
 }
 
 NodeWidget::~NodeWidget()
@@ -34,6 +36,11 @@ NodeWidget::~NodeWidget()
 
 void NodeWidget::draw_outer_box(node_draw_context* context)
 {
+    context->cr->set_source_rgba(0.0, 0.0, 0.0, 0.1);
+    context->cr->rectangle(0.0, 0.0, context->width, context->height);
+    context->cr->fill();
+
+
     context->cr->set_source_rgb(1.0, 0.0, 0.0);
     context->cr->move_to(0, 0);
     context->cr->line_to(context->width, 0);
@@ -148,14 +155,14 @@ void NodeWidget::on_unrealize()
 
 bool NodeWidget::on_button_pressed(GdkEventButton* button_event)
 {
-  cout << "Clicked!" << endl;
-  return true;
+    this->drag_start_x = button_event->x;
+    this->drag_start_y = button_event->y;
+    return true;
 }
 
 bool NodeWidget::on_button_released(GdkEventButton* release_event)
 {
-  cout << "Released!" << endl;
-  return true;
+    return true;
 }
 
 void NodeWidget::get_preferred_width_vfunc(int& minimum_width, int& natural_width) const
@@ -221,4 +228,12 @@ int NodeWidget::getOutputPortMiddleY(int index)
 Gale::Connection* NodeWidget::connect(const char* myPortName, NodeWidget* otherNode, const char* otherPortName)
 {
     return this->getNode()->connect(myPortName, otherNode->getNode(), otherPortName);
+}
+
+bool NodeWidget::on_mouse_motion(GdkEventMotion* motion_event)
+{
+    this->projectArea->move(*this,
+                this->projectArea->child_property_x(*this) + motion_event->x - this->drag_start_x,
+                this->projectArea->child_property_y(*this) + motion_event->y - this->drag_start_y);
+    return false;
 }

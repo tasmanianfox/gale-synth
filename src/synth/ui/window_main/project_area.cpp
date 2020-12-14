@@ -1,13 +1,10 @@
 #include "project_area.hpp"
 
-ProjectArea::ProjectArea() : project(nullptr)
+ProjectArea::ProjectArea(Project *project) :
+    project(project),
+    Gtk::Fixed()
 {
-
-}
-
-ProjectArea::ProjectArea(Project *project) : Gtk::Fixed()
-{
-    this->project = project;
+    this->add_events(Gdk::BUTTON1_MOTION_MASK);
 }
 
 bool ProjectArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
@@ -49,7 +46,7 @@ bool ProjectArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 
 void ProjectArea::addNode(ProjectNode* node)
 {
-    NodeWidget* widget = new NodeWidget(node);
+    NodeWidget* widget = new NodeWidget(this, node);
     this->nodes.push_back(widget);
     this->put(*widget, node->getX(), node->getY());
     widget->show();
