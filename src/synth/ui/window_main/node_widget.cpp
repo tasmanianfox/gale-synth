@@ -1,5 +1,5 @@
 #include "node_widget.hpp"
-#include "project_area.hpp"
+#include "node_container_widget.hpp"
 
 #include <iostream> // TODO: REMOVEME
 using namespace std;
@@ -10,10 +10,10 @@ const int PORT_WIDTH = 10;
 const int PORT_HEIGHT = 10;
 const int NAME_MARGIN_HORIZONTAL = 10;
 
-NodeWidget::NodeWidget(ProjectArea *projectArea, ProjectNode* node) :
+NodeWidget::NodeWidget(NodeContainerWidget* container, ProjectNode* node) :
     Gtk::Widget(),
     Glib::ObjectBase("gale_node"),
-    projectArea(projectArea),
+    container(container),
     node(node)
 {
     Pango::FontDescription font;
@@ -232,8 +232,6 @@ Gale::Connection* NodeWidget::connect(const char* myPortName, NodeWidget* otherN
 
 bool NodeWidget::on_mouse_motion(GdkEventMotion* motion_event)
 {
-    this->projectArea->move(*this,
-                this->projectArea->child_property_x(*this) + motion_event->x - this->drag_start_x,
-                this->projectArea->child_property_y(*this) + motion_event->y - this->drag_start_y);
+    this->container->moveMe(motion_event->x - this->drag_start_x, motion_event->y - this->drag_start_y);
     return false;
 }

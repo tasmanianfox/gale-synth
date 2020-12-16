@@ -12,23 +12,24 @@ bool ProjectArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
     cr->set_line_width(10.0);
     cr->set_source_rgba(0.0, 0.0, 1.0, 0.5);
 
-    for (NodeWidget* outputNode: this->nodes)
+    for (NodeContainerWidget* outputNodeContainer: this->nodes)
     {
+        NodeWidget* outputNode = outputNodeContainer->getNodeWidget();
         vector<Gale::Port*> outputPorts = outputNode->getNode()->getNode()->getOutputPorts();
         for (int outputPortIndex = 0; outputPortIndex < outputPorts.size(); outputPortIndex++)
         {
             Gale::Port* outputPort = outputPorts.at(outputPortIndex);
-            int outputX = this->child_property_x(*outputNode) + outputNode->getOutputPortMiddleX(outputPortIndex);
-            int outputY = this->child_property_y(*outputNode) + outputNode->getOutputPortMiddleY(outputPortIndex);
+            int outputX = this->child_property_x(*outputNodeContainer) + outputNode->getOutputPortMiddleX(outputPortIndex);
+            int outputY = this->child_property_y(*outputNodeContainer) + outputNode->getOutputPortMiddleY(outputPortIndex);
             for (Gale::Connection* connection: outputPort->getConnections())
             {
                 Gale::Port *inputPort = connection->getInput();
                 Gale::Node* inputNode = inputPort->getNode();
                 int inputPortIndex = inputNode->getInputPortIndex(inputPort);
-                NodeWidget* inputWidget = this->getNodeWidget(inputNode);
-
-                int inputX = this->child_property_x(*inputWidget) + inputWidget->getInputPortMiddleX(inputPortIndex);
-                int inputY = this->child_property_y(*inputWidget) + inputWidget->getInputPortMiddleY(inputPortIndex);
+                NodeContainerWidget* inputContainerWidget = this->getNodeContainerWidget(inputNode);
+                NodeWidget* inputWidget = inputContainerWidget->getNodeWidget();
+                int inputX = this->child_property_x(*inputContainerWidget) + inputWidget->getInputPortMiddleX(inputPortIndex);
+                int inputY = this->child_property_y(*inputContainerWidget) + inputWidget->getInputPortMiddleY(inputPortIndex);
                 
                 cr->move_to(outputX, outputY);
                 cr->line_to(inputX, inputY);
@@ -37,7 +38,6 @@ bool ProjectArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
         }
     }
 
-    
     cr->set_line_width(1.0);
     Gtk::Fixed::on_draw(cr);
 
@@ -46,17 +46,17 @@ bool ProjectArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 
 void ProjectArea::addNode(ProjectNode* node)
 {
-    NodeWidget* widget = new NodeWidget(this, node);
+    NodeContainerWidget* widget = new NodeContainerWidget(this, node);
     this->nodes.push_back(widget);
     this->put(*widget, node->getX(), node->getY());
     widget->show();
 }
 
-NodeWidget* ProjectArea::getNodeWidget(Gale::Node* node)
+NodeContainerWidget* ProjectArea::getNodeContainerWidget(Gale::Node* node)
 {
-    for (NodeWidget* widget: this->nodes)
+    for (NodeContainerWidget* widget: this->nodes)
     {
-        if (widget->getNode()->getNode() == node)
+        if (widget->getNodeWidget()->getNode()->getNode() == node)
         {
             return widget;
         }

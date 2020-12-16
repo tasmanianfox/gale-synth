@@ -7,7 +7,7 @@
 
 #include "synth/app/project/project.hpp"
 #include "synth/app/project/project_node.hpp"
-#include "synth/ui/window_main/node_widget.hpp"
+#include "synth/ui/window_main/node_container_widget.hpp"
 
 using namespace std;
 
@@ -21,9 +21,9 @@ public:
     bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
 private:
     Project *project;
-    vector<NodeWidget*> nodes;
+    vector<NodeContainerWidget*> nodes;
 
-    NodeWidget* getNodeWidget(Gale::Node* node);
+    NodeContainerWidget* getNodeContainerWidget(Gale::Node* node);
 };
 
 #endif

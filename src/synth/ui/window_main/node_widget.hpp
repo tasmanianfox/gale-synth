@@ -11,7 +11,7 @@
 
 using namespace std;
 
-class ProjectArea;
+class NodeContainerWidget;
 
 struct node_draw_context
 {
@@ -23,7 +23,7 @@ struct node_draw_context
 class NodeWidget : public Gtk::Widget
 {
 public:
-    NodeWidget(ProjectArea *projectArea, ProjectNode* node);
+    NodeWidget(NodeContainerWidget* container, ProjectNode* node);
     ~NodeWidget();
 
     int getInputPortMiddleX(int index);
@@ -35,7 +35,7 @@ public:
 
     Gale::Connection* connect(const char* myPortName, NodeWidget* otherNode, const char* otherPortName);
 private:
-    ProjectArea *projectArea;
+    NodeContainerWidget* container;
     ProjectNode* node;
 
     gdouble drag_start_x;
