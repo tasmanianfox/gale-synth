@@ -19,6 +19,7 @@ public:
     void setPosition(int x, int y);
     int getX();
     int getY();
+    vector<Gale::Port*> getPorts();
     vector<Gale::Port*> getInputPorts();
     vector<Gale::Port*> getOutputPorts();
     Gale::Node* getNode();

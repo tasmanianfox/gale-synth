@@ -39,6 +39,11 @@ Port* Node::getPort(const char* name)
   return nullptr;
 }
 
+vector<Port*> Node::getPorts()
+{
+  return this->ports;
+}
+
 vector<Port*> Node::getInputPorts()
 {
   return this->inputPorts;

@@ -40,7 +40,6 @@ void NodeWidget::draw_outer_box(node_draw_context* context)
     context->cr->rectangle(0.0, 0.0, context->width, context->height);
     context->cr->fill();
 
-
     context->cr->set_source_rgb(1.0, 0.0, 0.0);
     context->cr->move_to(0, 0);
     context->cr->line_to(context->width, 0);
@@ -52,42 +51,7 @@ void NodeWidget::draw_outer_box(node_draw_context* context)
 
 void NodeWidget::draw_ports(node_draw_context* context)
 {   
-    context->cr->set_source_rgb(0.0, 0.5, 0.0);
-    Pango::FontDescription font;
-    font.set_family("Monospace");
-    font.set_weight(Pango::WEIGHT_BOLD);
-    font.set_size(8*PANGO_SCALE);
-
-    vector<Gale::Port*> ports = this->node->getNode()->getInputPorts();
-    for(int i = 0; i < ports.size(); i++)
-    {
-        int y = this->getInputPortY(i);
-        context->cr->rectangle(this->getInputPortX(i), this->getInputPortY(i), PORT_WIDTH, PORT_HEIGHT);
-        context->cr->fill();
-
-        Gale::Port* port = ports.at(i);
-        Glib::RefPtr<Pango::Layout> layout = create_pango_layout(port->getName().c_str());
-        layout->set_font_description(font);
-        context->cr->move_to(PORT_WIDTH+3, y);
-        layout->show_in_cairo_context(context->cr);
-    }
-
-    ports = this->node->getNode()->getOutputPorts();
-    for(int i = 0; i < ports.size(); i++)
-    {
-        int y = this->getOutputPortY(i);
-        context->cr->rectangle(this->getOutputPortX(i), this->getOutputPortY(i), PORT_WIDTH, PORT_HEIGHT);
-        context->cr->fill();
-
-        Gale::Port* port = ports.at(i);
-        Glib::RefPtr<Pango::Layout> layout = create_pango_layout(port->getName().c_str());
-        layout->set_font_description(font);
-        int text_width;
-        int text_height;
-        layout->get_pixel_size(text_width, text_height);
-        context->cr->move_to(context->width - PORT_WIDTH - 3 - text_width, y);
-        layout->show_in_cairo_context(context->cr);
-    }
+    // TODO: REMOVE
 }
 
 void NodeWidget::draw_name(node_draw_context* context)
@@ -111,7 +75,6 @@ bool NodeWidget::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
     Gdk::Cairo::set_source_rgba(cr, refStyleContext->get_color(state));
 
     this->draw_outer_box(&context);
-    this->draw_ports(&context);
     this->draw_name(&context);
 
     return true;

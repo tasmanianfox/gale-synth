@@ -27,6 +27,10 @@ private:
 
     NodeWidget nodeWidget;
     vector<NodePortWidget*> nodePortWidgets;
+
+    int getPortY(int index);
+    int getInputPortX(int index);
+    int getOutputPortX(int index);
 };
 
 #endif

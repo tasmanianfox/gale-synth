@@ -19,6 +19,11 @@ void ProjectNode::setPosition(int x, int y)
   this->y = y;
 }
 
+vector<Gale::Port*> ProjectNode::getPorts()
+{
+  return this->node->getPorts();
+}
+
 vector<Gale::Port*> ProjectNode::getInputPorts()
 {
   return this->node->getInputPorts();

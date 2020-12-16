@@ -40,6 +40,7 @@ list(APPEND FILES_SOURCE
     src/synth/ui/window_main/project_area.cpp
     src/synth/ui/window_main/window_main.cpp
     src/synth/ui/window_main/node_container_widget.cpp
+    src/synth/ui/window_main/node_port_widget.cpp
     src/synth/ui/window_main/node_widget.cpp
     )
 # Sources END

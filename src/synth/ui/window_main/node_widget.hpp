@@ -33,6 +33,8 @@ public:
     int getOutputPortMiddleX(int index);
     int getOutputPortMiddleY(int index);
 
+    void get_preferred_width_vfunc(int& minimum_width, int& natural_width) const override;
+
     Gale::Connection* connect(const char* myPortName, NodeWidget* otherNode, const char* otherPortName);
 private:
     NodeContainerWidget* container;
@@ -47,7 +49,6 @@ private:
     bool on_button_released(GdkEventButton* release_event);
     bool on_mouse_motion(GdkEventMotion* motion_event);
 
-    void get_preferred_width_vfunc(int& minimum_width, int& natural_width) const override;
     void get_preferred_height_vfunc(int& minimum_height, int& natural_height) const override;
     void on_realize();
     void on_unrealize();
