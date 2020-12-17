@@ -49,11 +49,6 @@ void NodeWidget::draw_outer_box(node_draw_context* context)
     context->cr->stroke();
 }
 
-void NodeWidget::draw_ports(node_draw_context* context)
-{   
-    // TODO: REMOVE
-}
-
 void NodeWidget::draw_name(node_draw_context* context)
 {
     context->cr->set_source_rgb(0.0, 0.0, 0.0);
@@ -146,46 +141,6 @@ void NodeWidget::get_preferred_height_vfunc(int& minimum_height, int& natural_he
 ProjectNode* NodeWidget::getNode()
 {
     return this->node;
-}
-
-int NodeWidget::getInputPortX(int index)
-{
-    return 0;
-}
-
-int NodeWidget::getInputPortY(int index)
-{
-    return index*(PORT_WIDTH+PAD_PORTS) + PAD_VERTICAL;
-}
-
-int NodeWidget::getOutputPortX(int index)
-{
-    return this->get_allocation().get_width() - PORT_WIDTH;
-}
-
-int NodeWidget::getOutputPortY(int index)
-{
-    return index*(PORT_WIDTH+PAD_PORTS) + PAD_VERTICAL;
-}
-
-int NodeWidget::getInputPortMiddleX(int index)
-{
-    return this->getInputPortX(index) + PORT_WIDTH / 2;
-}
-
-int NodeWidget::getInputPortMiddleY(int index)
-{
-    return this->getInputPortY(index) + PORT_HEIGHT / 2;
-}
-
-int NodeWidget::getOutputPortMiddleX(int index)
-{
-    return this->getOutputPortX(index) + PORT_WIDTH / 2;
-}
-
-int NodeWidget::getOutputPortMiddleY(int index)
-{
-    return this->getOutputPortY(index) + PORT_HEIGHT / 2;
 }
 
 Gale::Connection* NodeWidget::connect(const char* myPortName, NodeWidget* otherNode, const char* otherPortName)

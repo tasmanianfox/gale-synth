@@ -49,16 +49,6 @@ void NodeContainerWidget::moveMe(gdouble x, gdouble y)
                             this->projectArea->child_property_y(*this) + y);
 }
 
-int NodeContainerWidget::getInputPortX(int index)
-{
-    return 0;
-}
-
-int NodeContainerWidget::getOutputPortX(int index)
-{
-    return this->get_allocation().get_width() - PORT_WIDTH;
-}
-
 int NodeContainerWidget::getPortY(int index)
 {
     return index*(PORT_WIDTH+PAD_PORTS) + PAD_VERTICAL;
