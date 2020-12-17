@@ -5,6 +5,7 @@
 #include <gtkmm/widget.h>
 
 #include "synth/core/node/port.hpp"
+#include "synth/ui/window_main/constants.hpp"
 
 class NodePortWidget : public Gtk::Widget
 {

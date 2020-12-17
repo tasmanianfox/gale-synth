@@ -1,9 +1,5 @@
 #include "node_container_widget.hpp"
 
-const int PORT_WIDTH = 10;
-const int PORT_HEIGHT = 10;
-const int NAME_MARGIN_HORIZONTAL = 10;
-
 NodePortWidget::NodePortWidget(Gale::Port* port) :
     Gtk::Widget(),
     Glib::ObjectBase("gale_node_port"),

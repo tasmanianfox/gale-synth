@@ -4,12 +4,6 @@
 #include <iostream> // TODO: REMOVEME
 using namespace std;
 
-const int PAD_VERTICAL = 25;
-const int PAD_PORTS = 10;
-const int PORT_WIDTH = 10;
-const int PORT_HEIGHT = 10;
-const int NAME_MARGIN_HORIZONTAL = 10;
-
 NodeWidget::NodeWidget(NodeContainerWidget* container, ProjectNode* node) :
     Gtk::Widget(),
     Glib::ObjectBase("gale_node"),

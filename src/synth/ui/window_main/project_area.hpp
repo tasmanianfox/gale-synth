@@ -7,6 +7,7 @@
 
 #include "synth/app/project/project.hpp"
 #include "synth/app/project/project_node.hpp"
+#include "synth/ui/window_main/constants.hpp"
 #include "synth/ui/window_main/node_container_widget.hpp"
 
 using namespace std;

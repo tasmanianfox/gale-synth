@@ -1,10 +1,6 @@
 #include "node_container_widget.hpp"
 #include "project_area.hpp"
 
-const int PAD_VERTICAL = 25;
-const int PAD_PORTS = 10;
-const int PORT_WIDTH = 10;
-
 NodeContainerWidget::NodeContainerWidget(ProjectArea *projectArea, ProjectNode* node) :
     projectArea(projectArea),
     node(node),
