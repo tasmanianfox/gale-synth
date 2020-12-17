@@ -14,23 +14,29 @@ bool ProjectArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 
     for (NodeContainerWidget* outputNodeContainer: this->nodes)
     {
-        NodeWidget* outputNode = outputNodeContainer->getNodeWidget();
-        vector<Gale::Port*> outputPorts = outputNode->getNode()->getNode()->getOutputPorts();
-        for (int outputPortIndex = 0; outputPortIndex < outputPorts.size(); outputPortIndex++)
+        for (NodePortWidget* outputPortWidget: outputNodeContainer->getPortWidgets())
         {
-            Gale::Port* outputPort = outputPorts.at(outputPortIndex);
-            int outputX = this->child_property_x(*outputNodeContainer) + outputNode->getOutputPortMiddleX(outputPortIndex);
-            int outputY = this->child_property_y(*outputNodeContainer) + outputNode->getOutputPortMiddleY(outputPortIndex);
-            for (Gale::Connection* connection: outputPort->getConnections())
+            int outputX = this->child_property_x(*outputNodeContainer) +
+                outputNodeContainer->child_property_x(*outputPortWidget) +
+                outputPortWidget->getPinCenterX();
+            int outputY = this->child_property_y(*outputNodeContainer) +
+                outputNodeContainer->child_property_y(*outputPortWidget) +
+                outputPortWidget->getPinCenterY();
+            for (Gale::Connection* connection: outputPortWidget->getPort()->getConnections())
             {
                 Gale::Port *inputPort = connection->getInput();
                 Gale::Node* inputNode = inputPort->getNode();
                 int inputPortIndex = inputNode->getInputPortIndex(inputPort);
-                NodeContainerWidget* inputContainerWidget = this->getNodeContainerWidget(inputNode);
-                NodeWidget* inputWidget = inputContainerWidget->getNodeWidget();
-                int inputX = this->child_property_x(*inputContainerWidget) + inputWidget->getInputPortMiddleX(inputPortIndex);
-                int inputY = this->child_property_y(*inputContainerWidget) + inputWidget->getInputPortMiddleY(inputPortIndex);
-                
+                NodeContainerWidget* inputNodeContainer = this->getNodeContainerWidget(inputNode);
+                NodePortWidget* inputPortWidget = inputNodeContainer->getPortWidget(inputPortIndex);
+
+                int inputX = this->child_property_x(*inputNodeContainer) +
+                    inputNodeContainer->child_property_x(*inputPortWidget) +
+                    inputPortWidget->getPinCenterX();
+                int inputY = this->child_property_y(*inputNodeContainer) +
+                    inputNodeContainer->child_property_y(*inputPortWidget) +
+                    inputPortWidget->getPinCenterY();
+
                 cr->move_to(outputX, outputY);
                 cr->line_to(inputX, inputY);
                 cr->stroke();

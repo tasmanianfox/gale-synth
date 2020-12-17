@@ -25,8 +25,8 @@ NodeContainerWidget::NodeContainerWidget(ProjectArea *projectArea, ProjectNode* 
         widget->get_preferred_width_vfunc(port_minimum_width, port_natural_width);
         int left = port->isInput() ? 0 : node_minimum_width - port_minimum_width;
         this->put(*widget, left, this->getPortY(*index));
+        this->nodePortWidgets.push_back(widget);
         widget->show();
-
 
         (*index)++;
     }
@@ -35,6 +35,11 @@ NodeContainerWidget::NodeContainerWidget(ProjectArea *projectArea, ProjectNode* 
 NodeWidget* NodeContainerWidget::getNodeWidget()
 {
     return &this->nodeWidget;
+}
+
+vector<NodePortWidget*> NodeContainerWidget::getPortWidgets()
+{
+    return this->nodePortWidgets;
 }
 
 void NodeContainerWidget::moveMe(gdouble x, gdouble y)
@@ -57,4 +62,9 @@ int NodeContainerWidget::getOutputPortX(int index)
 int NodeContainerWidget::getPortY(int index)
 {
     return index*(PORT_WIDTH+PAD_PORTS) + PAD_VERTICAL;
+}
+
+NodePortWidget* NodeContainerWidget::getPortWidget(int index)
+{
+    return this->nodePortWidgets.at(index);
 }

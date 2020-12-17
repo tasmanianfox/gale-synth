@@ -20,6 +20,8 @@ public:
 
     void moveMe(gdouble x, gdouble y);
 
+    vector<NodePortWidget*> getPortWidgets();
+    NodePortWidget* getPortWidget(int index);
     NodeWidget* getNodeWidget();
 private:
     ProjectNode* node;

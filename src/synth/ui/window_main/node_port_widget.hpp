@@ -12,14 +12,18 @@ public:
     NodePortWidget(Gale::Port* port);
 
     void get_preferred_width_vfunc(int& minimum_width, int& natural_width) const override;
+    Gale::Port* getPort();
+    int getPinCenterX();
+    int getPinCenterY();
 private:
     Gale::Port* port;
 
-    
     void get_preferred_height_vfunc(int& minimum_height, int& natural_height) const override;
     void on_realize();
     void on_unrealize();
     bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
+
+    int getPinX();
 
     Glib::RefPtr<Gdk::Window> m_refGdkWindow;
     Glib::RefPtr<Pango::Layout> labelName;
