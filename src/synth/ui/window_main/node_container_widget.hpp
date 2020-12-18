@@ -19,6 +19,7 @@ public:
     NodeContainerWidget(ProjectArea *projectArea, ProjectNode* node);
 
     void moveMe(gdouble x, gdouble y);
+    void redrawProjectArea();
 
     vector<NodePortWidget*> getPortWidgets();
     NodePortWidget* getPortWidget(int index);

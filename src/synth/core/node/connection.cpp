@@ -1,4 +1,5 @@
 #include "connection.hpp"
+#include "port.hpp"
 
 using namespace Gale;
 
@@ -11,4 +12,10 @@ Connection::Connection(Port* output, Port* input)
 Port* Connection::getInput()
 {
     return this->input;
+}
+
+Connection::~Connection()
+{
+    this->input->_removeConnection(this);
+    this->output->_removeConnection(this);
 }

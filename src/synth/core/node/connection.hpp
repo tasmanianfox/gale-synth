@@ -13,6 +13,7 @@ class Connection
 {
 public:
     Connection(Port* output, Port* input); // plugins are connected from OUTPUT to INPUT
+    ~Connection();
 
     Port* getInput();
 private:

@@ -7,22 +7,26 @@
 #include "synth/core/node/port.hpp"
 #include "synth/ui/window_main/constants.hpp"
 
+class NodeContainerWidget;
+
 class NodePortWidget : public Gtk::Widget
 {
 public:
-    NodePortWidget(Gale::Port* port);
+    NodePortWidget(NodeContainerWidget* container, Gale::Port* port);
 
     void get_preferred_width_vfunc(int& minimum_width, int& natural_width) const override;
     Gale::Port* getPort();
     int getPinCenterX();
     int getPinCenterY();
 private:
+    NodeContainerWidget* container;
     Gale::Port* port;
 
     void get_preferred_height_vfunc(int& minimum_height, int& natural_height) const override;
     void on_realize();
     void on_unrealize();
     bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
+    bool on_button_pressed(GdkEventButton* button_event);
 
     int getPinX();
 

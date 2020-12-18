@@ -1,8 +1,9 @@
 #include "node_container_widget.hpp"
 
-NodePortWidget::NodePortWidget(Gale::Port* port) :
+NodePortWidget::NodePortWidget(NodeContainerWidget* container, Gale::Port* port) :
     Gtk::Widget(),
     Glib::ObjectBase("gale_node_port"),
+    container(container),
     port(port)
 {
     Pango::FontDescription font;
@@ -11,6 +12,9 @@ NodePortWidget::NodePortWidget(Gale::Port* port) :
     font.set_size(8*PANGO_SCALE);
     this->labelName = create_pango_layout(this->port->getName().c_str());
     this->labelName->set_font_description(font);
+
+    this->set_events(Gdk::BUTTON_PRESS_MASK);
+    this->signal_button_press_event().connect(sigc::mem_fun(this, &NodePortWidget::on_button_pressed));
 }
 
 bool NodePortWidget::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
@@ -73,6 +77,18 @@ void NodePortWidget::on_unrealize()
 {
   m_refGdkWindow.reset();
   Gtk::Widget::on_unrealize();
+}
+
+bool NodePortWidget::on_button_pressed(GdkEventButton* button_event)
+{
+  if (3 == button_event->button && this->port->isInput() && this->port->getConnectionsCount() > 0)
+  {
+    Gale::Connection* connection = this->port->getConnection(0);
+    delete connection;
+    this->container->redrawProjectArea();
+  }
+
+  return true; 
 }
 
 void NodePortWidget::get_preferred_width_vfunc(int& minimum_width, int& natural_width) const

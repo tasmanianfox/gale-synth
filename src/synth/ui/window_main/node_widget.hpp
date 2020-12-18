@@ -13,6 +13,7 @@ using namespace std;
 
 class NodeContainerWidget;
 
+// TODO: Remove. It's enough to pass Cairo context. Width and height can be calculated from get_allocation()
 struct node_draw_context
 {
     const Cairo::RefPtr<Cairo::Context>& cr;

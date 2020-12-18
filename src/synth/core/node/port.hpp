@@ -23,14 +23,16 @@ class Port
 public:
     Port(Node* node, PortType type, const char* name);
     
+    Connection* connect(Port* otherPort);
+
     PortType getType();
     string getName();
-
     bool isInput();
-
     void _addConnection(Connection* connection);
-    Connection* connect(Port* otherPort);
+    // invoked from connection. Should NOT call a destructor for connection
+    void _removeConnection(Connection* connection);
     vector<Connection*> getConnections();
+    Connection* getConnection(int index);
     unsigned short int getConnectionsCount();
     Node* getNode();
 protected:

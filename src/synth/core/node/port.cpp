@@ -66,3 +66,21 @@ void Port::_addConnection(Connection* connection)
 {
     this->connections.push_back(connection);
 }
+
+void Port::_removeConnection(Connection* connection)
+{
+    for (int i = 0; i < this->connections.size(); i++)
+    {
+        Connection* testConnection = this->connections.at(i);
+        if (connection == testConnection)
+        {
+            this->connections.erase(this->connections.begin() + i);
+            break;
+        }
+    }
+}
+
+Connection* Port::getConnection(int index)
+{
+    return this->connections.at(index);
+}

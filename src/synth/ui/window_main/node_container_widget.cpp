@@ -15,7 +15,7 @@ NodeContainerWidget::NodeContainerWidget(ProjectArea *projectArea, ProjectNode* 
     {
         int* index = port->isInput() ? &inputIndex : &outputIndex;
         
-        NodePortWidget* widget = new NodePortWidget(port);
+        NodePortWidget* widget = new NodePortWidget(this, port);
         int port_minimum_width = 0, port_natural_width = 0, node_minimum_width = 0, node_natural_width = 0;
         this->nodeWidget.get_preferred_width_vfunc(node_minimum_width, node_natural_width);
         widget->get_preferred_width_vfunc(port_minimum_width, port_natural_width);
@@ -53,4 +53,9 @@ int NodeContainerWidget::getPortY(int index)
 NodePortWidget* NodeContainerWidget::getPortWidget(int index)
 {
     return this->nodePortWidgets.at(index);
+}
+
+void NodeContainerWidget::redrawProjectArea()
+{
+    this->projectArea->queue_draw();
 }
