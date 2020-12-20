@@ -3,8 +3,7 @@
 
 #include <string>
 
-#include <gdkmm/general.h>
-#include <gtkmm/widget.h>
+#include <gtkmm.h>
 
 #include "synth/app/project/project_node.hpp"
 #include "synth/core/node/port.hpp"

@@ -1,8 +1,7 @@
 #ifndef _GALE_SYNTH_UI_WINDOW_MAIN_NODE_PORT_WIDGET_H_
 #define _GALE_SYNTH_UI_WINDOW_MAIN_NODE_PORT_WIDGET_H_
 
-#include <gdkmm/general.h>
-#include <gtkmm/widget.h>
+#include <gtkmm.h>
 
 #include "synth/core/node/port.hpp"
 #include "synth/ui/window_main/constants.hpp"
