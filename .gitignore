@@ -3,6 +3,12 @@ CMakeFiles
 cmake_install.cmake
 Makefile
 
+/.vs
+*.vcxproj*
+/gale.dir
+/gale.sln
+/x64
+
 /build
 /.build
 
