@@ -14,13 +14,23 @@ set(LIBRARY_OUTPUT_PATH    ${CMAKE_BINARY_DIR}/.build)
 
 # Use the package PkgConfig to detect GTK+ headers/library files
 FIND_PACKAGE(PkgConfig REQUIRED)
-pkg_check_modules(GTKMM gtkmm-3.0 REQUIRED)
+#pkg_check_modules(GTKMM gtkmm REQUIRED)
+FIND_LIBRARY(gtkmm REQUIRED)
 
 # Setup CMake to use GTK+, tell the compiler where to look for headers
 # and to the linker where to look for libraries
 
 INCLUDE_DIRECTORIES(src ${GTKMM_INCLUDE_DIRS})
 LINK_DIRECTORIES(${GTKMM_LIBRARY_DIRS})
+
+# Windows / Visual C++
+if (MSVC_VERSION GREATER_EQUAL "1900")
+    include(CheckCXXCompilerFlag)
+    CHECK_CXX_COMPILER_FLAG("/std:c++latest" _cpp_latest_flag_supported)
+    if (_cpp_latest_flag_supported)
+        add_compile_options("/std:c++latest")
+    endif()
+endif()
 
 # Sources START
 
