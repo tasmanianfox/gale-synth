@@ -1,24 +1,13 @@
-set(APP_NAME gale)
-
 cmake_minimum_required(VERSION 3.10)
 
+set(APP_NAME gale)
 project(${APP_NAME} VERSION 0.1.0)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-
-# set(CMAKE_RUNTIME_OUTPUT_DIRECTORY .build)
-set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/.build)
-set(LIBRARY_OUTPUT_PATH    ${CMAKE_BINARY_DIR}/.build)
-
-# Use the package PkgConfig to detect GTK+ headers/library files
 FIND_PACKAGE(PkgConfig REQUIRED)
-#pkg_check_modules(GTKMM gtkmm REQUIRED)
 FIND_LIBRARY(gtkmm REQUIRED)
-
-# Setup CMake to use GTK+, tell the compiler where to look for headers
-# and to the linker where to look for libraries
 
 INCLUDE_DIRECTORIES(src ${GTKMM_INCLUDE_DIRS})
 LINK_DIRECTORIES(${GTKMM_LIBRARY_DIRS})
@@ -55,16 +44,16 @@ list(APPEND FILES_SOURCE
     )
 # Sources END
 
-# exe = executable file, lib = shared library
-set(target_type "exe")
-
 # Target-specific parameters START
 
-option(type "(native|lv2|vst). WARNING: only native is implemented." native)
+# app = executable file, lib = shared library
+set(target_type "lib")
+# native|lv2|vst
+set(type "native")
 
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/src/ports")
 if(type STREQUAL "native")
     include("src/ports/native/CMakeLists.txt")
+    set(target_type "app")
 endif()
 
 if(type STREQUAL "vst")
@@ -77,15 +66,14 @@ endif()
 
 # Target-specific parameters END
 
-set(all_code_files
-    ${FILES_SOURCE}
-    )
+set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/.build)
+set(LIBRARY_OUTPUT_PATH    ${CMAKE_BINARY_DIR}/.build)
 
-if (target_type STREQUAL "exe")
-    add_executable(${APP_NAME} ${all_code_files})
+if (target_type STREQUAL "app")
+    add_executable(${APP_NAME} ${FILES_SOURCE})
 endif()
 if (target_type STREQUAL "lib")
-    add_library(${APP_NAME} SHARED ${all_code_files})
+    add_library(${APP_NAME} SHARED ${FILES_SOURCE})
 endif()
 
 target_link_libraries(${APP_NAME} ${GTKMM_LIBRARIES})
