@@ -3,7 +3,10 @@
 
 #include <vector>
 
-#include <gtkmm.h>
+#include <wx/wxprec.h>
+#ifndef WX_PRECOMP
+    #include <wx/wx.h>
+#endif
 
 #include "synth/app/project/project_node.hpp"
 #include "node_port_widget.hpp"
@@ -13,12 +16,12 @@ using namespace std;
 
 class ProjectArea;
 
-class NodeContainerWidget : public Gtk::Fixed
+class NodeContainerWidget : public wxControl
 {
 public:
     NodeContainerWidget(ProjectArea *projectArea, ProjectNode* node);
 
-    void moveMe(gdouble x, gdouble y);
+    // void moveMe(gdouble x, gdouble y); TODO: REMOVE
     void redrawProjectArea();
 
     vector<NodePortWidget*> getPortWidgets();

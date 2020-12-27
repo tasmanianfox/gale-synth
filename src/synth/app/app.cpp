@@ -1,13 +1,13 @@
 #include "app.hpp"
 
-const char APP_ID[] = "com.github.tasmanianfox.gale";
 const char APP_NAME[] = "Gale";
 
-App::App(int argc, char *argv[]) :
-  Gtk::Application(APP_ID),
-  mainWindow(nullptr)
+bool App::OnInit()
 {
-    Glib::set_application_name(APP_NAME);
+  this->project.reset();
+  this->mainWindow = new WindowMain(APP_NAME, wxPoint(50, 50), wxSize(450, 340), &this->project);
+  this->mainWindow->Show(true);
+  return true;
 }
 
 App::~App()
@@ -16,19 +16,4 @@ App::~App()
   {
     delete this->mainWindow;
   } 
-}
-
-Glib::RefPtr<App> App::create(int argc, char *argv[])
-{
-  return Glib::RefPtr<App>(new App(argc, argv));
-}
-
-void App::on_startup()
-{
-  Gtk::Application::on_startup();
-
-  this->project.reset();
-  this->mainWindow = new WindowMain(&this->project);
-  add_window(*this->mainWindow);
-  this->mainWindow->show_all();
 }

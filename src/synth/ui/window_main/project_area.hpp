@@ -3,7 +3,10 @@
 
 #include <vector>
 
-#include <gtkmm.h>
+#include <wx/wxprec.h>
+#ifndef WX_PRECOMP
+    #include <wx/wx.h>
+#endif
 
 #include "synth/app/project/project.hpp"
 #include "synth/app/project/project_node.hpp"
@@ -12,14 +15,14 @@
 
 using namespace std;
 
-class ProjectArea : public Gtk::Fixed
+class ProjectArea : public wxControl
 {
 public:
     ProjectArea(Project *project);
 
     void addNode(ProjectNode* node);
 
-    bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
+    // bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override; TODO: REMOVE
 private:
     Project *project;
     vector<NodeContainerWidget*> nodes;

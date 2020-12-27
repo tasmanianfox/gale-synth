@@ -1,24 +1,24 @@
 #ifndef _GALE_SYNTH_APP_APP_H_
 #define _GALE_SYNTH_APP_APP_H_
 
-#include <gtkmm.h>
+#include <wx/wxprec.h>
+#ifndef WX_PRECOMP
+    #include <wx/wx.h>
+#endif
 
 #include "synth/ui/window_main/window_main.hpp"
 #include "synth/app/project/project.hpp"
 
-class App : public Gtk::Application
+class App: public wxApp
 {
 public:
-    static Glib::RefPtr<App> create(int argc, char *argv[]);
+    virtual bool OnInit();
 
 private:
     WindowMain* mainWindow;
     Project project;
 
-    App(int argc, char *argv[]);
     ~App();
-    
-    void on_startup() override;    
 };
 
 #endif

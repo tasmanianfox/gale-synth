@@ -6,11 +6,10 @@ project(${APP_NAME} VERSION 0.1.0)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-FIND_PACKAGE(PkgConfig REQUIRED)
-FIND_LIBRARY(gtkmm REQUIRED)
+find_package(wxWidgets REQUIRED COMPONENTS core)
 
-INCLUDE_DIRECTORIES(src ${GTKMM_INCLUDE_DIRS})
-LINK_DIRECTORIES(${GTKMM_LIBRARY_DIRS})
+include_directories(src)
+include(${wxWidgets_USE_FILE})
 
 # Windows / Visual C++
 if (MSVC_VERSION GREATER_EQUAL "1900")
@@ -76,4 +75,4 @@ if (target_type STREQUAL "lib")
     add_library(${APP_NAME} SHARED ${FILES_SOURCE})
 endif()
 
-target_link_libraries(${APP_NAME} ${GTKMM_LIBRARIES})
+target_link_libraries(${APP_NAME} ${wxWidgets_LIBRARIES})

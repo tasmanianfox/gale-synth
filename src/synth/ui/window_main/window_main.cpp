@@ -1,22 +1,17 @@
 #include "window_main.hpp"
 
-WindowMain::WindowMain(Project* project) :
+WindowMain::WindowMain(const wxString& title, const wxPoint& pos, const wxSize& size, Project* project) :
+    wxFrame(NULL, wxID_ANY, title, pos, size),
     project(project),
-    projectArea(ProjectArea(project))
+    projectArea(new ProjectArea(project))
 {
-	this->set_default_size(800, 600);
-    this->set_title("Gale");
-
-    this->add(this->m_Box);
     this->initMenu();
-    this->m_Box.pack_start(this->projectArea);
-
     this->loadProject();
 }
 
 WindowMain::~WindowMain()
 {
-    
+    delete this->projectArea;
 }
 
 void WindowMain::loadProject()
@@ -25,6 +20,6 @@ void WindowMain::loadProject()
     for (int i = 0; i < nodes.size(); i++)
     {
         ProjectNode* node = nodes.at(i);
-        this->projectArea.addNode(node);
+        this->projectArea->addNode(node);
     }   
 }
