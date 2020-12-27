@@ -7,6 +7,10 @@ enum
     ID_Open,
 };
 
+wxBEGIN_EVENT_TABLE(WindowMain, wxFrame)
+    EVT_MENU(wxID_EXIT,  WindowMain::onExit)
+wxEND_EVENT_TABLE()
+
 void WindowMain::initMenu()
 {
     wxMenu *menuFile = new wxMenu;
@@ -19,8 +23,9 @@ void WindowMain::initMenu()
     wxMenu *menuHelp = new wxMenu;
     menuHelp->Append(wxID_ABOUT);
     wxMenuBar *menuBar = new wxMenuBar;
-    menuBar->Append( menuFile,"&File");
-    menuBar->Append( menuAdd,"&Add");
-    menuBar->Append( menuHelp,"&Help");
+    menuBar->Append(menuFile, "&File");
+    menuBar->Append(menuAdd, "&Add");
+    menuBar->Append(menuHelp, "&Help");
+
     SetMenuBar(menuBar);
 }

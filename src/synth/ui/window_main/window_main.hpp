@@ -23,6 +23,10 @@ private:
   Project* project;
 
   void initMenu();
+
+  void onExit(wxCommandEvent& event);
+
+  wxDECLARE_EVENT_TABLE();
 };
 
 #endif

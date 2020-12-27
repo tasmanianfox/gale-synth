@@ -23,3 +23,8 @@ void WindowMain::loadProject()
         this->projectArea->addNode(node);
     }   
 }
+
+void WindowMain::onExit(wxCommandEvent& event)
+{
+    Close(true);
+}
