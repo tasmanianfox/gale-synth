@@ -21,9 +21,12 @@ public:
     NodeWidget(NodeContainerWidget* container, ProjectNode* node);
     ~NodeWidget();
 
+    void paintEvent(wxPaintEvent& evt);
+
     int getInputPortIndex(Gale::Port* port);
     ProjectNode* getNode();
-    // void get_preferred_width_vfunc(int& minimum_width, int& natural_width) const override; TODO:REMOVE
+
+    wxSize calculateSize();
 
     Gale::Connection* connect(const char* myPortName, NodeWidget* otherNode, const char* otherPortName);
 private:
@@ -48,6 +51,8 @@ private:
 
     // void draw_name(node_draw_context* context);
     // void draw_outer_box(node_draw_context* context);
+
+    DECLARE_EVENT_TABLE()
 };
 
 #endif

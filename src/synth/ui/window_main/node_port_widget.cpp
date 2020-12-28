@@ -1,7 +1,9 @@
 #include "node_container_widget.hpp"
 
-NodePortWidget::NodePortWidget(NodeContainerWidget* container, Gale::Port* port) :
-    wxControl(),
+wxColour green(0, 128, 0);
+
+NodePortWidget::NodePortWidget(NodeContainerWidget* container, const wxPoint& pos, Gale::Port* port) :
+    wxWindow(container, wxID_ANY, pos, wxSize(PORT_WIDTH, PORT_HEIGHT)),
     container(container),
     port(port)
 {
@@ -15,6 +17,12 @@ NodePortWidget::NodePortWidget(NodeContainerWidget* container, Gale::Port* port)
 
     // this->set_events(Gdk::BUTTON_PRESS_MASK);
     // this->signal_button_press_event().connect(sigc::mem_fun(this, &NodePortWidget::on_button_pressed));
+}
+
+void NodePortWidget::paintEvent(wxPaintEvent & evt)
+{
+  wxPaintDC dc(this);
+  dc.GradientFillLinear(wxRect(wxPoint(0, 0), wxPoint(10, 10)), green, green);
 }
 
 // TODO: REMOVE
@@ -126,3 +134,7 @@ int NodePortWidget::getPinX()
   return 0;
   //return this->port->isInput() ? 0 : get_allocation().get_width() - PORT_WIDTH; TODO: REMOVE
 }
+
+BEGIN_EVENT_TABLE(NodePortWidget, wxWindow)
+    EVT_PAINT(NodePortWidget::paintEvent)
+END_EVENT_TABLE()

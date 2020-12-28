@@ -11,10 +11,10 @@
 
 class NodeContainerWidget;
 
-class NodePortWidget : public wxControl
+class NodePortWidget : public wxWindow
 {
 public:
-    NodePortWidget(NodeContainerWidget* container, Gale::Port* port);
+    NodePortWidget(NodeContainerWidget* container, const wxPoint& pos, Gale::Port* port);
 
     // void get_preferred_width_vfunc(int& minimum_width, int& natural_width) const override; TODO: REMOVE
     Gale::Port* getPort();
@@ -31,11 +31,15 @@ private:
     // bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override;
     // bool on_button_pressed(GdkEventButton* button_event);
 
+    void paintEvent(wxPaintEvent & evt);
+
     int getPinX();
 
     // TODO: REMOVE
     // Glib::RefPtr<Gdk::Window> m_refGdkWindow;
     // Glib::RefPtr<Pango::Layout> labelName;
+
+    DECLARE_EVENT_TABLE()
 };
 
 #endif

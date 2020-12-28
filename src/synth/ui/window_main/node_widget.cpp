@@ -5,10 +5,12 @@
 using namespace std;
 
 NodeWidget::NodeWidget(NodeContainerWidget* container, ProjectNode* node) :
-    wxControl(),
+    wxControl(container, wxID_ANY),
     container(container),
     node(node)
 {
+    this->SetSize(calculateSize());
+    //setWidth(this->calculateWidth());
     // Pango::FontDescription font; TODO: REMOVE
     // font.set_family("Monospace");
     // font.set_weight(Pango::WEIGHT_BOLD);
@@ -49,6 +51,12 @@ NodeWidget::~NodeWidget()
 //     context->cr->move_to(NAME_MARGIN_HORIZONTAL, 5);
 //     this->labelName->show_in_cairo_context(context->cr);
 // }
+
+void NodeWidget::paintEvent(wxPaintEvent& evt)
+{
+    cout << "NodeWidget :: paint" << endl;
+}
+
 
 // bool NodeWidget::on_draw(const Cairo::RefPtr<Cairo::Context>& cr)
 // {
@@ -126,6 +134,14 @@ NodeWidget::~NodeWidget()
 //     minimum_width = natural_width = text_width + NAME_MARGIN_HORIZONTAL*2;
 // }
 
+wxSize NodeWidget::calculateSize()
+{
+    int maxPorts = max(this->node->getInputPorts().size(), this->node->getOutputPorts().size());
+    return wxSize(NAME_MARGIN_HORIZONTAL * 2 + 100,
+                  2 * PAD_VERTICAL + maxPorts * PORT_HEIGHT + (maxPorts-1) * PAD_PORTS);
+}
+
+// TODO: REMOVE
 // void NodeWidget::get_preferred_height_vfunc(int& minimum_height, int& natural_height) const
 // {
 //     int maxPorts = max(this->node->getInputPorts().size(), this->node->getOutputPorts().size());
@@ -147,3 +163,7 @@ Gale::Connection* NodeWidget::connect(const char* myPortName, NodeWidget* otherN
 {
     return this->getNode()->connect(myPortName, otherNode->getNode(), otherPortName);
 }
+
+BEGIN_EVENT_TABLE(NodeWidget, wxControl)
+    EVT_PAINT(NodeWidget::paintEvent)
+END_EVENT_TABLE()

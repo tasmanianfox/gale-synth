@@ -13,7 +13,7 @@
 class WindowMain : public wxFrame
 {
 public:
-  WindowMain(const wxString& title, const wxPoint& pos, const wxSize& size, Project* project);
+  WindowMain(Project* project);
   virtual ~WindowMain();
 
   void loadProject();

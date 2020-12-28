@@ -18,7 +18,7 @@ using namespace std;
 class ProjectArea : public wxControl
 {
 public:
-    ProjectArea(Project *project);
+    ProjectArea(wxWindow *parent, Project *project);
 
     void addNode(ProjectNode* node);
 
@@ -27,7 +27,11 @@ private:
     Project *project;
     vector<NodeContainerWidget*> nodes;
 
+    void paintEvent(wxPaintEvent& evt);
+
     NodeContainerWidget* getNodeContainerWidget(Gale::Node* node);
+
+    DECLARE_EVENT_TABLE()
 };
 
 #endif

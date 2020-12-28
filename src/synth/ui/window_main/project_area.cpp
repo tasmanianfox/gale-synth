@@ -1,11 +1,29 @@
 #include "project_area.hpp"
 
-ProjectArea::ProjectArea(Project *project) :
+ProjectArea::ProjectArea(wxWindow *parent, Project *project) :
+    wxControl(parent, wxID_ANY),
     project(project)
 {
     // this->add_events(Gdk::BUTTON1_MOTION_MASK); TODO: REMOVE
 }
 
+#include <iostream>
+using namespace std;
+void ProjectArea::paintEvent(wxPaintEvent & evt)
+{
+    cout << "ProjectArea :: paint" << endl;
+    wxPaintDC dc(this);
+    dc.SetBrush(wxBrush(wxColour(0, 0, 255, 128)));
+
+    for (NodeContainerWidget* outputNodeContainer: this->nodes)
+    {
+        for (NodePortWidget* outputPortWidget: outputNodeContainer->getPortWidgets())
+        {
+        }
+    }
+}
+
+// TODO: REMOVE
 // bool ProjectArea::on_draw(const Cairo::RefPtr<Cairo::Context>& cr) TODO: REMOVE
 // {
 //     cr->set_line_width(10.0);
@@ -51,10 +69,9 @@ ProjectArea::ProjectArea(Project *project) :
 
 void ProjectArea::addNode(ProjectNode* node)
 {
-    NodeContainerWidget* widget = new NodeContainerWidget(this, node);
+    NodeContainerWidget* widget = new NodeContainerWidget(this, wxPoint(node->getX(), node->getY()), node); // TODO: CALCULATE wxSize
     this->nodes.push_back(widget);
-    // this->Append(*widget, node->getX(), node->getY());
-    // widget->Show();
+    widget->Show();
 }
 
 NodeContainerWidget* ProjectArea::getNodeContainerWidget(Gale::Node* node)
@@ -68,3 +85,7 @@ NodeContainerWidget* ProjectArea::getNodeContainerWidget(Gale::Node* node)
     }
     return nullptr;
 }
+
+BEGIN_EVENT_TABLE(ProjectArea, wxControl)
+    EVT_PAINT(ProjectArea::paintEvent)
+END_EVENT_TABLE()

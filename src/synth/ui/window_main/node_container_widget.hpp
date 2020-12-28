@@ -16,10 +16,10 @@ using namespace std;
 
 class ProjectArea;
 
-class NodeContainerWidget : public wxControl
+class NodeContainerWidget : public wxWindow
 {
 public:
-    NodeContainerWidget(ProjectArea *projectArea, ProjectNode* node);
+    NodeContainerWidget(ProjectArea *projectArea, const wxPoint& pos, ProjectNode* node);
 
     // void moveMe(gdouble x, gdouble y); TODO: REMOVE
     void redrawProjectArea();
@@ -34,7 +34,11 @@ private:
     NodeWidget nodeWidget;
     vector<NodePortWidget*> nodePortWidgets;
 
+    void paintEvent(wxPaintEvent& evt);
+
     int getPortY(int index);
+
+    DECLARE_EVENT_TABLE()
 };
 
 #endif

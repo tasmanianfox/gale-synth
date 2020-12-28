@@ -1,10 +1,15 @@
 #include "window_main.hpp"
 
-WindowMain::WindowMain(const wxString& title, const wxPoint& pos, const wxSize& size, Project* project) :
-    wxFrame(NULL, wxID_ANY, title, pos, size),
+const char TITLE[] = "Gale";
+const int WIDTH = 1024;
+const int HEIGHT = 768;
+
+WindowMain::WindowMain(Project* project) :
+    wxFrame(nullptr, wxID_ANY, TITLE, wxDefaultPosition, wxSize(WIDTH, HEIGHT)),
     project(project),
-    projectArea(new ProjectArea(project))
+    projectArea(new ProjectArea(this, project))
 {
+    this->Center();
     this->initMenu();
     this->loadProject();
 }
