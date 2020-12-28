@@ -15,7 +15,7 @@ using namespace std;
 
 class NodeContainerWidget;
 
-class NodeWidget : public wxControl
+class NodeWidget : public wxWindow
 {
 public:
     NodeWidget(NodeContainerWidget* container, ProjectNode* node);

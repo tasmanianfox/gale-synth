@@ -1,12 +1,13 @@
 #include "node_container_widget.hpp"
 
-wxColour green(0, 128, 0);
+wxColour darkGreen(0, 128, 0);
 
 NodePortWidget::NodePortWidget(NodeContainerWidget* container, const wxPoint& pos, Gale::Port* port) :
-    wxWindow(container, wxID_ANY, pos, wxSize(PORT_WIDTH, PORT_HEIGHT)),
+    wxWindow(container, wxID_ANY, pos),
     container(container),
     port(port)
 {
+
     // TODO: REMOVE
     // Pango::FontDescription font;
     // font.set_family("Monospace");
@@ -22,7 +23,23 @@ NodePortWidget::NodePortWidget(NodeContainerWidget* container, const wxPoint& po
 void NodePortWidget::paintEvent(wxPaintEvent & evt)
 {
   wxPaintDC dc(this);
-  dc.GradientFillLinear(wxRect(wxPoint(0, 0), wxPoint(10, 10)), green, green);
+  dc.SetPen(wxPen(darkGreen));
+  dc.SetBrush(wxBrush(darkGreen));
+  dc.DrawRectangle(wxRect(0, 0, PORT_WIDTH, PORT_HEIGHT));
+
+  wxCoord w, h;
+  wxFont font(8, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD);
+  dc.GetTextExtent(this->port->getName(), &w, &h, NULL, NULL, &font);
+  SetSize(wxSize(PORT_WIDTH + 3 + w, PORT_HEIGHT));
+  dc.SetFont(font);
+  int portMargin = 3 + PORT_WIDTH;
+  int leftLabel = this->port->isInput() ? PORT_WIDTH+3 : this->GetClientSize().x - w - portMargin;
+  dc.DrawText(this->port->getName(), wxPoint(leftLabel, 0));
+  
+
+    dc.SetPen(*wxBLACK_PEN);
+    dc.SetBrush(*wxTRANSPARENT_BRUSH);
+    dc.DrawRectangle(wxRect(0, 0, GetSize().x, GetSize().y));
 }
 
 // TODO: REMOVE

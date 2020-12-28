@@ -5,7 +5,7 @@
 using namespace std;
 
 NodeWidget::NodeWidget(NodeContainerWidget* container, ProjectNode* node) :
-    wxControl(container, wxID_ANY),
+    wxWindow(container, wxID_ANY),
     container(container),
     node(node)
 {
@@ -54,7 +54,26 @@ NodeWidget::~NodeWidget()
 
 void NodeWidget::paintEvent(wxPaintEvent& evt)
 {
-    cout << "NodeWidget :: paint" << endl;
+    // Border
+    wxSize size = calculateSize();
+    wxPaintDC dc(this);
+    dc.SetPen(*wxBLACK_PEN);
+    dc.SetBrush(*wxTRANSPARENT_BRUSH);
+    dc.DrawRectangle(wxRect(0, 0, size.x, size.y));
+
+    // Name
+    wxCoord w, h;
+    wxFont font(8, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD);
+    dc.GetTextExtent(this->node->getNode()->getName(), &w, &h, NULL, NULL, &font);
+    dc.SetFont(font);
+    dc.DrawText(this->node->getNode()->getName(), wxPoint((this->GetSize().x - w) / 2, 5));
+
+
+//     context->cr->set_source_rgb(0.0, 0.0, 0.0);
+//     context->cr->move_to(NAME_MARGIN_HORIZONTAL, 5);
+//     this->labelName->show_in_cairo_context(context->cr);
+
+
 }
 
 
