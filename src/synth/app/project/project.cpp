@@ -2,8 +2,6 @@
 
 #include "synth/core/node/output/stream_output.hpp" // temporary
 #include "synth/core/node/oscillator/simple_oscillator.hpp" // temporary
-#include <iostream> // TODO: REMOVEME
-
 
 Project::Project() :
     project(new Gale::Project())

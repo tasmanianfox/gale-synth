@@ -21,8 +21,6 @@ public:
     ProjectArea(wxWindow *parent, Project *project);
 
     void addNode(ProjectNode* node);
-
-    // bool on_draw(const Cairo::RefPtr<Cairo::Context>& cr) override; TODO: REMOVE
 private:
     Project *project;
     vector<NodeContainerWidget*> nodes;

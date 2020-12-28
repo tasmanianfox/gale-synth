@@ -4,14 +4,11 @@ ProjectArea::ProjectArea(wxWindow *parent, Project *project) :
     wxControl(parent, wxID_ANY),
     project(project)
 {
-    // this->add_events(Gdk::BUTTON1_MOTION_MASK); TODO: REMOVE
+    
 }
 
-#include <iostream>
-using namespace std;
 void ProjectArea::paintEvent(wxPaintEvent & evt)
 {
-    cout << "ProjectArea :: paint" << endl;
     wxPaintDC dc(this);
     dc.SetBrush(wxBrush(wxColour(0, 0, 255, 128)));
 

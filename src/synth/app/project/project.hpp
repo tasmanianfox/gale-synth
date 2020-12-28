@@ -5,8 +5,7 @@
 
 #include "project_node.hpp"
 
-#include "synth/core/project.hpp" // TODO: REMOVEME
-#include "synth/core/node/node.hpp" // TODO: REMOVEME
+#include "synth/core/project.hpp"
 
 using namespace std;
 

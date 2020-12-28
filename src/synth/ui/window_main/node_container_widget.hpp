@@ -36,8 +36,6 @@ private:
 
     void paintEvent(wxPaintEvent& evt);
 
-    int getPortY(int index);
-
     DECLARE_EVENT_TABLE()
 };
 
