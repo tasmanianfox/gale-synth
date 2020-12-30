@@ -21,6 +21,8 @@ public:
     NodeWidget(NodeContainerWidget* container, ProjectNode* node);
     ~NodeWidget();
 
+    void onMouseMove(wxMouseEvent& evt);
+    void onMouseLeftDown(wxMouseEvent& evt);
     void paintEvent(wxPaintEvent& evt);
 
     int getInputPortIndex(Gale::Port* port);

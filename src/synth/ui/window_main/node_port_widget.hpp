@@ -23,8 +23,8 @@ private:
     NodeContainerWidget* container;
     Gale::Port* port;
 
-    int index;
-    bool areDimensionsSet;
+    int index; // port inddex in widget input / output side
+    bool areDimensionsSet; // FALSE on widget creation, TRUE after configuration
     int textWidth;
 
     void setDimensions(wxPaintDC* dc);

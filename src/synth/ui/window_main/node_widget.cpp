@@ -1,8 +1,7 @@
 #include "node_widget.hpp"
 #include "node_container_widget.hpp"
 
-#include <iostream> // TODO: REMOVEME
-using namespace std;
+wxPoint dragStart;
 
 NodeWidget::NodeWidget(NodeContainerWidget* container, ProjectNode* node) :
     wxWindow(container, wxID_ANY),
@@ -41,12 +40,18 @@ wxSize NodeWidget::calculateSize()
                   2 * PAD_VERTICAL + maxPorts * PORT_HEIGHT + (maxPorts-1) * PAD_PORTS);
 }
 
-// TODO: REMOVE
-// bool NodeWidget::on_mouse_motion(GdkEventMotion* motion_event)
-// {
-//     this->container->moveMe(motion_event->x - this->drag_start_x, motion_event->y - this->drag_start_y);
-//     return false;
-// }
+void NodeWidget::onMouseMove(wxMouseEvent& evt)
+{
+  if (evt.LeftIsDown())
+  {
+    this->container->moveMe(wxPoint(evt.m_x, evt.m_y) - dragStart);
+  }
+}
+
+void NodeWidget::onMouseLeftDown(wxMouseEvent& evt)
+{
+    dragStart = wxPoint(evt.m_x, evt.m_y);
+}
 
 ProjectNode* NodeWidget::getNode()
 {
@@ -59,5 +64,7 @@ Gale::Connection* NodeWidget::connect(const char* myPortName, NodeWidget* otherN
 }
 
 BEGIN_EVENT_TABLE(NodeWidget, wxControl)
+    EVT_LEFT_DOWN(NodeWidget::onMouseLeftDown)
+    EVT_MOTION(NodeWidget::onMouseMove)
     EVT_PAINT(NodeWidget::paintEvent)
 END_EVENT_TABLE()

@@ -88,5 +88,5 @@ int NodePortWidget::getPortY()
 }
 
 BEGIN_EVENT_TABLE(NodePortWidget, wxWindow)
-    EVT_PAINT(NodePortWidget::paintEvent)
+  EVT_PAINT(NodePortWidget::paintEvent)
 END_EVENT_TABLE()

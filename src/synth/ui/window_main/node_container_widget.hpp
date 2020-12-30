@@ -21,7 +21,7 @@ class NodeContainerWidget : public wxWindow
 public:
     NodeContainerWidget(ProjectArea *projectArea, const wxPoint& pos, ProjectNode* node);
 
-    // void moveMe(gdouble x, gdouble y); TODO: REMOVE
+    void moveMe(wxPoint point);
     void redrawProjectArea();
 
     vector<NodePortWidget*> getPortWidgets();

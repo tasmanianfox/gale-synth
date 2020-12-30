@@ -33,13 +33,10 @@ vector<NodePortWidget*> NodeContainerWidget::getPortWidgets()
     return this->nodePortWidgets;
 }
 
-// TODO: REMOVE
-// void NodeContainerWidget::moveMe(gdouble x, gdouble y)
-// {
-//     this->projectArea->move(*this,
-//                             this->projectArea->child_property_x(*this) + x,
-//                             this->projectArea->child_property_y(*this) + y);
-// }
+void NodeContainerWidget::moveMe(wxPoint point)
+{
+    this->Move(point + this->GetPosition());
+}
 
 NodePortWidget* NodeContainerWidget::getPortWidget(int index)
 {
