@@ -66,7 +66,7 @@ void ProjectArea::paintEvent(wxPaintEvent & evt)
 
 void ProjectArea::addNode(ProjectNode* node)
 {
-    NodeContainerWidget* widget = new NodeContainerWidget(this, wxPoint(node->getX(), node->getY()), node); // TODO: CALCULATE wxSize
+    NodeContainerWidget* widget = new NodeContainerWidget(this, node);
     this->nodes.push_back(widget);
     widget->Show();
 }

@@ -1,8 +1,8 @@
 #include "node_container_widget.hpp"
 #include "project_area.hpp"
 
-NodeContainerWidget::NodeContainerWidget(ProjectArea *projectArea, const wxPoint& pos, ProjectNode* node) :
-    wxWindow(projectArea, wxID_ANY, pos),
+NodeContainerWidget::NodeContainerWidget(ProjectArea *projectArea, ProjectNode* node) :
+    wxWindow(projectArea, wxID_ANY, wxPoint(node->getX(), node->getY())),
     projectArea(projectArea),
     node(node),
     nodeWidget(this, node)
@@ -47,12 +47,3 @@ void NodeContainerWidget::redrawProjectArea()
 {
     this->projectArea->Update();
 }
-
-void NodeContainerWidget::paintEvent(wxPaintEvent& evt)
-{
-
-}
-
-BEGIN_EVENT_TABLE(NodeContainerWidget, wxControl)
-    EVT_PAINT(NodeContainerWidget::paintEvent)
-END_EVENT_TABLE()

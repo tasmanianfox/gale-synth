@@ -19,7 +19,7 @@ class ProjectArea;
 class NodeContainerWidget : public wxWindow
 {
 public:
-    NodeContainerWidget(ProjectArea *projectArea, const wxPoint& pos, ProjectNode* node);
+    NodeContainerWidget(ProjectArea *projectArea, ProjectNode* node);
 
     void moveMe(wxPoint point);
     void redrawProjectArea();
@@ -33,10 +33,6 @@ private:
 
     NodeWidget nodeWidget;
     vector<NodePortWidget*> nodePortWidgets;
-
-    void paintEvent(wxPaintEvent& evt);
-
-    DECLARE_EVENT_TABLE()
 };
 
 #endif
