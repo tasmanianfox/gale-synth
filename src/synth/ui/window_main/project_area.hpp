@@ -29,10 +29,6 @@ private:
     Project *project;
     vector<NodeContainerWidget*> nodes;
     ConnectionsWidget* connectionsWidget;
-
-    void paintEvent(wxPaintEvent& evt);
-
-    DECLARE_EVENT_TABLE()
 };
 
 #endif
