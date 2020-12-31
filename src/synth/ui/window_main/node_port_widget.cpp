@@ -32,6 +32,7 @@ void NodePortWidget::paintEvent(wxPaintEvent & evt)
   // Port name
   dc.SetFont(fontNodePortName);
   int left = this->port->isInput() ? PORT_WIDTH+3 : this->GetSize().x - textWithMargin;
+  dc.SetTextForeground(wxColour(0, 0, 0));
   dc.DrawText(this->port->getName(), wxPoint(left, 0));
 }
 

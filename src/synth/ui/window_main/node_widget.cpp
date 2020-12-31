@@ -28,8 +28,10 @@ void NodeWidget::paintEvent(wxPaintEvent& evt)
     // Name
     wxCoord w, h;
     wxFont font(8, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD);
+    dc.SetBrush(*wxBLACK_BRUSH);
     dc.GetTextExtent(this->node->getNode()->getName(), &w, &h, NULL, NULL, &font);
     dc.SetFont(font);
+    dc.SetTextForeground(wxColour(0, 0, 0));
     dc.DrawText(this->node->getNode()->getName(), wxPoint((this->GetSize().x - w) / 2, 5));
 }
 

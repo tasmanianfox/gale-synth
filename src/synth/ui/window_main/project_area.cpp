@@ -4,7 +4,11 @@ ProjectArea::ProjectArea(wxWindow *parent, Project *project) :
     wxControl(parent, wxID_ANY),
     project(project)
 {
-    
+    this->SetSize(parent->GetClientSize());
+    this->SetBackgroundColour(wxColour(200, 200, 200));
+
+    this->connectionsWidget = new ConnectionsWidget(this);
+    this->connectionsWidget->Show();
 }
 
 void ProjectArea::paintEvent(wxPaintEvent & evt)
@@ -81,6 +85,11 @@ NodeContainerWidget* ProjectArea::getNodeContainerWidget(Gale::Node* node)
         }
     }
     return nullptr;
+}
+
+ProjectArea::~ProjectArea()
+{
+    delete this->connectionsWidget;
 }
 
 BEGIN_EVENT_TABLE(ProjectArea, wxControl)
