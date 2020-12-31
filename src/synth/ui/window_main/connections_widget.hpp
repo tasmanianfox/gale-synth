@@ -6,6 +6,8 @@
     #include <wx/wx.h>
 #endif
 
+#include "synth/ui/window_main/node_container_widget.hpp"
+
 class ProjectArea;
 
 /**
@@ -17,6 +19,8 @@ public:
     ConnectionsWidget(ProjectArea* projectArea);
 private:
     ProjectArea* projectArea;
+
+    NodeContainerWidget* getNodeContainerWidget(Gale::Node* node);
 
     void paintEvent(wxPaintEvent& evt);
 

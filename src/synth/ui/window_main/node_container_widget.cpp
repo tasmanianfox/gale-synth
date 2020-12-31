@@ -36,6 +36,7 @@ vector<NodePortWidget*> NodeContainerWidget::getPortWidgets()
 void NodeContainerWidget::moveMe(wxPoint point)
 {
     this->Move(point + this->GetPosition());
+    this->projectArea->getConnectionsWidget()->Refresh();
 }
 
 NodePortWidget* NodeContainerWidget::getPortWidget(int index)

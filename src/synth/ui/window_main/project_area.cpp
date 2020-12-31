@@ -11,6 +11,7 @@ ProjectArea::ProjectArea(wxWindow *parent, Project *project) :
     this->connectionsWidget->Show();
 }
 
+// TODO: REMOVE. Connections are rendered in dedicated class
 void ProjectArea::paintEvent(wxPaintEvent & evt)
 {
     wxPaintDC dc(this);
@@ -75,16 +76,14 @@ void ProjectArea::addNode(ProjectNode* node)
     widget->Show();
 }
 
-NodeContainerWidget* ProjectArea::getNodeContainerWidget(Gale::Node* node)
+vector<NodeContainerWidget*> ProjectArea::getNodes()
 {
-    for (NodeContainerWidget* widget: this->nodes)
-    {
-        if (widget->getNodeWidget()->getNode()->getNode() == node)
-        {
-            return widget;
-        }
-    }
-    return nullptr;
+    return this->nodes;
+}
+
+ConnectionsWidget* ProjectArea::getConnectionsWidget()
+{
+    return this->connectionsWidget;
 }
 
 ProjectArea::~ProjectArea()

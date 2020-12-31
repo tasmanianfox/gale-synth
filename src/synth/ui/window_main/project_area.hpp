@@ -23,14 +23,14 @@ public:
     ~ProjectArea();
 
     void addNode(ProjectNode* node);
+    vector<NodeContainerWidget*> getNodes();
+    ConnectionsWidget* getConnectionsWidget();
 private:
     Project *project;
     vector<NodeContainerWidget*> nodes;
     ConnectionsWidget* connectionsWidget;
 
     void paintEvent(wxPaintEvent& evt);
-
-    NodeContainerWidget* getNodeContainerWidget(Gale::Node* node);
 
     DECLARE_EVENT_TABLE()
 };

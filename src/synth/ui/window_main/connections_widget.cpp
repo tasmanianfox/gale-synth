@@ -11,12 +11,48 @@ ConnectionsWidget::ConnectionsWidget(ProjectArea* projectArea):
 void ConnectionsWidget::paintEvent(wxPaintEvent & evt)
 {
     wxPaintDC dc(this);
-    wxSize size = this->GetSize();
+    wxPen pen;
+	pen.SetColour(0, 0, 255);
+	pen.SetWidth(3);
+	pen.SetStyle(wxPENSTYLE_SOLID);
+	dc.SetPen(pen);
 
-    // dc.SetPen(*wxBLACK_PEN);
-    // dc.SetBrush(wxBrush(wxColor(200, 200, 200)));
-    // dc.DrawRectangle(wxRect(0, 0, size.x, size.y));
+    for (NodeContainerWidget* outputNodeContainer: this->projectArea->getNodes())
+    {
+        for (NodePortWidget* outputPortWidget: outputNodeContainer->getPortWidgets())
+        {
+            wxPoint outputNodePos = outputNodeContainer->GetPosition() + outputPortWidget->GetPosition();
+            int outputX = outputNodePos.x + outputPortWidget->getPinCenterX();
+            int outputY = outputNodePos.y + outputPortWidget->getPinCenterY();
+            for (Gale::Connection* connection: outputPortWidget->getPort()->getConnections())
+            {
+                Gale::Port *inputPort = connection->getInput();
+                Gale::Node* inputNode = inputPort->getNode();
+                int inputPortIndex = inputNode->getInputPortIndex(inputPort);
+                NodeContainerWidget* inputNodeContainer = this->getNodeContainerWidget(inputNode);
+                NodePortWidget* inputPortWidget = inputNodeContainer->getPortWidget(inputPortIndex);
 
+                wxPoint inputNodePos = inputNodeContainer->GetPosition() + inputPortWidget->GetPosition();
+                int inputX = inputNodePos.x + inputPortWidget->getPinCenterX();
+                int inputY = inputNodePos.y + inputPortWidget->getPinCenterY();
+
+                dc.DrawLine(outputX, outputY, inputX, inputY);
+            }
+        }
+    }
+
+}
+
+NodeContainerWidget* ConnectionsWidget::getNodeContainerWidget(Gale::Node* node)
+{
+    for (NodeContainerWidget* widget: this->projectArea->getNodes())
+    {
+        if (widget->getNodeWidget()->getNode()->getNode() == node)
+        {
+            return widget;
+        }
+    }
+    return nullptr;
 }
 
 BEGIN_EVENT_TABLE(ConnectionsWidget, wxWindow)
