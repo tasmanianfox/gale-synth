@@ -84,3 +84,10 @@ Connection* Port::getConnection(int index)
 {
     return this->connections.at(index);
 }
+
+void Port::deleteConnection(int index)
+{
+    Connection* connection = this->connections.at(index);
+    this->connections.erase(this->connections.begin() + index, this->connections.begin() + index + 1);
+    delete connection;
+}

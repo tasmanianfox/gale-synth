@@ -27,9 +27,10 @@ public:
     vector<NodePortWidget*> getPortWidgets();
     NodePortWidget* getPortWidget(int index);
     NodeWidget* getNodeWidget();
+    ProjectArea* getProjectArea();
 private:
     ProjectNode* node;
-    ProjectArea *projectArea;
+    ProjectArea* projectArea;
 
     NodeWidget nodeWidget;
     vector<NodePortWidget*> nodePortWidgets;

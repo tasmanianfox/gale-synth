@@ -1,4 +1,5 @@
 #include "node_container_widget.hpp"
+#include "project_area.hpp"
 
 wxColour darkGreen(0, 128, 0);
 wxFont fontNodePortName(8, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD);
@@ -36,18 +37,16 @@ void NodePortWidget::paintEvent(wxPaintEvent & evt)
   dc.DrawText(this->port->getName(), wxPoint(left, 0));
 }
 
-// TODO: REMOVE
-// bool NodePortWidget::on_button_pressed(GdkEventButton* button_event)
-// {
-//   if (3 == button_event->button && this->port->isInput() && this->port->getConnectionsCount() > 0)
-//   {
-//     Gale::Connection* connection = this->port->getConnection(0);
-//     delete connection;
-//     this->container->redrawProjectArea();
-//   }
+void NodePortWidget::onRightMouseDown(wxMouseEvent& evt)
+{
+  if(!(this->port->isInput() && this->port->getConnectionsCount() > 0))
+  {
+    return;
+  }
 
-//   return true; 
-// }
+  this->port->deleteConnection(0);
+  this->container->getProjectArea()->getConnectionsWidget()->Refresh();
+}
 
 Gale::Port* NodePortWidget::getPort()
 {
@@ -90,4 +89,5 @@ int NodePortWidget::getPortY()
 
 BEGIN_EVENT_TABLE(NodePortWidget, wxWindow)
   EVT_PAINT(NodePortWidget::paintEvent)
+  EVT_RIGHT_DOWN(NodePortWidget::onRightMouseDown)
 END_EVENT_TABLE()

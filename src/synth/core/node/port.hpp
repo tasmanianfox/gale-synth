@@ -33,6 +33,7 @@ public:
     void _removeConnection(Connection* connection);
     vector<Connection*> getConnections();
     Connection* getConnection(int index);
+    void deleteConnection(int index);
     unsigned short int getConnectionsCount();
     Node* getNode();
 protected:

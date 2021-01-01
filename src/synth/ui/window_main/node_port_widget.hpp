@@ -29,7 +29,8 @@ private:
 
     void setDimensions(wxPaintDC* dc);
 
-    void paintEvent(wxPaintEvent & evt);
+    void onRightMouseDown(wxMouseEvent& evt);
+    void paintEvent(wxPaintEvent& evt);
 
     int getPinX();
     int getPortY();

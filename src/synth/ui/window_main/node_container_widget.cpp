@@ -33,18 +33,18 @@ vector<NodePortWidget*> NodeContainerWidget::getPortWidgets()
     return this->nodePortWidgets;
 }
 
+ProjectArea* NodeContainerWidget::getProjectArea()
+{
+    return this->projectArea;
+}
+
 void NodeContainerWidget::moveMe(wxPoint point)
 {
     this->Move(point + this->GetPosition());
-    this->projectArea->getConnectionsWidget()->Refresh();
+    this->getProjectArea()->getConnectionsWidget()->Refresh();
 }
 
 NodePortWidget* NodeContainerWidget::getPortWidget(int index)
 {
     return this->nodePortWidgets.at(index);
-}
-
-void NodeContainerWidget::redrawProjectArea()
-{
-    this->projectArea->Update();
 }
