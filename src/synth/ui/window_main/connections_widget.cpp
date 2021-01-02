@@ -21,6 +21,11 @@ void ConnectionsWidget::paintEvent(wxPaintEvent & evt)
     {
         for (NodePortWidget* outputPortWidget: outputNodeContainer->getPortWidgets())
         {
+            if (outputPortWidget->getPort()->isInput())
+            {
+                continue;
+            }
+
             wxPoint outputNodePos = outputNodeContainer->GetPosition() + outputPortWidget->GetPosition();
             int outputX = outputNodePos.x + outputPortWidget->getPinCenterX();
             int outputY = outputNodePos.y + outputPortWidget->getPinCenterY();

@@ -36,6 +36,7 @@ list(APPEND FILES_SOURCE
     src/synth/app/project/project_node.cpp
     src/synth/ui/window_main/connections_widget.cpp
     src/synth/ui/window_main/menu.cpp
+    src/synth/ui/window_main/new_connection_widget.cpp
     src/synth/ui/window_main/project_area.cpp
     src/synth/ui/window_main/window_main.cpp
     src/synth/ui/window_main/node_container_widget.cpp

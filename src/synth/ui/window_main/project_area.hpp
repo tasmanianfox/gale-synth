@@ -12,6 +12,7 @@
 #include "synth/app/project/project_node.hpp"
 #include "synth/ui/window_main/connections_widget.hpp"
 #include "synth/ui/window_main/constants.hpp"
+#include "synth/ui/window_main/new_connection_widget.hpp"
 #include "synth/ui/window_main/node_container_widget.hpp"
 
 using namespace std;
@@ -25,10 +26,12 @@ public:
     void addNode(ProjectNode* node);
     vector<NodeContainerWidget*> getNodes();
     ConnectionsWidget* getConnectionsWidget();
+    NewConnectionWidget* getNewConnectionWidget();
 private:
     Project *project;
     vector<NodeContainerWidget*> nodes;
     ConnectionsWidget* connectionsWidget;
+    NewConnectionWidget* newConnectionWidget;
 };
 
 #endif

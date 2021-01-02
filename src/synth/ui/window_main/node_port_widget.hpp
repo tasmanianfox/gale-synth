@@ -17,8 +17,10 @@ public:
     NodePortWidget(NodeContainerWidget* container, int index, Gale::Port* port);
 
     Gale::Port* getPort();
+    NodeContainerWidget* getContainer();
     int getPinCenterX();
     int getPinCenterY();
+    wxPoint getPinCenter();
 private:
     NodeContainerWidget* container;
     Gale::Port* port;
@@ -29,6 +31,9 @@ private:
 
     void setDimensions(wxPaintDC* dc);
 
+    void onLeftMouseDown(wxMouseEvent& evt);
+    void onLeftMouseUp(wxMouseEvent& evt);
+    void onMouseMove(wxMouseEvent& evt);
     void onRightMouseDown(wxMouseEvent& evt);
     void paintEvent(wxPaintEvent& evt);
 

@@ -37,6 +37,23 @@ void NodePortWidget::paintEvent(wxPaintEvent & evt)
   dc.DrawText(this->port->getName(), wxPoint(left, 0));
 }
 
+void NodePortWidget::onLeftMouseDown(wxMouseEvent& evt)
+{
+  this->container->getProjectArea()->getNewConnectionWidget()->setClickedPort(this);
+}
+
+void NodePortWidget::onLeftMouseUp(wxMouseEvent& evt)
+{
+  NewConnectionWidget* widget = this->container->getProjectArea()->getNewConnectionWidget();
+  if (widget->getClickedPort() == nullptr)
+  {
+      return;
+  }
+
+  this->container->getProjectArea()->getNewConnectionWidget()->setClickedPort(nullptr);
+  widget->Refresh();
+}
+
 void NodePortWidget::onRightMouseDown(wxMouseEvent& evt)
 {
   if(!(this->port->isInput() && this->port->getConnectionsCount() > 0))
@@ -53,6 +70,11 @@ Gale::Port* NodePortWidget::getPort()
   return this->port;
 }
 
+NodeContainerWidget* NodePortWidget::getContainer()
+{
+  return this->container;
+}
+
 int NodePortWidget::getPinCenterX()
 {
   return this->getPinX() + PORT_WIDTH / 2;
@@ -61,6 +83,11 @@ int NodePortWidget::getPinCenterX()
 int NodePortWidget::getPinCenterY()
 {
   return PORT_HEIGHT / 2;
+}
+
+wxPoint NodePortWidget::getPinCenter()
+{
+  return wxPoint(this->getPinCenterX(), this->getPinCenterY());
 }
 
 int NodePortWidget::getPinX()
@@ -82,6 +109,17 @@ void NodePortWidget::setDimensions(wxPaintDC* dc)
   this->areDimensionsSet = true;
 }
 
+void NodePortWidget::onMouseMove(wxMouseEvent& evt)
+{
+  NewConnectionWidget* widget = this->container->getProjectArea()->getNewConnectionWidget();
+  if (widget->getClickedPort() == nullptr)
+  {
+      return;
+  }
+
+  widget->Refresh();
+}
+
 int NodePortWidget::getPortY()
 {
     return this->index*(PORT_WIDTH+PAD_PORTS) + PAD_VERTICAL;
@@ -89,5 +127,8 @@ int NodePortWidget::getPortY()
 
 BEGIN_EVENT_TABLE(NodePortWidget, wxWindow)
   EVT_PAINT(NodePortWidget::paintEvent)
+  EVT_LEFT_DOWN(NodePortWidget::onLeftMouseDown)
+  EVT_LEFT_UP(NodePortWidget::onLeftMouseUp)
+  EVT_MOTION(NodePortWidget::onMouseMove)
   EVT_RIGHT_DOWN(NodePortWidget::onRightMouseDown)
 END_EVENT_TABLE()
