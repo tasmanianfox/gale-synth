@@ -2,6 +2,7 @@
 #include "project_area.hpp"
 
 wxColour darkGreen(0, 128, 0);
+wxColour yellow(255, 211, 0);
 wxFont fontNodePortName(8, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD);
 
 NodePortWidget::NodePortWidget(NodeContainerWidget* container, int index, Gale::Port* port) :
@@ -24,8 +25,9 @@ void NodePortWidget::paintEvent(wxPaintEvent & evt)
   }
   
   // Pin
-  dc.SetPen(wxPen(darkGreen));
-  dc.SetBrush(wxBrush(darkGreen));
+  wxColour pinColor = this->container->getProjectArea()->getClickedPort() == this ? yellow : darkGreen;
+  dc.SetPen(wxPen(pinColor));
+  dc.SetBrush(wxBrush(pinColor));
   int portMargin = 3 + PORT_WIDTH;
   int textWithMargin = this->textWidth + portMargin;
   dc.DrawRectangle(wxRect(this->getPinX(), 0, PORT_WIDTH, PORT_HEIGHT));
@@ -39,19 +41,14 @@ void NodePortWidget::paintEvent(wxPaintEvent & evt)
 
 void NodePortWidget::onLeftMouseDown(wxMouseEvent& evt)
 {
-  this->container->getProjectArea()->getNewConnectionWidget()->setClickedPort(this);
-}
-
-void NodePortWidget::onLeftMouseUp(wxMouseEvent& evt)
-{
-  NewConnectionWidget* widget = this->container->getProjectArea()->getNewConnectionWidget();
-  if (widget->getClickedPort() == nullptr)
-  {
-      return;
+  NodePortWidget* prevClickedPort = this->container->getProjectArea()->getClickedPort();
+  NodePortWidget* newClickedPort = nullptr == prevClickedPort ? this : nullptr;
+  if (nullptr != prevClickedPort) {
+    prevClickedPort->getPort()->connect(this->getPort());
+    this->container->getProjectArea()->getConnectionsWidget()->Refresh();
   }
-
-  this->container->getProjectArea()->getNewConnectionWidget()->setClickedPort(nullptr);
-  widget->Refresh();
+  this->container->getProjectArea()->setClickedPort(newClickedPort);
+  this->Refresh();
 }
 
 void NodePortWidget::onRightMouseDown(wxMouseEvent& evt)
@@ -111,13 +108,13 @@ void NodePortWidget::setDimensions(wxPaintDC* dc)
 
 void NodePortWidget::onMouseMove(wxMouseEvent& evt)
 {
-  NewConnectionWidget* widget = this->container->getProjectArea()->getNewConnectionWidget();
-  if (widget->getClickedPort() == nullptr)
-  {
-      return;
-  }
+  // NewConnectionWidget* widget = this->container->getProjectArea()->getNewConnectionWidget();
+  // if (widget->getClickedPort() == nullptr)
+  // {
+  //     return;
+  // }
 
-  widget->Refresh();
+  // widget->Refresh();
 }
 
 int NodePortWidget::getPortY()
@@ -128,7 +125,6 @@ int NodePortWidget::getPortY()
 BEGIN_EVENT_TABLE(NodePortWidget, wxWindow)
   EVT_PAINT(NodePortWidget::paintEvent)
   EVT_LEFT_DOWN(NodePortWidget::onLeftMouseDown)
-  EVT_LEFT_UP(NodePortWidget::onLeftMouseUp)
   EVT_MOTION(NodePortWidget::onMouseMove)
   EVT_RIGHT_DOWN(NodePortWidget::onRightMouseDown)
 END_EVENT_TABLE()

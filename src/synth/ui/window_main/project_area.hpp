@@ -25,13 +25,15 @@ public:
 
     void addNode(ProjectNode* node);
     vector<NodeContainerWidget*> getNodes();
+    NodePortWidget* getClickedPort();
     ConnectionsWidget* getConnectionsWidget();
-    NewConnectionWidget* getNewConnectionWidget();
+    void setClickedPort(NodePortWidget* widget);
 private:
     Project *project;
-    vector<NodeContainerWidget*> nodes;
+    NodePortWidget* clickedPort;
     ConnectionsWidget* connectionsWidget;
     NewConnectionWidget* newConnectionWidget;
+    vector<NodeContainerWidget*> nodes;
 };
 
 #endif

@@ -2,7 +2,8 @@
 
 ProjectArea::ProjectArea(wxWindow *parent, Project *project) :
     wxControl(parent, wxID_ANY),
-    project(project)
+    project(project),
+    clickedPort(nullptr)
 {
     this->SetSize(parent->GetClientSize());
     this->SetBackgroundColour(wxColour(200, 200, 200));
@@ -10,8 +11,6 @@ ProjectArea::ProjectArea(wxWindow *parent, Project *project) :
     // Can't be placed to initializer since size is not known yet
     this->connectionsWidget = new ConnectionsWidget(this);
     this->connectionsWidget->Show();
-    this->newConnectionWidget = new NewConnectionWidget(this);
-    this->newConnectionWidget->Show();
 }
 
 void ProjectArea::addNode(ProjectNode* node)
@@ -21,9 +20,9 @@ void ProjectArea::addNode(ProjectNode* node)
     widget->Show();
 }
 
-vector<NodeContainerWidget*> ProjectArea::getNodes()
+NodePortWidget* ProjectArea::getClickedPort()
 {
-    return this->nodes;
+    return this->clickedPort;
 }
 
 ConnectionsWidget* ProjectArea::getConnectionsWidget()
@@ -31,9 +30,14 @@ ConnectionsWidget* ProjectArea::getConnectionsWidget()
     return this->connectionsWidget;
 }
 
-NewConnectionWidget* ProjectArea::getNewConnectionWidget()
+vector<NodeContainerWidget*> ProjectArea::getNodes()
 {
-    return this->newConnectionWidget;
+    return this->nodes;
+}
+
+void ProjectArea::setClickedPort(NodePortWidget* widget)
+{
+    this->clickedPort = widget;
 }
 
 ProjectArea::~ProjectArea()
