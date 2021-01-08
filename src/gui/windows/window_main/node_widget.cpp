@@ -60,7 +60,7 @@ ProjectNode* NodeWidget::getNode()
     return this->node;
 }
 
-Gale::Connection* NodeWidget::connect(const char* myPortName, NodeWidget* otherNode, const char* otherPortName)
+Gale::Core::Connection* NodeWidget::connect(const char* myPortName, NodeWidget* otherNode, const char* otherPortName)
 {
     return this->getNode()->connect(myPortName, otherNode->getNode(), otherPortName);
 }

@@ -3,7 +3,7 @@
 
 #include "core/node/node.hpp"
 
-namespace Gale
+namespace Gale::Core
 {
 
 /**

@@ -1,6 +1,6 @@
 #include "project.hpp"
 
-using namespace Gale;
+using namespace Gale::Core;
 
 void Project::addNode(Node* node)
 {

@@ -1,6 +1,6 @@
 #include "stream_output.hpp"
 
-using namespace Gale;
+using namespace Gale::Core;
 
 StreamOutput::StreamOutput() :
     Node::Node("Stream output")

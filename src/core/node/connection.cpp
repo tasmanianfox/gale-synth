@@ -1,7 +1,7 @@
 #include "connection.hpp"
 #include "port.hpp"
 
-using namespace Gale;
+using namespace Gale::Core;
 
 Connection::Connection(Port* output, Port* input)
 {

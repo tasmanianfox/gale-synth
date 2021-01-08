@@ -1,6 +1,6 @@
 #include "port.hpp"
 
-using namespace Gale;
+using namespace Gale::Core;
 
 Port::Port(Node* node, PortType type, const char* name)
 {
@@ -24,7 +24,7 @@ string Port::getName()
     return this->name;
 }
 
-Gale::Node* Port::getNode()
+Node* Port::getNode()
 {
     return this->node;
 }

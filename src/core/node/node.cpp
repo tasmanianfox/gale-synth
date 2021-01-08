@@ -1,6 +1,6 @@
 #include "node.hpp"
 
-using namespace Gale;
+using namespace Gale::Core;
 
 Node::Node(const char* name)
 {

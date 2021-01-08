@@ -20,7 +20,7 @@ public:
 private:
     ProjectArea* projectArea;
 
-    NodeContainerWidget* getNodeContainerWidget(Gale::Node* node);
+    NodeContainerWidget* getNodeContainerWidget(Gale::Core::Node* node);
 
     void paintEvent(wxPaintEvent& evt);
 

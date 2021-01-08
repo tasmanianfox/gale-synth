@@ -25,12 +25,12 @@ public:
     void onMouseLeftDown(wxMouseEvent& evt);
     void paintEvent(wxPaintEvent& evt);
 
-    int getInputPortIndex(Gale::Port* port);
+    int getInputPortIndex(Gale::Core::Port* port);
     ProjectNode* getNode();
 
     wxSize calculateSize();
 
-    Gale::Connection* connect(const char* myPortName, NodeWidget* otherNode, const char* otherPortName);
+    Gale::Core::Connection* connect(const char* myPortName, NodeWidget* otherNode, const char* otherPortName);
 private:
     NodeContainerWidget* container;
     ProjectNode* node;

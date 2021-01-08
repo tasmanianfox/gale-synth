@@ -1,7 +1,7 @@
 #ifndef _GALE_CORE_NODE_CONNECTION_H_
 #define _GALE_CORE_NODE_CONNECTION_H_
 
-namespace Gale
+namespace Gale::Core
 {
 
 class Port;

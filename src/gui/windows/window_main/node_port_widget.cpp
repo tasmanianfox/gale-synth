@@ -5,7 +5,7 @@ wxColour darkGreen(0, 128, 0);
 wxColour yellow(255, 211, 0);
 wxFont fontNodePortName(8, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD);
 
-NodePortWidget::NodePortWidget(NodeContainerWidget* container, int index, Gale::Port* port) :
+NodePortWidget::NodePortWidget(NodeContainerWidget* container, int index, Gale::Core::Port* port) :
     wxWindow(container, wxID_ANY),
     container(container),
     index(index),
@@ -62,7 +62,7 @@ void NodePortWidget::onRightMouseDown(wxMouseEvent& evt)
   this->container->getProjectArea()->getConnectionsWidget()->Refresh();
 }
 
-Gale::Port* NodePortWidget::getPort()
+Gale::Core::Port* NodePortWidget::getPort()
 {
   return this->port;
 }

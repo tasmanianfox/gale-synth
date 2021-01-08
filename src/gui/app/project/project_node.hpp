@@ -11,20 +11,20 @@ using namespace std;
 class ProjectNode
 {
 public:
-    ProjectNode(Gale::Node* node);
+    ProjectNode(Gale::Core::Node* node);
     ~ProjectNode();
 
-    Gale::Connection* connect(const char* myPortName, ProjectNode* otherNode, const char* otherPortName);
+    Gale::Core::Connection* connect(const char* myPortName, ProjectNode* otherNode, const char* otherPortName);
 
     void setPosition(int x, int y);
     int getX();
     int getY();
-    vector<Gale::Port*> getPorts();
-    vector<Gale::Port*> getInputPorts();
-    vector<Gale::Port*> getOutputPorts();
-    Gale::Node* getNode();
+    vector<Gale::Core::Port*> getPorts();
+    vector<Gale::Core::Port*> getInputPorts();
+    vector<Gale::Core::Port*> getOutputPorts();
+    Gale::Core::Node* getNode();
 private:
-    Gale::Node* node;
+    Gale::Core::Node* node;
 
     int x;
     int y;

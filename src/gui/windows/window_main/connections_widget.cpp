@@ -29,10 +29,10 @@ void ConnectionsWidget::paintEvent(wxPaintEvent & evt)
             wxPoint outputNodePos = outputNodeContainer->GetPosition() + outputPortWidget->GetPosition();
             int outputX = outputNodePos.x + outputPortWidget->getPinCenterX();
             int outputY = outputNodePos.y + outputPortWidget->getPinCenterY();
-            for (Gale::Connection* connection: outputPortWidget->getPort()->getConnections())
+            for (Gale::Core::Connection* connection: outputPortWidget->getPort()->getConnections())
             {
-                Gale::Port *inputPort = connection->getInput();
-                Gale::Node* inputNode = inputPort->getNode();
+                Gale::Core::Port *inputPort = connection->getInput();
+                Gale::Core::Node* inputNode = inputPort->getNode();
                 int inputPortIndex = inputNode->getInputPortIndex(inputPort);
                 NodeContainerWidget* inputNodeContainer = this->getNodeContainerWidget(inputNode);
                 NodePortWidget* inputPortWidget = inputNodeContainer->getPortWidget(inputPortIndex);
@@ -48,7 +48,7 @@ void ConnectionsWidget::paintEvent(wxPaintEvent & evt)
 
 }
 
-NodeContainerWidget* ConnectionsWidget::getNodeContainerWidget(Gale::Node* node)
+NodeContainerWidget* ConnectionsWidget::getNodeContainerWidget(Gale::Core::Node* node)
 {
     for (NodeContainerWidget* widget: this->projectArea->getNodes())
     {

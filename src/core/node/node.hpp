@@ -9,7 +9,7 @@
 
 using namespace std;
 
-namespace Gale
+namespace Gale::Core
 {
 
 /**

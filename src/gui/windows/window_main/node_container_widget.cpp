@@ -13,7 +13,7 @@ NodeContainerWidget::NodeContainerWidget(ProjectArea *projectArea, ProjectNode* 
     this->SetSize(nodeWidgetSize);
 
     int inputIndex = 0, outputIndex = 0;
-    for(Gale::Port* port: node->getNode()->getPorts())
+    for(Gale::Core::Port* port: node->getNode()->getPorts())
     {
         int* index = port->isInput() ? &inputIndex : &outputIndex;
         NodePortWidget* widget = new NodePortWidget(this, *index, port);

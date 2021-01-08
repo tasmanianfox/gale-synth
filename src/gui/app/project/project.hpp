@@ -25,7 +25,7 @@ public:
 protected:
     vector<ProjectNode*> nodes;
 private:
-    Gale::Project* project;
+    Gale::Core::Project* project;
 };
 
 #endif

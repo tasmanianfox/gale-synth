@@ -4,7 +4,7 @@
 #include "core/node/oscillator/simple_oscillator.hpp" // temporary
 
 Project::Project() :
-    project(new Gale::Project())
+    project(new Gale::Core::Project())
 {
     
 }
@@ -23,17 +23,17 @@ void Project::reset() // Temporary. Should be a clean project
     {
         delete project;
     }
-    this->project = new Gale::Project();
+    this->project = new Gale::Core::Project();
 
     for (int i = 0; i < this->nodes.size(); i++) {
         delete this->nodes.at(i);
     }
 
     // temporary. Just for demo
-    ProjectNode* node1 = new ProjectNode(new Gale::SimpleOscillator());
+    ProjectNode* node1 = new ProjectNode(new Gale::Core::SimpleOscillator());
     node1->setPosition(50, 300);
     this->addNode(node1);
-    ProjectNode* node2 = new ProjectNode(new Gale::StreamOutput());
+    ProjectNode* node2 = new ProjectNode(new Gale::Core::StreamOutput());
     node2->setPosition(300, 300);
     this->addNode(node2);
 

@@ -1,6 +1,6 @@
 #include "simple_oscillator.hpp"
 
-using namespace Gale;
+using namespace Gale::Core;
 
 SimpleOscillator::SimpleOscillator() :
     Node::Node("Simple oscillator")

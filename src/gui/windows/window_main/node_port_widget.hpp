@@ -14,16 +14,16 @@ class NodeContainerWidget;
 class NodePortWidget : public wxWindow
 {
 public:
-    NodePortWidget(NodeContainerWidget* container, int index, Gale::Port* port);
+    NodePortWidget(NodeContainerWidget* container, int index, Gale::Core::Port* port);
 
-    Gale::Port* getPort();
+    Gale::Core::Port* getPort();
     NodeContainerWidget* getContainer();
     int getPinCenterX();
     int getPinCenterY();
     wxPoint getPinCenter();
 private:
     NodeContainerWidget* container;
-    Gale::Port* port;
+    Gale::Core::Port* port;
 
     int index; // port inddex in widget input / output side
     bool areDimensionsSet; // FALSE on widget creation, TRUE after configuration
