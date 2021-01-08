@@ -1,12 +1,12 @@
-#ifndef _GALE_SYNTH_UI_WINDOW_MAIN_CONNECTIONS_WIDGET_H_
-#define _GALE_SYNTH_UI_WINDOW_MAIN_CONNECTIONS_WIDGET_H_
+#ifndef _GALE_GUI_WINDOWS_WINDOW_MAIN_CONNECTIONS_WIDGET_H_
+#define _GALE_GUI_WINDOWS_WINDOW_MAIN_CONNECTIONS_WIDGET_H_
 
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
     #include <wx/wx.h>
 #endif
 
-#include "synth/ui/window_main/node_container_widget.hpp"
+#include "gui/windows/window_main/node_container_widget.hpp"
 
 class ProjectArea;
 

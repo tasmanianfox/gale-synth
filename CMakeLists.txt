@@ -25,22 +25,22 @@ endif()
 set(FILES_SOURCE)
 
 list(APPEND FILES_SOURCE
-    src/synth/app/app.cpp
-    src/synth/core/node/connection.cpp
-    src/synth/core/node/node.cpp
-    src/synth/core/project.cpp
-    src/synth/core/node/oscillator/simple_oscillator.cpp
-    src/synth/core/node/output/stream_output.cpp
-    src/synth/core/node/port.cpp
-    src/synth/app/project/project.cpp
-    src/synth/app/project/project_node.cpp
-    src/synth/ui/window_main/connections_widget.cpp
-    src/synth/ui/window_main/menu.cpp
-    src/synth/ui/window_main/project_area.cpp
-    src/synth/ui/window_main/window_main.cpp
-    src/synth/ui/window_main/node_container_widget.cpp
-    src/synth/ui/window_main/node_port_widget.cpp
-    src/synth/ui/window_main/node_widget.cpp
+    src/gui/app/app.cpp
+    src/core/node/connection.cpp
+    src/core/node/node.cpp
+    src/core/project.cpp
+    src/core/node/oscillator/simple_oscillator.cpp
+    src/core/node/output/stream_output.cpp
+    src/core/node/port.cpp
+    src/gui/app/project/project.cpp
+    src/gui/app/project/project_node.cpp
+    src/gui/windows/window_main/connections_widget.cpp
+    src/gui/windows/window_main/menu.cpp
+    src/gui/windows/window_main/project_area.cpp
+    src/gui/windows/window_main/window_main.cpp
+    src/gui/windows/window_main/node_container_widget.cpp
+    src/gui/windows/window_main/node_port_widget.cpp
+    src/gui/windows/window_main/node_widget.cpp
     )
 # Sources END
 
@@ -52,7 +52,7 @@ set(target_type "lib")
 set(type "native")
 
 if(type STREQUAL "native")
-    include("src/ports/native/CMakeLists.txt")
+    include("src/targets/native/CMakeLists.txt")
     set(target_type "app")
 endif()
 
@@ -61,7 +61,7 @@ if(type STREQUAL "vst")
 endif()
 
 if(type STREQUAL "lv2")
-    include("src/ports/lv2/CMakeLists.txt")
+    include("src/targets/lv2/CMakeLists.txt")
 endif()
 
 # Target-specific parameters END

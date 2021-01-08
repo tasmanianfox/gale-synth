@@ -1,7 +1,7 @@
 #include "project.hpp"
 
-#include "synth/core/node/output/stream_output.hpp" // temporary
-#include "synth/core/node/oscillator/simple_oscillator.hpp" // temporary
+#include "core/node/output/stream_output.hpp" // temporary
+#include "core/node/oscillator/simple_oscillator.hpp" // temporary
 
 Project::Project() :
     project(new Gale::Project())

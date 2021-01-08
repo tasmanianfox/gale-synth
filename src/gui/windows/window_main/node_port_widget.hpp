@@ -1,13 +1,13 @@
-#ifndef _GALE_SYNTH_UI_WINDOW_MAIN_NODE_PORT_WIDGET_H_
-#define _GALE_SYNTH_UI_WINDOW_MAIN_NODE_PORT_WIDGET_H_
+#ifndef _GALE_GUI_WINDOWS_WINDOW_MAIN_NODE_PORT_WIDGET_H_
+#define _GALE_GUI_WINDOWS_WINDOW_MAIN_NODE_PORT_WIDGET_H_
 
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
     #include <wx/wx.h>
 #endif
 
-#include "synth/core/node/port.hpp"
-#include "synth/ui/window_main/constants.hpp"
+#include "core/node/port.hpp"
+#include "gui/windows/window_main/constants.hpp"
 
 class NodeContainerWidget;
 

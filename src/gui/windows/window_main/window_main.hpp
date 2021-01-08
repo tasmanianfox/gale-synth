@@ -1,14 +1,14 @@
-#ifndef _GALE_SYNTH_UI_WINDOW_MAIN_WINDOW_MAIN_H_
-#define _GALE_SYNTH_UI_WINDOW_MAIN_WINDOW_MAIN_H_
+#ifndef _GALE_GUI_WINDOWS_WINDOW_MAIN_WINDOW_MAIN_H_
+#define _GALE_GUI_WINDOWS_WINDOW_MAIN_WINDOW_MAIN_H_
 
 #include <wx/wxprec.h>
 #ifndef WX_PRECOMP
     #include <wx/wx.h>
 #endif
 
-#include "synth/app/project/project.hpp"
-#include "synth/ui/window_main/node_widget.hpp"
-#include "synth/ui/window_main/project_area.hpp"
+#include "gui/app/project/project.hpp"
+#include "gui/windows/window_main/node_widget.hpp"
+#include "gui/windows/window_main/project_area.hpp"
 
 class WindowMain : public wxFrame
 {

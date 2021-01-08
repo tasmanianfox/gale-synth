@@ -1,5 +1,5 @@
-#ifndef _GALE_SYNTH_UI_WINDOW_MAIN_NODE_CONTAINER_WIDGET_H_
-#define _GALE_SYNTH_UI_WINDOW_MAIN_NODE_CONTAINER_WIDGET_H_
+#ifndef _GALE_GUI_WINDOWS_WINDOW_MAIN_NODE_CONTAINER_WIDGET_H_
+#define _GALE_GUI_WINDOWS_WINDOW_MAIN_NODE_CONTAINER_WIDGET_H_
 
 #include <vector>
 
@@ -8,7 +8,7 @@
     #include <wx/wx.h>
 #endif
 
-#include "synth/app/project/project_node.hpp"
+#include "gui/app/project/project_node.hpp"
 #include "node_port_widget.hpp"
 #include "node_widget.hpp"
 

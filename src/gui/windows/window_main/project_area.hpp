@@ -1,5 +1,5 @@
-#ifndef _GALE_SYNTH_UI_WINDOW_MAIN_PROJECT_AREA_H_
-#define _GALE_SYNTH_UI_WINDOW_MAIN_PROJECT_AREA_H_
+#ifndef _GALE_GUI_WINDOWS_WINDOW_MAIN_PROJECT_AREA_H_
+#define _GALE_GUI_WINDOWS_WINDOW_MAIN_PROJECT_AREA_H_
 
 #include <vector>
 
@@ -8,12 +8,12 @@
     #include <wx/wx.h>
 #endif
 
-#include "synth/app/project/project.hpp"
-#include "synth/app/project/project_node.hpp"
-#include "synth/ui/window_main/connections_widget.hpp"
-#include "synth/ui/window_main/constants.hpp"
-#include "synth/ui/window_main/new_connection_widget.hpp"
-#include "synth/ui/window_main/node_container_widget.hpp"
+#include "gui/app/project/project.hpp"
+#include "gui/app/project/project_node.hpp"
+#include "gui/windows/window_main/connections_widget.hpp"
+#include "gui/windows/window_main/constants.hpp"
+#include "gui/windows/window_main/new_connection_widget.hpp"
+#include "gui/windows/window_main/node_container_widget.hpp"
 
 using namespace std;
 

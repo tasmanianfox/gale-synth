@@ -1,11 +1,11 @@
-#ifndef _GALE_SYNTH_APP_PROJECT_PROJECT_H_
-#define _GALE_SYNTH_APP_PROJECT_PROJECT_H_
+#ifndef _GALE_GUI_APP_PROJECT_PROJECT_H_
+#define _GALE_GUI_APP_PROJECT_PROJECT_H_
 
 #include <vector>
 
 #include "project_node.hpp"
 
-#include "synth/core/project.hpp"
+#include "core/project.hpp"
 
 using namespace std;
 

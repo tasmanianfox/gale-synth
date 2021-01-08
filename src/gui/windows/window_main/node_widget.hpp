@@ -1,5 +1,5 @@
-#ifndef _GALE_SYNTH_UI_WINDOW_MAIN_NODE_WIDGET_H_
-#define _GALE_SYNTH_UI_WINDOW_MAIN_NODE_WIDGET_H_
+#ifndef _GALE_GUI_WINDOWS_WINDOW_MAIN_NODE_WIDGET_H_
+#define _GALE_GUI_WINDOWS_WINDOW_MAIN_NODE_WIDGET_H_
 
 #include <string>
 
@@ -8,8 +8,8 @@
     #include <wx/wx.h>
 #endif
 
-#include "synth/app/project/project_node.hpp"
-#include "synth/core/node/port.hpp"
+#include "gui/app/project/project_node.hpp"
+#include "core/node/port.hpp"
 
 using namespace std;
 
