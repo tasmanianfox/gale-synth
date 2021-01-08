@@ -1,9 +1,9 @@
-#ifndef _GALE_CORE_NODE_OUTPUT_STREAM_OTUPUT_H_
-#define _GALE_CORE_NODE_OUTPUT_STREAM_OTUPUT_H_
+#ifndef _GALE_CORE_PROJECT_NODE_OUTPUT_STREAM_OTUPUT_H_
+#define _GALE_CORE_PROJECT_NODE_OUTPUT_STREAM_OTUPUT_H_
 
 #include <string>
 
-#include "core/node/node.hpp"
+#include "core/project/node/node.hpp"
 
 namespace Gale::Core
 {

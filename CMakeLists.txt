@@ -26,12 +26,12 @@ set(FILES_SOURCE)
 
 list(APPEND FILES_SOURCE
     src/gui/app/app.cpp
-    src/core/node/connection.cpp
-    src/core/node/node.cpp
-    src/core/project.cpp
-    src/core/node/oscillator/simple_oscillator.cpp
-    src/core/node/output/stream_output.cpp
-    src/core/node/port.cpp
+    src/core/project/node/connection.cpp
+    src/core/project/node/node.cpp
+    src/core/project/project.cpp
+    src/core/project/node/oscillator/simple_oscillator.cpp
+    src/core/project/node/output/stream_output.cpp
+    src/core/project/node/port.cpp
     src/gui/app/project/project.cpp
     src/gui/app/project/project_node.cpp
     src/gui/windows/window_main/connections_widget.cpp

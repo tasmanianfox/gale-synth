@@ -1,7 +1,7 @@
-#ifndef _GALE_CORE_NODE_OSCILLATOR_SIMPLE_OSCILLATOR_H_
-#define _GALE_CORE_NODE_OSCILLATOR_SIMPLE_OSCILLATOR_H_
+#ifndef _GALE_CORE_PROJECT_NODE_OSCILLATOR_SIMPLE_OSCILLATOR_H_
+#define _GALE_CORE_PROJECT_NODE_OSCILLATOR_SIMPLE_OSCILLATOR_H_
 
-#include "core/node/node.hpp"
+#include "core/project/node/node.hpp"
 
 namespace Gale::Core
 {

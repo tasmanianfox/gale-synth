@@ -6,7 +6,7 @@
     #include <wx/wx.h>
 #endif
 
-#include "core/node/port.hpp"
+#include "core/project/node/port.hpp"
 #include "gui/windows/window_main/constants.hpp"
 
 class NodeContainerWidget;

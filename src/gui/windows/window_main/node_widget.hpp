@@ -9,7 +9,7 @@
 #endif
 
 #include "gui/app/project/project_node.hpp"
-#include "core/node/port.hpp"
+#include "core/project/node/port.hpp"
 
 using namespace std;
 

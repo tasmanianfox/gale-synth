@@ -1,5 +1,5 @@
-#ifndef _GALE_CORE_NODE_NODE_H_
-#define _GALE_CORE_NODE_NODE_H_
+#ifndef _GALE_CORE_PROJECT_NODE_NODE_H_
+#define _GALE_CORE_PROJECT_NODE_NODE_H_
 
 #include <algorithm>
 #include <string>

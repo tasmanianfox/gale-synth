@@ -3,8 +3,8 @@
 
 #include <vector>
 
-#include "core/node/node.hpp"
-#include "core/node/port.hpp"
+#include "core/project/node/node.hpp"
+#include "core/project/node/port.hpp"
 
 using namespace std;
 

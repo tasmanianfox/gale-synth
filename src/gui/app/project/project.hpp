@@ -5,7 +5,7 @@
 
 #include "project_node.hpp"
 
-#include "core/project.hpp"
+#include "core/project/project.hpp"
 
 using namespace std;
 
