@@ -8,8 +8,8 @@
     #include <wx/wx.h>
 #endif
 
-#include "gui/app/project/project.hpp"
-#include "gui/app/project/project_node.hpp"
+#include "gui/project/project.hpp"
+#include "gui/project/project_node.hpp"
 #include "gui/windows/window_main/connections_widget.hpp"
 #include "gui/windows/window_main/constants.hpp"
 #include "gui/windows/window_main/new_connection_widget.hpp"

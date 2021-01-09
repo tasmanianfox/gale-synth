@@ -8,7 +8,7 @@
     #include <wx/wx.h>
 #endif
 
-#include "gui/app/project/project_node.hpp"
+#include "gui/project/project_node.hpp"
 #include "node_port_widget.hpp"
 #include "node_widget.hpp"
 

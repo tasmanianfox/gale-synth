@@ -25,15 +25,15 @@ endif()
 set(FILES_SOURCE)
 
 list(APPEND FILES_SOURCE
-    src/gui/app/app.cpp
+    src/gui/app.cpp
     src/core/project/node/connection.cpp
     src/core/project/node/node.cpp
     src/core/project/project.cpp
     src/core/project/node/oscillator/simple_oscillator.cpp
     src/core/project/node/output/stream_output.cpp
     src/core/project/node/port.cpp
-    src/gui/app/project/project.cpp
-    src/gui/app/project/project_node.cpp
+    src/gui/project/project.cpp
+    src/gui/project/project_node.cpp
     src/gui/windows/window_main/connections_widget.cpp
     src/gui/windows/window_main/menu.cpp
     src/gui/windows/window_main/project_area.cpp

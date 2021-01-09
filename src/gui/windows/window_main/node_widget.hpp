@@ -8,7 +8,7 @@
     #include <wx/wx.h>
 #endif
 
-#include "gui/app/project/project_node.hpp"
+#include "gui/project/project_node.hpp"
 #include "core/project/node/port.hpp"
 
 using namespace std;

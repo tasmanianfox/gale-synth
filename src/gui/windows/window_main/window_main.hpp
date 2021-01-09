@@ -6,7 +6,7 @@
     #include <wx/wx.h>
 #endif
 
-#include "gui/app/project/project.hpp"
+#include "gui/project/project.hpp"
 #include "gui/windows/window_main/node_widget.hpp"
 #include "gui/windows/window_main/project_area.hpp"
 
