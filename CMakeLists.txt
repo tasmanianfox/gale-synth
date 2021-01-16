@@ -34,6 +34,7 @@ list(APPEND FILES_SOURCE
     src/core/project/node/port.cpp
     src/gui/project/project.cpp
     src/gui/project/project_node.cpp
+    src/gui/sound/output/sound_output.cpp
     src/gui/windows/window_main/connections_widget.cpp
     src/gui/windows/window_main/menu.cpp
     src/gui/windows/window_main/project_area.cpp
@@ -66,6 +67,32 @@ endif()
 
 # Target-specific parameters END
 
+
+set(ALL_LIBS)
+list(APPEND ALL_LIBS ${wxWidgets_LIBRARIES})
+# OS-specific parameters START
+if(UNIX AND NOT APPLE) 
+    list(APPEND FILES_SOURCE
+        src/gui/sound/output/soundio_sound_output.cpp
+    )
+
+    find_library(LIBJACK NAMES jack)
+    find_library(LIBSOUNDIO NAMES soundio)
+    find_library(LIBPULSE NAMES pulse)
+    # find_library(SOUNDIO NAMES libsoundio.a)
+    find_package(ALSA REQUIRED)
+    # include_directories(${ALSA_INCLUDE_DIRS})
+    message("TEST " ${LIBSOUNDIO} ${LIBPULSE})
+    list(APPEND ALL_LIBS
+        ${LIBSOUNDIO}
+        ${LIBPULSE}
+        ${LIBJACK}
+        ${ALSA_LIBRARIES}
+    )
+endif()
+
+# OS-specific parameters END
+
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR}/.build)
 set(LIBRARY_OUTPUT_PATH    ${CMAKE_BINARY_DIR}/.build)
 
@@ -76,4 +103,4 @@ if (target_type STREQUAL "lib")
     add_library(${APP_NAME} SHARED ${FILES_SOURCE})
 endif()
 
-target_link_libraries(${APP_NAME} ${wxWidgets_LIBRARIES})
+target_link_libraries(${APP_NAME} ${ALL_LIBS})

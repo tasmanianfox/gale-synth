@@ -1,8 +1,17 @@
 #include "app.hpp"
 
+#ifdef __linux__
+    #include "gui/sound/output/soundio_sound_output.hpp"
+    using SoundOutputImpl = SoundioSoundOutput;
+#endif
+
 bool App::OnInit()
 {
   this->project.reset();
+
+  this->soundOutput = new SoundOutputImpl();
+  this->soundOutput->startSoundThread();
+
   this->mainWindow = new WindowMain(&this->project);
   this->mainWindow->Show(true);
   return true;
@@ -10,8 +19,10 @@ bool App::OnInit()
 
 App::~App()
 {
-  if (this->mainWindow != nullptr)
-  {
+  if (this->mainWindow != nullptr) {
     delete this->mainWindow;
-  } 
+  }
+  if (this->soundOutput != nullptr) {
+    delete this->soundOutput;
+  }
 }

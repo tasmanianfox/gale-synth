@@ -8,6 +8,7 @@
 
 #include "gui/windows/window_main/window_main.hpp"
 #include "gui/project/project.hpp"
+#include "gui/sound/output/sound_output.hpp"
 
 class App: public wxApp
 {
@@ -17,6 +18,7 @@ public:
 private:
     WindowMain* mainWindow;
     Project project;
+    SoundOutput* soundOutput;
 
     ~App();
 };
