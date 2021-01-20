@@ -13,9 +13,6 @@ public:
     SoundioSoundOutput();
 protected:
     virtual void soundThread() override;
-
-private:
-    float seconds_offset;
 };
 
 #endif

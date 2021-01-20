@@ -12,7 +12,9 @@ namespace Gale::Core
 class SimpleOscillator : public Node
 {
 public:
-    SimpleOscillator();
+    SimpleOscillator(node_id id);
+
+    const char* getName() override;
 };
 
 }

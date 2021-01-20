@@ -16,6 +16,7 @@ public:
     ~Connection();
 
     Port* getInput();
+    Port* getOutput();
 private:
     Port* input;
     Port* output;

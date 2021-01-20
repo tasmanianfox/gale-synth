@@ -26,6 +26,8 @@ protected:
     vector<ProjectNode*> nodes;
 private:
     Gale::Core::Project* project;
+
+    void refresh();
 };
 
 #endif

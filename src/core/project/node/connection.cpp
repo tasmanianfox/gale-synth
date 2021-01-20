@@ -14,6 +14,11 @@ Port* Connection::getInput()
     return this->input;
 }
 
+Port* Connection::getOutput()
+{
+    return this->output;
+}
+
 Connection::~Connection()
 {
     this->input->_removeConnection(this);

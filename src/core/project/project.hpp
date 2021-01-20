@@ -3,22 +3,27 @@
 
 #include <vector>
 
-#include "node/node.hpp"
+#include "core/project/node/node.hpp"
+#include "core/project/pipeline.hpp"
 
 using namespace std;
 
 namespace Gale::Core
 {
 
-/**
- * 
- */
 class Project
 {
 public:
+    Project();
+
+    void refresh();
+    node_id generateNodeId();
+
     void addNode(Node* node);
 private:
     vector<Node*> nodes;
+    Pipeline pipeline;
+    node_id last_node_id;
 };
 
 }

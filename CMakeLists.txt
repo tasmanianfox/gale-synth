@@ -28,6 +28,7 @@ list(APPEND FILES_SOURCE
     src/gui/app.cpp
     src/core/project/node/connection.cpp
     src/core/project/node/node.cpp
+    src/core/project/pipeline.cpp
     src/core/project/project.cpp
     src/core/project/node/oscillator/simple_oscillator.cpp
     src/core/project/node/output/stream_output.cpp

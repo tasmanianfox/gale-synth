@@ -3,6 +3,7 @@
 
 #include <string>
 
+#include "core/project/node/constants.hpp"
 #include "core/project/node/node.hpp"
 
 namespace Gale::Core
@@ -14,7 +15,10 @@ namespace Gale::Core
 class StreamOutput : public Node
 {
 public:
-    StreamOutput();
+    StreamOutput(node_id id);
+
+    int getCode() override;
+    const char* getName() override;
 };
 
 }

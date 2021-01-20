@@ -51,8 +51,7 @@ static void gale_gui_sound_output_soundio_sound_output_write_callback(struct Sou
     }
 }
 
-SoundioSoundOutput::SoundioSoundOutput() :
-    seconds_offset(0.0f) {
+SoundioSoundOutput::SoundioSoundOutput() {
 
 }
 

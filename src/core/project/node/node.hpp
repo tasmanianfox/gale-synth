@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 
+#include "constants.hpp"
 #include "port.hpp"
 
 using namespace std;
@@ -12,26 +13,32 @@ using namespace std;
 namespace Gale::Core
 {
 
+typedef int node_id;
+
 /**
  * Nodes: wave generators, processors, mixers, effects, etc
  */
 class Node
 {
 public:
-    Node(const char* name);
+    Node(int id);
     ~Node();
 
     Port* getPort(const char* name);
     vector<Port*> getPorts();
     vector<Port*> getInputPorts();
     vector<Port*> getOutputPorts();
+    node_id getId();
     int getInputPortIndex(Port* port);
-    string getName();
+    virtual int getCode(); // code for internal code
+    virtual const char* getName(); // displayable name
+    bool is(int code);
 protected:
     vector<Port*> ports;
     vector<Port*> inputPorts;
     vector<Port*> outputPorts;
-    string name;
+
+    int id;
 
     void addPort(Port* p);
 };

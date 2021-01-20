@@ -2,10 +2,8 @@
 
 using namespace Gale::Core;
 
-Node::Node(const char* name)
-{
-    this->name = string(name);
-}
+Node::Node(int id) :
+  id(id) {}
 
 Node::~Node()
 {
@@ -44,6 +42,10 @@ vector<Port*> Node::getPorts()
   return this->ports;
 }
 
+node_id Node::getId() {
+  return this->id;
+}
+
 vector<Port*> Node::getInputPorts()
 {
   return this->inputPorts;
@@ -68,7 +70,14 @@ int Node::getInputPortIndex(Port* port)
     return -1;
 }
 
-string Node::getName()
-{
-  return this->name;
+int Node::getCode() {
+  return NODE_CODE_MISC;
+}
+
+const char* Node::getName() {
+  return "undefined";
+}
+
+bool Node::is(int code) {
+  return code == this->getCode();
 }
