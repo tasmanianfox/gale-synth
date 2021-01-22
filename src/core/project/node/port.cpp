@@ -2,12 +2,11 @@
 
 using namespace Gale::Core;
 
-Port::Port(Node* node, PortType type, const char* name)
-{
-    this->node = node;
-    this->type = type;
-    this->name = string(name);
-}
+Port::Port(Node* node, PortType type, const char* name) :
+    name(name),
+    node(node),
+    type(type),
+    value(.0f) {}
 
 PortType Port::getType()
 {
@@ -17,6 +16,11 @@ PortType Port::getType()
 bool Port::isInput()
 {
     return PortType::INPUT == this->type;
+}
+
+bool Port::isOutput()
+{
+    return PortType::OUTPUT == this->type;
 }
 
 string Port::getName()
@@ -90,4 +94,25 @@ void Port::deleteConnection(int index)
     Connection* connection = this->connections.at(index);
     this->connections.erase(this->connections.begin() + index, this->connections.begin() + index + 1);
     delete connection;
+}
+
+float Port::getValue() {
+    return this->value;
+}
+
+void Port::setOutputValue(float value) {
+    if (this->isInput()) {
+        return;
+    }
+    this->value = value;
+    for (Connection* connection: this->connections) {
+        connection->getInput()->setInputValue(value);
+    }
+}
+
+void Port::setInputValue(float value) {
+    if (this->isOutput()) {
+        return;
+    }
+    this->value = value;
 }

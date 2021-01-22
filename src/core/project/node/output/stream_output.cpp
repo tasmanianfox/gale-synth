@@ -17,3 +17,7 @@ const char* StreamOutput::getName()
 {
     return "Stream output";
 }
+
+void StreamOutput::play(NodePlayContext* context) {
+    
+}

@@ -28,6 +28,7 @@ public:
     PortType getType();
     string getName();
     bool isInput();
+    bool isOutput();
     void _addConnection(Connection* connection);
     // invoked from connection. Should NOT call a destructor for connection
     void _removeConnection(Connection* connection);
@@ -36,10 +37,15 @@ public:
     void deleteConnection(int index);
     unsigned short int getConnectionsCount();
     Node* getNode();
+    float getValue();
+    void setOutputValue(float value); // setter for output ports
+    void setInputValue(float value); // setter for input ports
 protected:
     Node* node;
     PortType type;
     string name;
+
+    float value;
 
     vector<Connection*> connections;
 };

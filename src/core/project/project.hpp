@@ -20,6 +20,7 @@ public:
     node_id generateNodeId();
 
     void addNode(Node* node);
+    Pipeline* getPipelinePtr();
 private:
     vector<Node*> nodes;
     Pipeline pipeline;

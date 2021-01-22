@@ -80,10 +80,7 @@ if(UNIX AND NOT APPLE)
     find_library(LIBJACK NAMES jack)
     find_library(LIBSOUNDIO NAMES soundio)
     find_library(LIBPULSE NAMES pulse)
-    # find_library(SOUNDIO NAMES libsoundio.a)
     find_package(ALSA REQUIRED)
-    # include_directories(${ALSA_INCLUDE_DIRS})
-    message("TEST " ${LIBSOUNDIO} ${LIBPULSE})
     list(APPEND ALL_LIBS
         ${LIBSOUNDIO}
         ${LIBPULSE}

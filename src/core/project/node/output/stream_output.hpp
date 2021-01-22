@@ -17,6 +17,8 @@ class StreamOutput : public Node
 public:
     StreamOutput(node_id id);
 
+    void play(NodePlayContext* context) override;
+
     int getCode() override;
     const char* getName() override;
 };

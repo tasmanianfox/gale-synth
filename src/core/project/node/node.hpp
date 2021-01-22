@@ -7,6 +7,7 @@
 
 #include "constants.hpp"
 #include "port.hpp"
+#include "core/project/node/node_play_context.hpp"
 
 using namespace std;
 
@@ -23,6 +24,10 @@ class Node
 public:
     Node(int id);
     ~Node();
+
+    // main method for node. Reads inputs,
+    // calculates values of outputs
+    virtual void play(NodePlayContext* context) = 0; 
 
     Port* getPort(const char* name);
     vector<Port*> getPorts();

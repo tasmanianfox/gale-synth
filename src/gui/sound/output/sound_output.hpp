@@ -6,12 +6,17 @@
 
 #include <wx/msgdlg.h>
 
+#include "core/project/pipeline.hpp"
+
 class SoundOutput {
 public:
+    SoundOutput(Gale::Core::Pipeline* pipeline);
     void startSoundThread();
 protected:
     virtual void soundThread() = 0;
     void soundThreadWrapper();
+
+    Gale::Core::Pipeline* pipeline;
 private:
     std::thread thread;
 };

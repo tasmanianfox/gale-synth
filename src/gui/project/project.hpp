@@ -21,6 +21,7 @@ public:
 public:
     void addNode(ProjectNode* node);
     vector<ProjectNode*> getNodes();
+    Gale::Core::Project* getProject();
 
 protected:
     vector<ProjectNode*> nodes;

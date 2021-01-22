@@ -2,6 +2,9 @@
 
 using namespace std;
 
+SoundOutput::SoundOutput(Gale::Core::Pipeline* pipeline) :
+    pipeline(pipeline) {}
+
 void SoundOutput::startSoundThread()
 {
     this->thread = std::thread(&SoundOutput::soundThreadWrapper, this);

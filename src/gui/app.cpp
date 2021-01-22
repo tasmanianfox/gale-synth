@@ -9,7 +9,7 @@ bool App::OnInit()
 {
   this->project.reset();
 
-  this->soundOutput = new SoundOutputImpl();
+  this->soundOutput = new SoundOutputImpl(this->project.getProject()->getPipelinePtr());
   this->soundOutput->startSoundThread();
 
   this->mainWindow = new WindowMain(&this->project);

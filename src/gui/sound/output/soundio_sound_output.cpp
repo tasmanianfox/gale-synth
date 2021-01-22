@@ -3,6 +3,7 @@
 using namespace std;
 
 static float gale_gui_sound_output_soundio_sound_output_seconds_offset = 0.0f;
+Gale::Core::Pipeline* gale_gui_sound_output_soundio_sound_output_pipeline = nullptr;
 
 static void gale_gui_sound_output_soundio_sound_output_write_callback(struct SoundIoOutStream *outstream,
         int frame_count_min, int frame_count_max) {
@@ -22,37 +23,37 @@ static void gale_gui_sound_output_soundio_sound_output_write_callback(struct Sou
         if (!frame_count)
             break;
 
-        float pitch = 440.0f;
-        float radians_per_second = pitch * 2.0f * M_PI;
         for (int frame = 0; frame < frame_count; frame += 1) {
-            float sample = sin((gale_gui_sound_output_soundio_sound_output_seconds_offset + frame * seconds_per_frame) * radians_per_second);
-            // square
-            // sample = sample > 0 ? 1.0 : -1.0;
-            // sound
-            sample *= 0.5;
-            
+            struct Gale::Core::NodePlayContext context = {
+                .frame = frame,
+                .frame_count = frame_count,
+                .sample_rate = outstream->sample_rate,
+                .seconds_offset = gale_gui_sound_output_soundio_sound_output_seconds_offset
+            };
+            Gale::Core::SoundOutputData data = gale_gui_sound_output_soundio_sound_output_pipeline->generateSound(&context);
+
             float *ptr;
             // LEFT
             ptr = (float*)(areas[0].ptr + areas[0].step * frame);
-            *ptr = sample;
+            *ptr = data.left.value;
             // RIGHT
             ptr = (float*)(areas[1].ptr + areas[1].step * frame);
-            *ptr = sample;
+            *ptr = data.right.value;
         }
         gale_gui_sound_output_soundio_sound_output_seconds_offset =
             fmod(gale_gui_sound_output_soundio_sound_output_seconds_offset + seconds_per_frame * frame_count, 1.0);
 
         if ((err = soundio_outstream_end_write(outstream))) {
-            fprintf(stderr, "%s\n", soundio_strerror(err));
-            exit(1);
+            throw soundio_strerror(err);
         }
 
         frames_left -= frame_count;
     }
 }
 
-SoundioSoundOutput::SoundioSoundOutput() {
-
+SoundioSoundOutput::SoundioSoundOutput(Gale::Core::Pipeline* pipeline) :
+        SoundOutput(pipeline) {
+    gale_gui_sound_output_soundio_sound_output_pipeline = pipeline;
 }
 
 void SoundioSoundOutput::soundThread() {

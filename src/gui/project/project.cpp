@@ -52,6 +52,10 @@ vector<ProjectNode*> Project::getNodes() {
     return this->nodes;
 }
 
+Gale::Core::Project* Project::getProject() {
+    return this->project;
+}
+
 void Project::refresh() {
     this->project->refresh();
 }
