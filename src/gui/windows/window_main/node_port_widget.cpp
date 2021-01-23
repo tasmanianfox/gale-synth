@@ -45,7 +45,7 @@ void NodePortWidget::onLeftMouseDown(wxMouseEvent& evt)
   NodePortWidget* newClickedPort = nullptr == prevClickedPort ? this : nullptr;
   if (nullptr != prevClickedPort) {
     prevClickedPort->getPort()->connect(this->getPort());
-    this->container->getProjectArea()->getConnectionsWidget()->Refresh();
+    this->container->getProjectArea()->refreshConnections();
   }
   this->container->getProjectArea()->setClickedPort(newClickedPort);
   this->Refresh();
@@ -59,7 +59,7 @@ void NodePortWidget::onRightMouseDown(wxMouseEvent& evt)
   }
 
   this->port->deleteConnection(0);
-  this->container->getProjectArea()->getConnectionsWidget()->Refresh();
+  this->container->getProjectArea()->refreshConnections();
 }
 
 Gale::Core::Port* NodePortWidget::getPort()
@@ -106,16 +106,6 @@ void NodePortWidget::setDimensions(wxPaintDC* dc)
   this->areDimensionsSet = true;
 }
 
-void NodePortWidget::onMouseMove(wxMouseEvent& evt)
-{
-  // NewConnectionWidget* widget = this->container->getProjectArea()->getNewConnectionWidget();
-  // if (widget->getClickedPort() == nullptr)
-  // {
-  //     return;
-  // }
-
-  // widget->Refresh();
-}
 
 int NodePortWidget::getPortY()
 {
@@ -125,6 +115,5 @@ int NodePortWidget::getPortY()
 BEGIN_EVENT_TABLE(NodePortWidget, wxWindow)
   EVT_PAINT(NodePortWidget::paintEvent)
   EVT_LEFT_DOWN(NodePortWidget::onLeftMouseDown)
-  EVT_MOTION(NodePortWidget::onMouseMove)
   EVT_RIGHT_DOWN(NodePortWidget::onRightMouseDown)
 END_EVENT_TABLE()

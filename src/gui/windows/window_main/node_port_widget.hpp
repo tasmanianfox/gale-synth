@@ -32,7 +32,6 @@ private:
     void setDimensions(wxPaintDC* dc);
 
     void onLeftMouseDown(wxMouseEvent& evt);
-    void onMouseMove(wxMouseEvent& evt);
     void onRightMouseDown(wxMouseEvent& evt);
     void paintEvent(wxPaintEvent& evt);
 

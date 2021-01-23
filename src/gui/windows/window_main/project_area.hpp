@@ -12,7 +12,6 @@
 #include "gui/project/project_node.hpp"
 #include "gui/windows/window_main/connections_widget.hpp"
 #include "gui/windows/window_main/constants.hpp"
-#include "gui/windows/window_main/new_connection_widget.hpp"
 #include "gui/windows/window_main/node_container_widget.hpp"
 
 using namespace std;
@@ -23,6 +22,8 @@ public:
     ProjectArea(wxWindow *parent, Project *project);
     ~ProjectArea();
 
+    void refreshConnections();
+
     void addNode(ProjectNode* node);
     vector<NodeContainerWidget*> getNodes();
     NodePortWidget* getClickedPort();
@@ -32,7 +33,6 @@ private:
     Project *project;
     NodePortWidget* clickedPort;
     ConnectionsWidget* connectionsWidget;
-    NewConnectionWidget* newConnectionWidget;
     vector<NodeContainerWidget*> nodes;
 };
 

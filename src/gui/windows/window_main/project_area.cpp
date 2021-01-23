@@ -40,8 +40,12 @@ void ProjectArea::setClickedPort(NodePortWidget* widget)
     this->clickedPort = widget;
 }
 
+void ProjectArea::refreshConnections() {
+    this->getConnectionsWidget()->Refresh();
+    this->project->getProject()->refresh();
+}
+
 ProjectArea::~ProjectArea()
 {
     delete this->connectionsWidget;
-    delete this->newConnectionWidget;
 }

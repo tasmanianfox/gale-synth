@@ -17,13 +17,8 @@ SoundOutputData Pipeline::generateSound(NodePlayContext* context) {
         return result;
     }
 
-
     for (Node* node: this->sortedNodes) {
         node->play(context);
-        // if (node->is(NODE_CODE_STREAM_OUTPUT)) {
-        //     output = node;
-        //     break;
-        // }
     }
 
     Port* leftPort = output->getPort("IN_L");
@@ -34,24 +29,6 @@ SoundOutputData Pipeline::generateSound(NodePlayContext* context) {
     if (rightPort != nullptr) {
         result.right.value = rightPort->getValue();
     }
-
-
-
-    //result.left.value = 
-
-    // float sample = sin((gale_gui_sound_output_soundio_sound_output_seconds_offset + frame * seconds_per_frame) * radians_per_second);
-    // // square
-    // // sample = sample > 0 ? 1.0 : -1.0;
-    // // sound
-    // sample *= 0.5;
-
-    // float *ptr;
-    // // LEFT
-    // ptr = (float*)(areas[0].ptr + areas[0].step * frame);
-    // result.left = sample;
-    // // RIGHT
-    // ptr = (float*)(areas[1].ptr + areas[1].step * frame);
-    // result.right = sample;
 
     return result;
 }
@@ -80,7 +57,6 @@ bool pipelineSortDepths(struct PipelineDepthMap a, struct PipelineDepthMap b) {
 }
 
 // Pipeline sorting-related END
-
 void Pipeline::build() {
     vector<struct PipelineDepthMap> depths;
     vector<node_id> usedIds;
