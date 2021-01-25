@@ -1,7 +1,5 @@
 #include "soundio_sound_output.hpp"
 
-using namespace std;
-
 static float gale_gui_sound_output_soundio_sound_output_seconds_offset = 0.0f;
 Gale::Core::Pipeline* gale_gui_sound_output_soundio_sound_output_pipeline = nullptr;
 
@@ -64,6 +62,8 @@ void SoundioSoundOutput::soundThread() {
         throw "out of memory";
     }
 
+    // TODO: Configurable sound backend
+    // soundio_connect_backend(soundio, SoundIoBackendJack)
     if ((err = soundio_connect(soundio))) {
         throw string("error connecting: ") + soundio_strerror(err);
     }

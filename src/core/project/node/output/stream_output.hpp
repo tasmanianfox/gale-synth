@@ -21,6 +21,9 @@ public:
 
     int getCode() override;
     const char* getName() override;
+private:
+    Port* leftPort;
+    Port* rightPort;
 };
 
 }

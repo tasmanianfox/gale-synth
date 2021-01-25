@@ -57,6 +57,7 @@ bool pipelineSortDepths(struct PipelineDepthMap a, struct PipelineDepthMap b) {
 }
 
 // Pipeline sorting-related END
+
 void Pipeline::build() {
     vector<struct PipelineDepthMap> depths;
     vector<node_id> usedIds;
