@@ -8,6 +8,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 find_package(wxWidgets REQUIRED COMPONENTS core)
 
+
 include_directories(src)
 include(${wxWidgets_USE_FILE})
 
@@ -50,20 +51,28 @@ list(APPEND FILES_SOURCE
 
 # app = executable file, lib = shared library
 set(target_type "lib")
-# native|lv2|vst
-set(type "native")
+# build_type = app type. "native" application, "lv2", "vst" etc
 
-if(type STREQUAL "native")
+# native|lv2|vst
+if(build_type STREQUAL "")
+    set(build_type "native")
+endif()
+
+if(build_type STREQUAL "native")
     include("src/targets/native/CMakeLists.txt")
     set(target_type "app")
 endif()
 
-if(type STREQUAL "vst")
+if(build_type STREQUAL "vst")
     message( FATAL_ERROR "VST build is not implemented." )
 endif()
 
-if(type STREQUAL "lv2")
+if(build_type STREQUAL "lv2")
     include("src/targets/lv2/CMakeLists.txt")
+endif()
+
+if(build_type STREQUAL "")
+message(SEND_ERROR "Unsupported build_type: " ${build_type} ". Valud values: native|lv2")
 endif()
 
 # Target-specific parameters END
@@ -71,8 +80,11 @@ endif()
 
 set(ALL_LIBS)
 list(APPEND ALL_LIBS ${wxWidgets_LIBRARIES})
+
 # OS-specific parameters START
-if(UNIX AND NOT APPLE) 
+
+# NATIVE LINUX
+if(build_type STREQUAL "native" AND UNIX AND NOT APPLE) 
     list(APPEND FILES_SOURCE
         src/gui/sound/output/soundio_sound_output.cpp
     )
@@ -86,6 +98,11 @@ if(UNIX AND NOT APPLE)
         ${LIBPULSE}
         ${LIBJACK}
         ${ALSA_LIBRARIES}
+    )
+endif()
+if (build_type STREQUAL "lv2")
+    list(APPEND FILES_SOURCE
+        src/gui/sound/output/plugin_sound_output.cpp
     )
 endif()
 

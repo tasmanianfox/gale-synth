@@ -9,6 +9,7 @@
 #include "gui/windows/window_main/window_main.hpp"
 #include "gui/project/project.hpp"
 #include "gui/sound/output/sound_output.hpp"
+#include "gui/sound/output/sound_output_impl.hpp"
 
 class App: public wxApp
 {

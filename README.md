@@ -24,9 +24,6 @@ cmake --build . --config Release
 cmake --install . --config Release # for Linux. Windows will need configuration of paths in CMakeLists.txt instead of looking up the library from system path
 ```
 
-
-
-
 ### Native app
 
 ```bash

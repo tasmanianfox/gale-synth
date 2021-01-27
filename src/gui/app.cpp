@@ -1,10 +1,5 @@
 #include "app.hpp"
 
-#ifdef __linux__
-    #include "gui/sound/output/soundio_sound_output.hpp"
-    using SoundOutputImpl = SoundioSoundOutput;
-#endif
-
 bool App::OnInit()
 {
   this->project.reset();
